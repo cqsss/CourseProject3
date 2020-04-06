@@ -11,6 +11,6 @@ public class EchartController {
     }
     @RequestMapping("/calendartest")
     public String myDemo2(){
-        return "custom-calendar-icon";
+        return "calendar";
     }
 }
