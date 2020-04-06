@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+ HEAD:src/main/resources/templates/calendar.html
 <html style="height: 100%" >
    <head>
        <meta charset="utf-8">
@@ -46,94 +47,50 @@ function getVirtulData(year) {
         var eventCount = Math.round(Math.random() * pathes.length);
         for (var i = 0; i < eventCount; i++) {
             items.push(Math.round(Math.random() * (pathes.length - 1)));
+=======
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <script src="https://cdn.bootcss.com/echarts/4.7.0/echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width:100%;height:400px;"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 模拟数据
+    function getVirtulData(year) {
+        year = year || '2017';
+        var date = +echarts.number.parseDate(year + '-01-01');
+        var end = +echarts.number.parseDate(year + '-12-31');
+        var dayTime = 3600 * 24 * 1000;
+        var data = [];
+        for (var time = date; time <= end; time += dayTime) {
+            data.push([
+                echarts.format.formatTime('yyyy-MM-dd', time),
+                Math.floor(Math.random() * 10000)
+            ]);
+
         }
-        data.push([
-            echarts.format.formatTime('yyyy-MM-dd', time),
-            items.join('|')
-        ]);
+        return data;
     }
-    return data;
-}
-
-function renderItem(params, api) {
-    var cellPoint = api.coord(api.value(0));
-    var cellWidth = params.coordSys.cellWidth;
-    var cellHeight = params.coordSys.cellHeight;
-
-    var value = api.value(1);
-    var events = value && value.split('|');
-
-    if (isNaN(cellPoint[0]) || isNaN(cellPoint[1])) {
-        return;
-    }
-
-    var group = {
-        type: 'group',
-        children: echarts.util.map(layouts[events.length - 1], function (itemLayout, index) {
-            return {
-                type: 'path',
-                shape: {
-                    pathData: pathes[events[index]],
-                    x: -8,
-                    y: -8,
-                    width: 16,
-                    height: 16
-                },
-                position: [
-                    cellPoint[0] + echarts.number.linearMap(itemLayout[0], [-0.5, 0.5], [-cellWidth / 2, cellWidth / 2]),
-                    cellPoint[1] + echarts.number.linearMap(itemLayout[1], [-0.5, 0.5], [-cellHeight / 2 + 20, cellHeight / 2])
-                ],
-                style: api.style({
-                    fill: colors[events[index]]
-                })
-            };
-        }) || []
+    var option = {
+        visualMap: {
+            show: false,
+            min: 0,
+            max: 10000
+        },
+        calendar: {
+            range: '2017'
+        },
+        series: {
+            type: 'heatmap',
+            coordinateSystem: 'calendar',
+            data: getVirtulData(2017)
+        }
     };
-
-    group.children.push({
-        type: 'text',
-        style: {
-            x: cellPoint[0],
-            y: cellPoint[1] - cellHeight / 2 + 15,
-            text: echarts.format.formatTime('dd', api.value(0)),
-            fill: '#777',
-            textFont: api.font({fontSize: 14})
-        }
-    });
-
-    return group;
-}
-
-option = {
-    tooltip: {
-    },
-    calendar: [{
-        left: 'center',
-        top: 'middle',
-        cellSize: [70, 70],
-        yearLabel: {show: false},
-        orient: 'vertical',
-        dayLabel: {
-            firstDay: 1,
-            nameMap: 'cn'
-        },
-        monthLabel: {
-            show: false
-        },
-        range: '2017-03'
-    }],
-    series: [{
-        type: 'custom',
-        coordinateSystem: 'calendar',
-        renderItem: renderItem,
-        dimensions: [null, {type: 'ordinal'}],
-        data: getVirtulData(2017)
-    }]
-};
-;
-if (option && typeof option === "object") {
-    myChart.setOption(option, true);
-}
-       </script>
-   </body>
+    myChart.setOption(option);
+</script>
+</body>
 </html>
