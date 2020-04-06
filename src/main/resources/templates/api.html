@@ -21,15 +21,15 @@
     var marker = new BMap.Marker(point);  // 创建标注
     map.addOverlay(marker);               // 将标注添加到地图中
     marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-
+    var title=[[${address}]];
     var opts = {
         width : 200,     // 信息窗口宽度
         height: 100,     // 信息窗口高度
-        title : "周伟测试的会议标题" , // 信息窗口标题
+        title : title, // 信息窗口标题
         enableMessage:true,//设置允许信息窗发送短息
         message:"周伟测试的会议内容~"
     }
-    var infoWindow = new BMap.InfoWindow("周伟测试的地址：哈工大周伟测试的寝室", opts);  // 创建信息窗口对象
+    var infoWindow = new BMap.InfoWindow([[${address}]], opts);  // 创建信息窗口对象
     map.enableScrollWheelZoom(true);
     map.openInfoWindow(infoWindow,point); //开启信息窗口
 </script>
