@@ -13,5 +13,8 @@ public class EchartController {
     @RequestMapping("/calendartest")
     public String myDemo2(){
         return "calendar";
+=======
+        return "calendartest";
+
     }
 }
