@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2020/4/7
  */
 @Controller
-public class EchartController {
-    @RequestMapping("/echarttest")
-    public String myDemo(){
-        return "echarttest";
+public class CalendarController {
+    @RequestMapping("/calendartest")
+    public String calendar(){
+        return "calendartest";
     }
 }
