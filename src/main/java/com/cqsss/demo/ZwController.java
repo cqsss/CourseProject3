@@ -3,10 +3,7 @@ package com.cqsss.demo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-/**
- * @author zw
- * @date 2020/4/7
- */
+
 class Point{
         double x;
         double y;
@@ -17,6 +14,10 @@ class Point{
 }
 @SuppressWarnings({"ALL", "AlibabaClassMustHaveAuthor"})
 @Controller
+/**
+ * @author zw
+ * @date 2020/4/7
+ */
 public class ZwController {
     @RequestMapping("/zw")
     public String test(Model model){
