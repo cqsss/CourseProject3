@@ -5,6 +5,22 @@
     <title>手动输入学术活动</title>
 </head>
 <body>
-<p>今天放假</p>>
+<form name="myform" onsubmit="return validateForm()" method="post">
+    Meeting name:<br>
+    <input type="text" name="meetingname">
+    <br>
+    Meeting date:<br>
+    <input type="datetime-local" name="meetingdate">
+    <input type="submit" value="提交">
+</form>
 </body>
+<script>
+    function validateForm() {
+        var x = document.forms["myform"]["meetingname"].value;
+        if (x == "") {
+            alert("必须填写会议名称");
+            return false;
+        }
+    }
+</script>>
 </html>
