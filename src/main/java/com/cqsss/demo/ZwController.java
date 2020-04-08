@@ -12,7 +12,12 @@ class Point{
             y=37.54;
         }
 }
+@SuppressWarnings({"ALL", "AlibabaClassMustHaveAuthor"})
 @Controller
+/**
+ * @author zw
+ * @date 2020/4/7
+ */
 public class ZwController {
     @RequestMapping("/zw")
     public String test(Model model){
