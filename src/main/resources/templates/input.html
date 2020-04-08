@@ -10,17 +10,41 @@
     <input type="text" name="meetingname">
     <br>
     Meeting date:<br>
-    <input type="datetime-local" name="meetingdate">
-    <input type="submit" value="提交">
+    <input type="date" name="meetingdate">
+    <br>
+    Meeting content:<br>
+    <input type="text" name="meetingcontent"><br>
+    <input type="submit" value="提交"><br>
+
 </form>
 </body>
 <script>
     function validateForm() {
-        var x = document.forms["myform"]["meetingname"].value;
-        if (x == "") {
+        var name = document.forms["myform"]["meetingname"].value;
+        if (name == "") {
             alert("必须填写会议名称");
             return false;
         }
+        var date = document.forms["myform"]["meetingdate"].value;
+        if (date =="" ) {
+            alert("必须填写会议时间");
+            return false;
+        }
+        var content=document.forms["myform"]["meetingcontent"].value;
+        if(content==""){
+            var r=confirm("会议内容是否不填？");
+            if(r){
+                document.forms["myform"]["meetingcontent"].value="暂无相关信息!";
+            }
+            else{
+                return false;
+            }
+
+        }
+            alert("submit success!");
+
+
+
     }
 </script>>
 </html>

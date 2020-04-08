@@ -12,8 +12,10 @@ public class inputController {
     public String aa(HttpServletRequest request) {
         String meeting_name=request.getParameter("meetingname");
         String meeting_date=request.getParameter("meetingdate");
+        String meeting_content=request.getParameter("meetingcontent");
         System.out.println(meeting_name);
         System.out.println(meeting_date);
+        System.out.println(meeting_content);
         return "input";
     }
 }
