@@ -1,17 +1,9 @@
 package com.cqszw.demo.Controller;
 
+import com.cqszw.demo.Bean.Point;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-class Point{
-        double x;
-        double y;
-        Point(){
-            x=122.09;
-            y=37.54;
-        }
-}
 
 @SuppressWarnings({"ALL", "AlibabaClassMustHaveAuthor"})
 @Controller
@@ -22,9 +14,9 @@ class Point{
 public class ZwController {
     @RequestMapping("/zw")
     public String test(Model model){
-        Point p=new Point();
-        model.addAttribute("p_x",p.x);
-        model.addAttribute("p_y",p.y);
+        Point p=new Point(122.09,37.54);
+        model.addAttribute("p_x",p.getX());
+        model.addAttribute("p_y",p.getY());
        model.addAttribute("title","周伟测试");
        model.addAttribute("address","周伟测试的地址：哈工大周伟测试的寝室");
 
