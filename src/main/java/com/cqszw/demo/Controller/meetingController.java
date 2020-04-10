@@ -20,8 +20,8 @@ public class meetingController {
         System.out.println(a.getLatitude());
         model.addAttribute("p_y",a.getLatitude());
         model.addAttribute("p_x",a.getLongitude());
-        model.addAttribute("title","mysqltest");
-        model.addAttribute("address","mysqltest的地址：哈工大周伟测试的寝室");
+        model.addAttribute("title","会议名字："+a.getName());
+        model.addAttribute("address","会议地点："+a.getLocation());
 
         return "api";
     }
