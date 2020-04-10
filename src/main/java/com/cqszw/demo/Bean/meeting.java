@@ -7,7 +7,7 @@ public class meeting {
     private  String content;
     private  String location;
     private Date date;
-    private  double longtitude;
+    private  double longitude;
     private  double latitude;
 
     public String getName() {
@@ -42,12 +42,12 @@ public class meeting {
         this.date = date;
     }
 
-    public double getLongtitude() {
-        return longtitude;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLongtitude(double longtitude) {
-        this.longtitude = longtitude;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public double getLatitude() {

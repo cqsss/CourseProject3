@@ -23,7 +23,7 @@ CREATE TABLE `meeting` (
   `name` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
   `content` varchar(255) DEFAULT NULL,
-  `longitude` double(255,0) NOT NULL,
+  `longitude` double  NOT NULL,
   `latitude` double NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`name`,`location`,`date`)
@@ -32,4 +32,4 @@ CREATE TABLE `meeting` (
 -- ----------------------------
 -- Records of meeting
 -- ----------------------------
-INSERT INTO `meeting` VALUES ('hitwh', '山东威海环翠器文化西路', '初始化必备', '122', '37.54', '2020-01-01 00:00:00');
+INSERT INTO `meeting` VALUES ('hitwh', '山东威海环翠器文化西路', '初始化必备', '122.09', '37.54', '2020-01-01 00:00:00');
