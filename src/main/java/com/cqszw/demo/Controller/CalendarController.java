@@ -1,7 +1,8 @@
-package com.cqsss.demo;
+package com.cqszw.demo.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 /**
  * @author cqs
  * @date 2020/4/7

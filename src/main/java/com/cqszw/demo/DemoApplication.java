@@ -1,14 +1,11 @@
-package com.cqsss.demo;
+package com.cqszw.demo;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-/**
- * @author cqs
- * @date 2020/4/7
- */
-@SuppressWarnings("ALL")
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+
+@SpringBootApplication
+@MapperScan("com.cqszw.demo.Mapper")
 public class DemoApplication {
 
     public static void main(String[] args) {
