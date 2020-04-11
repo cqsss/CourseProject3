@@ -1,21 +1,18 @@
 package com.cqszw.demo.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import com.cqszw.demo.Bean.meeting;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.cqszw.demo.Bean.Meeting;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
 
 @Controller
 public class inputController {
-    private  meeting meeting=new meeting();
+    @Autowired
+    private com.cqszw.demo.Service.MeetingService meetingService;
+    private  Meeting meeting=new Meeting();
     @RequestMapping("/new")
     public  String n(){
         return "input";
@@ -41,8 +38,8 @@ public class inputController {
 
         return "locationcheck";
     }
-    @RequestMapping("/new/locationcheck")
-    public String showPage(HttpServletRequest request) {
+    @PostMapping("/new/locationcheck")
+    public String showPage (HttpServletRequest request) {
         String string_x=request.getParameter("x");
         String string_y=request.getParameter("y");
 //        System.out.println(string_x);
@@ -52,6 +49,7 @@ public class inputController {
         System.out.println(meeting.getLongitude());
         System.out.println(meeting.getLatitude());
         meeting.show();
+        meetingService.insertMeeting(meeting);
         return "index";
     }
 

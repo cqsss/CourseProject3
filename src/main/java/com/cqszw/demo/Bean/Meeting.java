@@ -2,11 +2,11 @@ package com.cqszw.demo.Bean;
 
 import java.util.Date;
 
-public class meeting {
+public class Meeting {
     private  String name;
     private  String content;
     private  String location;
-    private String date;
+    private  String date;
     private  double longitude;
     private  double latitude;
 
