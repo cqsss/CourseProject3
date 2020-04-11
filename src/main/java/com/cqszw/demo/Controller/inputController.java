@@ -20,7 +20,7 @@ public class inputController {
     public  String n(){
         return "input";
     }
-    @RequestMapping("/input")
+    @RequestMapping("/new/input")
     public String aa(HttpServletRequest request) throws ParseException {
         String meeting_name = request.getParameter("meetingname");
         String meeting_date = request.getParameter("meetingdate");
@@ -41,7 +41,7 @@ public class inputController {
 
         return "locationcheck";
     }
-    @RequestMapping("/locationcheck")
+    @RequestMapping("/new/locationcheck")
     public String showPage(HttpServletRequest request) {
         String string_x=request.getParameter("x");
         String string_y=request.getParameter("y");
