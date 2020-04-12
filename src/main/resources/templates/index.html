@@ -7,19 +7,21 @@
 		<meta name="author" content="">
 		<title>Welcome!</title>
 		<!-- Bootstrap core CSS -->
-		<link href="asserts/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/asserts/css/bootstrap.min.css" rel="stylesheet">
 		<!-- Custom styles for this template -->
-		<link href="asserts/css/signin.css" rel="stylesheet">
+		<link href="/asserts/css/signin.css" rel="stylesheet">
 	</head>
 
 	<body class="text-center">
-		<form class="form-signin" action="dashboard.html">
-			<img class="mb-4" src="asserts/img/bootstrap-solid.svg" alt="" width="72" height="72">
+		<form class="form-signin" method="post" th:action="@{/login}">
+			<img class="mb-4" src="/asserts/img/bootstrap-solid.svg" alt="" width="72" height="72">
 			<h1 class="h3 mb-3 font-weight-normal" th:text="#{index.tip}">Please sign in</h1>
+			<!--判断条件后生效-->
+			<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
 			<label class="sr-only"th:text="#{index.username}">Username</label>
-			<input type="text" class="form-control" placeholder="Username" th:placeholder="#{index.username}" required="" autofocus="">
+			<input type="text" class="form-control" placeholder="Username" th:placeholder="#{index.username}" required="" autofocus="" name="username">
 			<label class="sr-only" th:text="#{index.userpassword}">Password</label>
-			<input type="password" class="form-control" placeholder="Password" th:placeholder="#{index.userpassword}" required="">
+			<input type="password" class="form-control" placeholder="Password" th:placeholder="#{index.userpassword}" required="" name="password">
 			<div class="checkbox mb-3">
 				<label>
           <input type="checkbox" value="remember-me">[[#{index.remember}]]

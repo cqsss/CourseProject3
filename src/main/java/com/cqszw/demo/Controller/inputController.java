@@ -50,7 +50,7 @@ public class inputController {
         System.out.println(meeting.getLatitude());
         meeting.show();
         meetingService.insertMeeting(meeting);
-        return "index";
+        return "redirect:/main.html";
     }
 
 
