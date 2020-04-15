@@ -5,6 +5,8 @@ import com.cqszw.demo.Mapper.MeetingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MeetingService {
     @Autowired
@@ -14,4 +16,5 @@ public class MeetingService {
         return meetingMapper.getbyname(name);
     }
     public  int insertMeeting(Meeting meeting){ return meetingMapper.insertMeeting(meeting);}
+    public List<Meeting> getAll(){return  meetingMapper.getAll();}
 }

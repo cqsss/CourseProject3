@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Collection;
+import java.util.List;
+
 @Controller
 public class meetingController {
     @Autowired
@@ -22,5 +25,13 @@ public class meetingController {
         model.addAttribute("address","会议地点："+a.getLocation());
 
         return "api";
+    }
+    @GetMapping("/meetings")
+    public  String list(Model model){
+
+        List<Meeting>meetings=meetingService.getAll();
+        //查询所有会议返回列表页面
+        model.addAttribute("meetings",meetings);
+        return  "meeting/list";
     }
 }

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80015
 File Encoding         : 65001
 
-Date: 2020-04-11 22:18:55
+Date: 2020-04-15 20:24:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,3 +33,5 @@ CREATE TABLE `meeting` (
 -- Records of meeting
 -- ----------------------------
 INSERT INTO `meeting` VALUES ('hitwh', '山东威海环翠器文化西路', '初始化必备', '122.09', '37.54', '2020-01-01 00:00:00');
+INSERT INTO `meeting` VALUES ('操作系统', '在家里', '上网课', '114.75', '25.8', '2020-04-15');
+INSERT INTO `meeting` VALUES ('软件工程', '在家里', '上网课', '114.75', '25.8', '2020-04-15');
