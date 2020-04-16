@@ -12,9 +12,10 @@ public class MeetingService {
     @Autowired
     private MeetingMapper meetingMapper;
 
-    public  Meeting getMeetingByName(String name) {
+    public  List<Meeting> getMeetingByName(String name) {
         return meetingMapper.getbyname(name);
     }
     public  int insertMeeting(Meeting meeting){ return meetingMapper.insertMeeting(meeting);}
     public List<Meeting> getAll(){return  meetingMapper.getAll();}
+    public  Meeting getMeeting(String name,String location,String date){return meetingMapper.getMeeting(name, location, date);}
 }
