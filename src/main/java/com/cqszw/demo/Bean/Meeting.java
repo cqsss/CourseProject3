@@ -2,11 +2,11 @@ package com.cqszw.demo.Bean;
 
 import java.util.Date;
 
-public class meeting {
+public class Meeting {
     private  String name;
     private  String content;
     private  String location;
-    private Date date;
+    private  String date;
     private  double longitude;
     private  double latitude;
 
@@ -34,11 +34,11 @@ public class meeting {
         this.location = location;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -56,5 +56,14 @@ public class meeting {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+    public void  show(){
+        System.out.println("name: "+name);
+        System.out.println("content: "+content);
+        System.out.println("location: "+location);
+        System.out.println("longitude: "+longitude);
+        System.out.println("latitude: "+latitude);
+        System.out.println("date: "+date);
+
     }
 }
