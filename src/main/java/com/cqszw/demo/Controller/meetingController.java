@@ -5,10 +5,7 @@ import com.cqszw.demo.Service.MeetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.List;
 public class meetingController {
     @Autowired
     private MeetingService meetingService;
+    private  Meeting will_alter;
     @GetMapping("/test/{name}")
     public String get(@PathVariable("name") String name, Model model){
         List<Meeting> a= meetingService.getMeetingByName(name);
@@ -58,6 +56,7 @@ public class meetingController {
 //        System.out.println(location);
 //        System.out.println(date);
         Meeting meeting = meetingService.getMeeting(name, location, date);
+        will_alter=meeting;
 //        model.addAttribute("name",meeting.getName());
 //        model.addAttribute("location",meeting.getLocation());
 //        model.addAttribute("date",meeting.getDate());
@@ -69,9 +68,18 @@ public class meetingController {
         return  "meeting/alter";
     }
     @PutMapping("/meeting")
-    public String update(){
+    public String update(Meeting meeting){
         System.out.println("更新");
+        if(will_alter!=null){
+            //meeting.show();
+            meetingService.updateMeeting(meeting,will_alter);
+        }
         return "redirect:/meetings";
     }
-
+    @DeleteMapping("/meeting/{name}/{location}/{date}")
+public  String alter(@PathVariable("name")String name,@PathVariable("location")String location,@PathVariable("date")String date) {
+        System.out.println("删除");
+        meetingService.deleteMeeting(name,location,date);
+        return "redirect:/meetings";
+    }
 }

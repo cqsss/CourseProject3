@@ -207,7 +207,10 @@
 										<td th:text="${meeting.latitude}"> </td>
 										<td>
 											<a class="btn btn-sm btn-primary" th:href="@{'/meeting/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}">编辑</a>
-											<button class="btn btn-sm btn-danger">删除</button>
+											<form th:action="@{'/meeting/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}" method="post">
+												<input type="hidden" name="_method" value="delete">
+												<button type="submit" class="btn btn-sm btn-danger">删除</button>
+											</form>
 										</td>
 
 								</tr>
@@ -222,18 +225,18 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js"></script>
-		<script type="text/javascript" src="asserts/js/popper.min.js"></script>
-		<script type="text/javascript" src="asserts/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/asserts/js/jquery-3.2.1.slim.min.js"></script>
+		<script type="text/javascript" src="/asserts/js/popper.min.js"></script>
+		<script type="text/javascript" src="/asserts/js/bootstrap.min.js"></script>
 
 		<!-- Icons -->
-		<script type="text/javascript" src="asserts/js/feather.min.js"></script>
+		<script type="text/javascript" src="/asserts/js/feather.min.js"></script>
 		<script>
 			feather.replace()
 		</script>
 
 		<!-- Graphs -->
-		<script type="text/javascript" src="asserts/js/Chart.min.js"></script>
+		<script type="text/javascript" src="/asserts/js/Chart.min.js"></script>
 		<script>
 			var ctx = document.getElementById("myChart");
 			var myChart = new Chart(ctx, {
