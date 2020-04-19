@@ -16,7 +16,7 @@ public class MeetingService {
         return meetingMapper.getbyname(name);
     }
     public List<Meeting> getMeetingByDate(String date) {
-        return meetingMapper.getbyname(date);
+        return meetingMapper.getbydate(date);
     }
     public int insertMeeting(Meeting meeting){ return meetingMapper.insertMeeting(meeting);}
     public List<Meeting> getAll(){return  meetingMapper.getAll();}

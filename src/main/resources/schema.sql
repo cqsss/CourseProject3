@@ -32,6 +32,6 @@ CREATE TABLE `meeting` (
 -- ----------------------------
 -- Records of meeting
 -- ----------------------------
-INSERT INTO `meeting` VALUES ('hitwh', '山东威海环翠器文化西路', '初始化必备', '122.09', '37.54', '2020-01-01 00:00:00');
+INSERT INTO `meeting` VALUES ('hitwh', '山东威海环翠器文化西路', '初始化必备', '122.09', '37.54', '2020-01-01');
 INSERT INTO `meeting` VALUES ('操作系统', '在家里', '上网课', '114.75', '25.8', '2020-04-15');
 INSERT INTO `meeting` VALUES ('软件工程', '在家里', '上网课', '114.75', '25.8', '2020-04-15');

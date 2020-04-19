@@ -10,7 +10,7 @@ import java.util.List;
 public interface MeetingMapper {
     @Select("select * from meeting where name=#{name}")
     List<Meeting> getbyname(@Param("name") String name);
-    @Select("select * from meeting where name=#{date}")
+    @Select("select * from meeting where date=#{date}")
     List<Meeting> getbydate(@Param("date") String date);
     @Select("select * from meeting")
     List<Meeting> getAll();

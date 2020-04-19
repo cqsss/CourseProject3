@@ -244,15 +244,16 @@
     myChart.on('click', function (params) {
         //console.log(params);
         var date=params.data[0];
-        $.ajax({
-            type:"POST",
-            url:"/table",
-            data:{date},
-            dataType: 'json',
-            success: function(data) {
-                return data;
-            }
-        });
+        window.location.assign("/table/"+date);
+        // $.ajax({
+        //     type:"post",
+        //     data:{date},
+        //     url:"/table/"+data,
+        //     dataType: 'json'
+        //     // success: function(data) {
+        //     //     return data;
+        //     // }
+        // });
     });
 </script>
 
