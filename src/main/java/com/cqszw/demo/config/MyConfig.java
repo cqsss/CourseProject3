@@ -6,6 +6,7 @@ import com.cqszw.demo.Component.LoginHandlerInterceptor;
 import com.cqszw.demo.Component.MyLocaleResolve;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -40,6 +41,13 @@ public class MyConfig extends WebMvcConfigurationSupport {
     @Bean
     public  LocaleResolver localeResolver(){
         return new MyLocaleResolve();
+    }
+    @Bean
+    public HiddenHttpMethodFilter hiddenHttpMethodFilter(){
+        HiddenHttpMethodFilter hiddenHttpMethodFilter=new HiddenHttpMethodFilter();
+        hiddenHttpMethodFilter.setBeanName("HiddenHttpMethodFilter");
+        hiddenHttpMethodFilter.setMethodParam("_method");
+        return hiddenHttpMethodFilter;
     }
 
 

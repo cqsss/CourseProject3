@@ -183,41 +183,41 @@
 				<!--</nav>-->
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h2><a class="btn btn-sm btn-success" href="meeting" th:href="@{/meeting}">添加会议</a></h2>
-					<div class="table-responsive">
-						<table class="table table-striped table-sm">
-							<thead>
-								<tr>
-									<th>name</th>
-									<th>content</th>
-									<th>location</th>
-									<th>date</th>
-									<th>longitude</th>
-									<th>latitude</th>
+					<form th:action="@{/meeting}" method="post">
+						<!--发送put请求修改员工数据-->
+						<!--
+						1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
+						2、页面创建一个post表单
+						3、创建一个input项，name="_method";值就是我们指定的请求方式
+						-->
+						<input type="hidden" name="_method" value="put">
+						<div class="form-group">
+							<label>meeting name</label>
+							<input name="name" type="text" class="form-control" placeholder="会议名称" th:value="${meeting.name}">
+						</div>
+						<div class="form-group">
+							<label>meeting content</label>
+							<input name="content" type="text" class="form-control" placeholder="会议内容"th:value="${meeting.content}">
+						</div>
+						<div class="form-group">
+							<label>meeting location</label>
+							<input name="location" type="text" class="form-control" placeholder="会议地址"th:value="${meeting.location}">
+						</div>
+						<div class="form-group">
+							<label>meeting date</label>
+							<input name="date" type="text" class="form-control" placeholder="会议日期"th:value="${meeting.date}">
+						</div>
+						<div class="form-group">
+							<label>meeting longitude</label>
+							<input name="longitude" type="text" class="form-control" placeholder="会议经度"th:value="${meeting.longitude}">
+						</div>
+						<div class="form-group">
+							<label>meeting latitude</label>
+							<input name="latitude" type="text" class="form-control" placeholder="会议纬度"th:value="${meeting.latitude}">
+						</div>
 
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="meeting:${meetings}">
-										<td th:text="${meeting.name}"> </td>
-										<td th:text="${meeting.content}"> </td>
-										<td th:text="${meeting.location}"> </td>
-										<td th:text="${meeting.date}"> </td>
-										<td th:text="${meeting.longitude}"> </td>
-										<td th:text="${meeting.latitude}"> </td>
-										<td>
-											<a class="btn btn-sm btn-primary" th:href="@{'/meeting/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}">编辑</a>
-											<form th:action="@{'/meeting/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}" method="post">
-												<input type="hidden" name="_method" value="delete">
-												<button type="submit" class="btn btn-sm btn-danger">删除</button>
-											</form>
-										</td>
-
-								</tr>
-							</tbody>
-
-						</table>
-					</div>
+						<button type="submit" class="btn btn-primary" >添加</button>
+					</form>
 				</main>
 			</div>
 		</div>
@@ -230,7 +230,7 @@
 		<script type="text/javascript" src="/asserts/js/bootstrap.min.js"></script>
 
 		<!-- Icons -->
-		<script type="text/javascript" src="/asserts/js/feather.min.js"></script>
+		<script type="text/javascript" src="asserts/js/feather.min.js"></script>
 		<script>
 			feather.replace()
 		</script>

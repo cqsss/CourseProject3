@@ -7,3 +7,7 @@ spring:
     initialization-mode: always
   thymeleaf:
     cache: false
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
