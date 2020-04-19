@@ -17,8 +17,8 @@ public class ZwController {
         Point p=new Point(122.09,37.54);
         model.addAttribute("p_x",p.getX());
         model.addAttribute("p_y",p.getY());
-       model.addAttribute("title","周伟测试");
-       model.addAttribute("address","周伟测试的地址：哈工大周伟测试的寝室");
+        model.addAttribute("title","周伟测试");
+        model.addAttribute("address","周伟测试的地址：哈工大周伟测试的寝室");
 
         return "api";
     }

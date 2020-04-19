@@ -193,18 +193,16 @@
 									<th>date</th>
 									<th>longitude</th>
 									<th>latitude</th>
-
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="meeting:${meetings}">
-										<td th:text="${meeting.name}"> </td>
-										<td th:text="${meeting.content}"> </td>
-										<td th:text="${meeting.location}"> </td>
-										<td th:text="${meeting.date}"> </td>
-										<td th:text="${meeting.longitude}"> </td>
-										<td th:text="${meeting.latitude}"> </td>
-
+									<td th:text="${meeting.name}"> </td>
+									<td th:text="${meeting.content}"> </td>
+									<td th:text="${meeting.location}"> </td>
+									<td th:text="${meeting.date}"> </td>
+									<td th:text="${meeting.longitude}"> </td>
+									<td th:text="${meeting.latitude}"> </td>
 								</tr>
 							</tbody>
 

@@ -17,21 +17,19 @@ public class meetingController {
     private MeetingService meetingService;
     @GetMapping("/test/{name}")
     public String get(@PathVariable("name") String name, Model model){
-        Meeting a= meetingService.getMeetingByName(name);
+        Meeting a = meetingService.getMeetingByName(name);
         System.out.println(a.getLatitude());
         model.addAttribute("p_y",a.getLatitude());
         model.addAttribute("p_x",a.getLongitude());
         model.addAttribute("title","会议名字："+a.getName());
         model.addAttribute("address","会议地点："+a.getLocation());
-
         return "api";
     }
     @GetMapping("/meetings")
-    public  String list(Model model){
-
+    public String list(Model model){
         List<Meeting>meetings=meetingService.getAll();
         //查询所有会议返回列表页面
         model.addAttribute("meetings",meetings);
-        return  "meeting/list";
+        return "meeting/list";
     }
 }

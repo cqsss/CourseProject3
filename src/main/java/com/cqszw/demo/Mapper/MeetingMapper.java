@@ -13,6 +13,8 @@ import java.util.List;
 public interface MeetingMapper {
     @Select("select * from meeting where name=#{name}")
     Meeting getbyname(@Param("name") String name);
+    @Select("select * from meeting where date=#{date}")
+    List<Meeting> getbydate(@Param("date") String date);
     @Select("select * from meeting")
     List<Meeting> getAll();
     @Insert("insert into meeting(name,content,location,date,longitude,latitude) values(#{name},#{content},#{location},#{date},#{longitude},#{latitude})")
