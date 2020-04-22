@@ -77,21 +77,17 @@
                     <thead>
                     <tr>
                         <th>name</th>
-                        <th>content</th>
                         <th>location</th>
                         <th>date</th>
-                        <th>longitude</th>
-                        <th>latitude</th>
+                        <th>url</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="meeting:${meetings}">
                         <td th:text="${meeting.name}"> </td>
-                        <td th:text="${meeting.content}"> </td>
                         <td th:text="${meeting.location}"> </td>
                         <td th:text="${meeting.date}"> </td>
-                        <td th:text="${meeting.longitude}"> </td>
-                        <td th:text="${meeting.latitude}"> </td>
+                        <td th:text="${meeting.url}"> </td>
                         <td>
                             <a class="btn btn-sm btn-primary" th:href="@{'/table/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}">查看会议</a>
                         </td>

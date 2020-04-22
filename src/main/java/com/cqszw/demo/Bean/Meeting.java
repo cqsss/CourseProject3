@@ -4,11 +4,9 @@ import java.util.Date;
 
 public class Meeting {
     private  String name;
-    private  String content;
     private  String location;
     private  String date;
-    private  double longitude;
-    private  double latitude;
+    private  String url;
 
     public String getName() {
         return name;
@@ -16,14 +14,6 @@ public class Meeting {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public String getLocation() {
@@ -42,28 +32,23 @@ public class Meeting {
         this.date = date;
     }
 
-    public double getLongitude() {
-        return longitude;
+    public String getUrl() {
+        return url;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public Meeting() {
+
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
     public void  show(){
         System.out.println("name: "+name);
-        System.out.println("content: "+content);
         System.out.println("location: "+location);
-        System.out.println("longitude: "+longitude);
-        System.out.println("latitude: "+latitude);
         System.out.println("date: "+date);
+        System.out.println("url: "+url);
 
     }
 }

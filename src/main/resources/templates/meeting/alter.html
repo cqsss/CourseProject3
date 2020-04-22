@@ -196,10 +196,6 @@
 							<input name="name" type="text" class="form-control" placeholder="会议名称" th:value="${meeting.name}">
 						</div>
 						<div class="form-group">
-							<label>meeting content</label>
-							<input name="content" type="text" class="form-control" placeholder="会议内容"th:value="${meeting.content}">
-						</div>
-						<div class="form-group">
 							<label>meeting location</label>
 							<input name="location" type="text" class="form-control" placeholder="会议地址"th:value="${meeting.location}">
 						</div>
@@ -208,12 +204,8 @@
 							<input name="date" type="text" class="form-control" placeholder="会议日期"th:value="${meeting.date}">
 						</div>
 						<div class="form-group">
-							<label>meeting longitude</label>
-							<input name="longitude" type="text" class="form-control" placeholder="会议经度"th:value="${meeting.longitude}">
-						</div>
-						<div class="form-group">
-							<label>meeting latitude</label>
-							<input name="latitude" type="text" class="form-control" placeholder="会议纬度"th:value="${meeting.latitude}">
+							<label>meeting url</label>
+							<input name="content" type="text" class="form-control" placeholder="会议详情链接"th:value="${meeting.url}">
 						</div>
 
 						<button type="submit" class="btn btn-primary" >添加</button>

@@ -53,7 +53,7 @@
 <div class="container-fluid">
     <div class="row">
         <!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
-        <div th:replace="commens/bar::sidebar(activeUri='meetings')"></div>
+        <div th:replace="commens/bar::sidebar(activeUri='map')"></div>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
         </main>
@@ -81,21 +81,13 @@
 <script type="text/javascript"  th:inline="javascript">
     // 百度地图API功能
     var map = new BMap.Map("allmap");
-    var point = new BMap.Point([[${p_x}]], [[${p_y}]]);
-    map.centerAndZoom(point, 15);
-    var marker = new BMap.Marker(point);  // 创建标注
-    map.addOverlay(marker);               // 将标注添加到地图中
-    marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-    var title=[[${title}]];
-    var opts = {
-        width : 200,     // 信息窗口宽度
-        height: 100,     // 信息窗口高度
-        title : title, // 信息窗口标题
-        enableMessage:true,//设置允许信息窗发送短息
-        message:"周伟测试的会议内容~"
-    }
-    var infoWindow = new BMap.InfoWindow([[${address}]], opts);  // 创建信息窗口对象
-    map.enableScrollWheelZoom(true);
-    map.openInfoWindow(infoWindow,point); //开启信息窗口
+    map.centerAndZoom([[${location}]],15);
+    var local = new BMap.LocalSearch(map, {
+        renderOptions:{map: map}
+    });
+    local.search([[${location}]]);
+    map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+
 </script>
 </html>

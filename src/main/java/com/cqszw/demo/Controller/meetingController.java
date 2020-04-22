@@ -15,17 +15,7 @@ public class meetingController {
     @Autowired
     private MeetingService meetingService;
     private  Meeting will_alter;
-    @GetMapping("/test/{name}")
-    public String get(@PathVariable("name") String name, Model model){
-        List<Meeting> a= meetingService.getMeetingByName(name);
-        for(int i=0;i<a.size();i++) {
-            model.addAttribute("p_y", a.get(i).getLatitude());
-            model.addAttribute("p_x", a.get(i).getLongitude());
-            model.addAttribute("title", "会议名字：" + a.get(i).getName());
-            model.addAttribute("address", "会议地点：" + a.get(i).getLocation());
-        }
-        return "api";
-    }
+
     @GetMapping("/meetings")
     public  String list(Model model){
 
@@ -55,14 +45,12 @@ public class meetingController {
 //        System.out.println(name);
 //        System.out.println(location);
 //        System.out.println(date);
-        Meeting meeting = meetingService.getMeeting(name, location, date);
-        will_alter=meeting;
+         Meeting meeting = meetingService.getMeeting(name, location, date);
+         will_alter=meeting;
 //        model.addAttribute("name",meeting.getName());
 //        model.addAttribute("location",meeting.getLocation());
 //        model.addAttribute("date",meeting.getDate());
-//        model.addAttribute("content",meeting.getContent());
-//        model.addAttribute("longitude",meeting.getLongitude());
-//        model.addAttribute("latitude",meeting.getLatitude());
+//        model.addAttribute("url",meeting.getContent());
           model.addAttribute("meeting",meeting);
           meeting.show();
         return  "meeting/alter";

@@ -200,11 +200,9 @@
 							<tbody>
 								<tr th:each="meeting:${meetings}">
 										<td th:text="${meeting.name}"> </td>
-										<td th:text="${meeting.content}"> </td>
 										<td th:text="${meeting.location}"> </td>
 										<td th:text="${meeting.date}"> </td>
-										<td th:text="${meeting.longitude}"> </td>
-										<td th:text="${meeting.latitude}"> </td>
+									    <td th:text="${meeting.url}"> </td>
 										<td>
 											<a class="btn btn-sm btn-primary" th:href="@{'/meeting/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}">编辑</a>
 											<form th:action="@{'/meeting/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}" method="post">
