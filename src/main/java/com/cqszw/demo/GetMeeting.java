@@ -4,6 +4,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -13,10 +15,12 @@ import java.util.List;
  * @author Lenovo
  * @date 2020/4/22
  */
+@Component
 public class GetMeeting {
-    public static void main(String[] args) throws IOException {
+    @Scheduled(cron = "0/5 * * * * ? ")
+    public static void getMeetings() throws IOException {
 
-        Integer pagenum=10;
+        Integer pagenum=1;
         String page;
         String url;
         List<String> lName=new LinkedList<String>();//用于存储名称

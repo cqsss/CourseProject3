@@ -36,3 +36,29 @@ INSERT INTO `meeting` VALUES ('hitwh', '南康', '2020-04-22', '', '0');
 INSERT INTO `meeting` VALUES ('操作系统', '威海', '2020-04-15', '', '1');
 INSERT INTO `meeting` VALUES ('软件工程', '日本东京', '2020-04-15', '', '2');
 INSERT INTO `meeting` VALUES ('软件工程', '日本名古屋市立大学', '2020-04-15', '', '3');
+
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `is_manager` tinyint(1) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `sex` varchar(255) DEFAULT NULL CHECK (sex='男'||sex='女'),
+  `telephone` varchar(255) DEFAULT NULL,
+  `introduce` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`username`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES ('admin', '123456', '1', '', null, null, null, null, '1');

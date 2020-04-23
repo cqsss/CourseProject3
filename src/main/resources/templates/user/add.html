@@ -183,37 +183,47 @@
 				<!--</nav>-->
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h2><a class="btn btn-sm btn-success" href="meeting" th:href="@{/meeting}">添加会议</a></h2>
-					<div class="table-responsive">
-						<table class="table table-striped table-sm">
-							<thead>
-								<tr>
-									<th>name</th>
-									<th>location</th>
-									<th>date</th>
-									<th>url</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="meeting:${meetings}">
-										<td th:text="${meeting.name}"> </td>
-										<td th:text="${meeting.location}"> </td>
-										<td th:text="${meeting.date}"> </td>
-									    <td th:text="${meeting.url}"> </td>
-										<td>
-											<a class="btn btn-sm btn-primary" th:href="@{'/meeting/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}">编辑</a>
-											<form th:action="@{'/meeting/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}" method="post">
-												<input type="hidden" name="_method" value="delete">
-												<button type="submit" class="btn btn-sm btn-danger">删除</button>
-											</form>
-										</td>
-
-								</tr>
-							</tbody>
-
-						</table>
-					</div>
+					<form th:action="@{/user}" method="post">
+						<!--发送put请求修改员工数据-->
+						<!--
+						1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
+						2、页面创建一个post表单
+						3、创建一个input项，name="_method";值就是我们指定的请求方式
+						-->
+						<div class="form-group">
+							<label>username</label>
+							<input name="username" type="text" readonly class="form-control" placeholder="用户名" >
+						</div>
+						<div class="form-group">
+							<label>password</label>
+							<input name="location" type="text" class="form-control" placeholder="密码" >
+						</div>
+						<div class="form-group">
+							<label>is_manager</label>
+							<input name="is_manager" type="text" class="form-control" placeholder="管理员" >
+						</div>
+						<div class="form-group">
+							<label>name</label>
+							<input name="name" type="text" class="form-control" placeholder="姓名" >
+						</div>
+						<div class="form-group">
+							<label>age</label>
+							<input name="age" type="text" class="form-control" placeholder="年龄" >
+						</div>
+						<div class="form-group">
+							<label>sex</label>
+							<input name="sex" type="text" class="form-control" placeholder="性别" >
+						</div>
+						<div class="form-group">
+							<label>telphone</label>
+							<input name="telphone" type="text" class="form-control" placeholder="电话" >
+						</div>
+						<div class="form-group">
+							<label>个人简介</label>
+							<input name="introduce" type="text" class="form-control" placeholder="个人简介" >
+						</div>
+						<button type="submit" class="btn btn-primary" >添加</button>
+					</form>
 				</main>
 			</div>
 		</div>
