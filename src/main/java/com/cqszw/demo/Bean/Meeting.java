@@ -3,6 +3,15 @@ package com.cqszw.demo.Bean;
 import java.util.Date;
 
 public class Meeting {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private  int id;
     private  String name;
     private  String location;
     private  String date;

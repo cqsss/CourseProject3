@@ -39,7 +39,8 @@ public class TableController {
     public  String alter(@PathVariable("name")String name, @PathVariable("location")String location,
                          @PathVariable("date")String date,Model model) {
         Meeting meeting = meetingService.getMeeting(name, location, date);
-//        model.addAttribute("location",meeting.getLocation());
+        model.addAttribute("location",meeting.getLocation());
+        model.addAttribute("meeting",meeting);
         return "map";
     }
 

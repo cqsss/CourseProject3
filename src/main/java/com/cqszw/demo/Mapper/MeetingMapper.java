@@ -14,7 +14,7 @@ public interface MeetingMapper {
     List<Meeting> getbydate(@Param("date") String date);
     @Select("select * from meeting")
     List<Meeting> getAll();
-    @Insert("insert into meeting(name,content,location,date,url) values(#{name},#{content},#{location},#{date},#{url})")
+    @Insert("insert into meeting(name,location,date,url) values(#{name},#{location},#{date},#{url})")
     public  int insertMeeting(Meeting meeting);
     @Select("select * from meeting where name=#{name} and location=#{location} and date=#{date}")
     Meeting getMeeting(@Param("name") String name,@Param("location") String location,@Param("date") String date);
