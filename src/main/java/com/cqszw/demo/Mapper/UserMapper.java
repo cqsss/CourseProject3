@@ -25,6 +25,6 @@ public interface UserMapper {
                              @Param("age") int age,@Param("sex") String sex,
                              @Param("telephone") String telephone,@Param("introduce") String introduce,
                              @Param("old_username") String old_name);
-//    @Delete("delete from meeting where name=#{name} and location=#{location} and date=#{date}")
-//    public  int deleteMeeting(@Param("name") String name,@Param("location") String location,@Param("date") String date);
+    @Delete("delete from user where username=#{username}")
+    public  int deleteUser(@Param("username") String username);
 }

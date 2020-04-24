@@ -20,4 +20,15 @@ public class UserService {
                 user.getName(),user.getAge(),user.getSex(),user.getTelephone(),
                 user.getIntroduce(),old_user.getUsername());
     }
+    public  int deleteUser(String username){
+        return  userMapper.deleteUser(username);
+    }
+    public boolean searchUser(String username){
+        if(userMapper.getbyusername(username)!=null){
+            return  true;
+        }
+        else {
+            return  false;
+        }
+    }
 }

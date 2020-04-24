@@ -211,7 +211,7 @@
 									    <td th:text="${user.introduce}"> </td>
 										<td>
 											<a class="btn btn-sm btn-primary" th:href="@{'/user/'+${user.username}}">编辑</a>
-											<button type="submit" class="btn btn-sm btn-danger deleteUser">删除</button>
+											<button class="btn btn-sm btn-danger deleteBtn" th:attr="del_uri=@{'/user/'+${user.username}}">删除</button>
 
 										</td>
 
@@ -240,7 +240,13 @@
 		<script>
 			feather.replace()
 		</script>
-
+		<script>
+            $(".deleteBtn").click(function(){
+                //删除当前员工的
+                $("#deleteUser").attr("action",$(this).attr("del_uri")).submit();
+                return false;
+            });
+		</script>
 		<!-- Graphs -->
 		<script type="text/javascript" src="/asserts/js/Chart.min.js"></script>
 		<script>

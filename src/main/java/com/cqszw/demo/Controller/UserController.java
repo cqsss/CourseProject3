@@ -6,10 +6,7 @@ import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -57,10 +54,10 @@ public class UserController {
         }
         return "redirect:/users";
     }
-//    @DeleteMapping("/meeting/{name}/{location}/{date}")
-//    public  String alter(@PathVariable("name")String name,@PathVariable("location")String location,@PathVariable("date")String date) {
+    @DeleteMapping("/user/{username}")
+    public  String deleteUser(@PathVariable("username")String username) {
 //        System.out.println("删除");
-//        meetingService.deleteMeeting(name,location,date);
-//        return "redirect:/meetings";
-//    }
+        userService.deleteUser(username);
+        return "redirect:/users";
+    }
 }
