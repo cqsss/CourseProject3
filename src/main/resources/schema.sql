@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80015
 File Encoding         : 65001
 
-Date: 2020-04-15 20:24:04
+Date: 2020-04-23 20:03:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,16 +22,43 @@ DROP TABLE IF EXISTS `meeting`;
 CREATE TABLE `meeting` (
   `name` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
-  `content` varchar(255) DEFAULT NULL,
-  `longitude` double NOT NULL,
-  `latitude` double NOT NULL,
   `date` varchar(255) NOT NULL,
-  PRIMARY KEY (`name`,`location`,`date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`name`,`location`,`date`),
+  KEY `id` (`id`),UNIQUE (id)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of meeting
 -- ----------------------------
-INSERT INTO `meeting` VALUES ('hitwh', '山东威海环翠器文化西路', '初始化必备', '122.09', '37.54', '2020-01-01 00:00:00');
-INSERT INTO `meeting` VALUES ('操作系统', '在家里', '上网课', '114.75', '25.8', '2020-04-15');
-INSERT INTO `meeting` VALUES ('软件工程', '在家里', '上网课', '114.75', '25.8', '2020-04-15');
+INSERT INTO `meeting` VALUES ('hitwh', '南康', '2020-04-22', '', '0');
+INSERT INTO `meeting` VALUES ('操作系统', '威海', '2020-04-15', '', '1');
+INSERT INTO `meeting` VALUES ('软件工程', '日本东京', '2020-04-15', '', '2');
+INSERT INTO `meeting` VALUES ('软件工程', '日本名古屋市立大学', '2020-04-15', '', '3');
+
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `is_manager` tinyint(1) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `sex` varchar(255) DEFAULT NULL CHECK (sex='男'||sex='女'),
+  `telephone` varchar(255) DEFAULT NULL,
+  `introduce` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`username`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES ('admin', '123456', '1', '', null, null, null, null, '1');

@@ -183,31 +183,45 @@
 				<!--</nav>-->
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<form th:action="@{/meeting}" method="post">
+					<form th:action="@{/user}" method="post">
 						<!--发送put请求修改员工数据-->
 						<!--
 						1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
 						2、页面创建一个post表单
 						3、创建一个input项，name="_method";值就是我们指定的请求方式
 						-->
-						<input type="hidden" name="_method" value="put">
 						<div class="form-group">
-							<label>meeting name</label>
-							<input name="name" type="text" class="form-control" placeholder="会议名称" th:value="${meeting.name}">
+							<label>username</label>
+							<input name="username" type="text" readonly class="form-control" placeholder="用户名" >
 						</div>
 						<div class="form-group">
-							<label>meeting location</label>
-							<input name="location" type="text" class="form-control" placeholder="会议地址"th:value="${meeting.location}">
+							<label>password</label>
+							<input name="location" type="text" class="form-control" placeholder="密码" >
 						</div>
 						<div class="form-group">
-							<label>meeting date</label>
-							<input name="date" type="date" class="form-control" placeholder="会议日期"th:value="${meeting.date}">
+							<label>is_manager</label>
+							<input name="is_manager" type="text" class="form-control" placeholder="管理员" >
 						</div>
 						<div class="form-group">
-							<label>meeting url</label>
-							<input name="content" type="text" class="form-control" placeholder="会议详情链接"th:value="${meeting.url}">
+							<label>name</label>
+							<input name="name" type="text" class="form-control" placeholder="姓名" >
 						</div>
-
+						<div class="form-group">
+							<label>age</label>
+							<input name="age" type="text" class="form-control" placeholder="年龄" >
+						</div>
+						<div class="form-group">
+							<label>sex</label>
+							<input name="sex" type="text" class="form-control" placeholder="性别" >
+						</div>
+						<div class="form-group">
+							<label>telphone</label>
+							<input name="telphone" type="text" class="form-control" placeholder="电话" >
+						</div>
+						<div class="form-group">
+							<label>个人简介</label>
+							<input name="introduce" type="text" class="form-control" placeholder="个人简介" >
+						</div>
 						<button type="submit" class="btn btn-primary" >添加</button>
 					</form>
 				</main>
@@ -222,7 +236,7 @@
 		<script type="text/javascript" src="/asserts/js/bootstrap.min.js"></script>
 
 		<!-- Icons -->
-		<script type="text/javascript" src="asserts/js/feather.min.js"></script>
+		<script type="text/javascript" src="/asserts/js/feather.min.js"></script>
 		<script>
 			feather.replace()
 		</script>

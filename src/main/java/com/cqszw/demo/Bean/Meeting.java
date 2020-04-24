@@ -3,12 +3,28 @@ package com.cqszw.demo.Bean;
 import java.util.Date;
 
 public class Meeting {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private  int id;
+
+    public Meeting(String name, String location, String date, String url) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.date = date;
+        this.url = url;
+    }
+
     private  String name;
-    private  String content;
     private  String location;
     private  String date;
-    private  double longitude;
-    private  double latitude;
+    private  String url;
 
     public String getName() {
         return name;
@@ -16,14 +32,6 @@ public class Meeting {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public String getLocation() {
@@ -42,28 +50,32 @@ public class Meeting {
         this.date = date;
     }
 
-    public double getLongitude() {
-        return longitude;
+    public String getUrl() {
+        return url;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public Meeting() {
+
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
     public void  show(){
         System.out.println("name: "+name);
-        System.out.println("content: "+content);
         System.out.println("location: "+location);
-        System.out.println("longitude: "+longitude);
-        System.out.println("latitude: "+latitude);
         System.out.println("date: "+date);
+        System.out.println("url: "+url);
 
+    }
+    public boolean is_null(){
+        if(name.isEmpty()||date.isEmpty()||location.isEmpty()){
+            return  true;
+
+        }
+        else {
+            return false;
+        }
     }
 }
