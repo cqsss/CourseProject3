@@ -203,10 +203,7 @@
 									    <td th:text="${meeting.url}"> </td>
 										<td>
 											<a class="btn btn-sm btn-primary" th:href="@{'/meeting/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}">编辑</a>
-											<form th:action="@{'/meeting/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}" method="post">
-												<input type="hidden" name="_method" value="delete">
-												<button type="submit" class="btn btn-sm btn-danger">删除</button>
-											</form>
+											<button class="btn btn-sm btn-danger deleteBtn" th:attr="del_uri=@{'/meeting/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}">删除</button>
 										</td>
 
 								</tr>
@@ -215,6 +212,10 @@
 						</table>
 					</div>
 				</main>
+				<form id="deleteMeeting" method="post">
+					<input type="hidden" name="_method" value="delete">
+
+				</form>
 			</div>
 		</div>
 
@@ -230,7 +231,13 @@
 		<script>
 			feather.replace()
 		</script>
-
+		<script>
+            $(".deleteBtn").click(function(){
+                //删除当前员工的
+                $("#deleteMeeting").attr("action",$(this).attr("del_uri")).submit();
+                return false;
+            });
+		</script>
 		<!-- Graphs -->
 		<script type="text/javascript" src="/asserts/js/Chart.min.js"></script>
 		<script>

@@ -29,4 +29,12 @@ public class MeetingService {
     public int deleteMeeting(String name,String location,String date){
         return  meetingMapper.deleteMeeting(name,location,date);
     }
+    public boolean searchMeeting(String name,String location,String date){
+        if(meetingMapper.getMeeting(name, location, date)!=null){
+            return  true;
+        }
+        else {
+            return  false;
+        }
+    }
 }

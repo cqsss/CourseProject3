@@ -1,9 +1,12 @@
 package com.cqszw.demo;
 
+import com.cqszw.demo.Bean.Meeting;
+import com.cqszw.demo.Service.MeetingService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +20,10 @@ import java.util.List;
  */
 @Component
 public class GetMeeting {
+    @Autowired
+    private  MeetingService meetingService;
     @Scheduled(cron = "0/5 * * * * ? ")
-    public static void getMeetings() throws IOException {
+    public void getMeetings() throws IOException {
 
         Integer pagenum=1;
         String page;
@@ -51,9 +56,17 @@ public class GetMeeting {
             e.printStackTrace();
         }
 
-        System.out.println("查询完毕！！");
+        System.out.println("更新查询结果完毕！！");
         for(int i=0;i<lName.size();i++) {
-            System.out.println("名称:"+lName.get(i)+",日期:"+lDate.get(i)+",地点:"+lLocation.get(i)+",URL:"+lURL.get(i));
+            //System.out.println("名称:"+lName.get(i)+",日期:"+lDate.get(i)+",地点:"+lLocation.get(i)+",URL:"+lURL.get(i));
+            Meeting meeting=new Meeting(lName.get(i),lLocation.get(i),lDate.get(i),lURL.get(i));
+            //meeting.show();
+            if(!meeting.is_null()) {
+                if(!meetingService.searchMeeting(meeting.getName(),meeting.getLocation(),meeting.getDate())){
+                    meetingService.insertMeeting(meeting);
+                }
+            }
+           // meetingService.insertMeeting(new Meeting(lName.get(i),lLocation.get(i),lDate.get(i),lURL.get(i)));
         }
 
     }

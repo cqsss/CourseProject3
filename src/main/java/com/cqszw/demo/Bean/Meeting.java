@@ -12,6 +12,15 @@ public class Meeting {
     }
 
     private  int id;
+
+    public Meeting(String name, String location, String date, String url) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.date = date;
+        this.url = url;
+    }
+
     private  String name;
     private  String location;
     private  String date;
@@ -59,5 +68,14 @@ public class Meeting {
         System.out.println("date: "+date);
         System.out.println("url: "+url);
 
+    }
+    public boolean is_null(){
+        if(name.isEmpty()||date.isEmpty()||location.isEmpty()){
+            return  true;
+
+        }
+        else {
+            return false;
+        }
     }
 }
