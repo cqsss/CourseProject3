@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -39,7 +40,12 @@ public class UserController {
         return  "redirect:/users";
     }
     @GetMapping("/user/{username}")
-    public  String alter(@PathVariable("username")String username,Model model){
+    public  String alter(@PathVariable("username")String username, Model model, HttpServletRequest request){
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        if(username.equals("null")&& loginUser==null){
+
+            return "redirect:/index";
+        }
         User user = userService.getUserbyUsername(username);
         will_alter=user;
         model.addAttribute("user",user);
