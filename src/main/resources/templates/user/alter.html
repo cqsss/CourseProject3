@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>Dashboard Template for Bootstrap</title>
+		<title>C&Z学术日历和地图</title>
 		<!-- Bootstrap core CSS -->
 		<link href="/asserts/css/bootstrap.min.css" rel="stylesheet">
 
@@ -57,7 +57,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
-				<div th:replace="commens/bar::sidebar(activeUri='meetings')"></div>
+				<div th:replace="commens/bar::sidebar(activeUri='users')"></div>
 				<!--<nav class="col-md-2 d-none d-md-block bg-light sidebar">-->
 				<!---->
 					<!--<div class="sidebar-sticky">-->
@@ -183,7 +183,7 @@
 				<!--</nav>-->
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<form th:action="@{/meeting}" method="post">
+					<form th:action="@{/user}" method="post">
 						<!--发送put请求修改员工数据-->
 						<!--
 						1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
@@ -192,22 +192,44 @@
 						-->
 						<input type="hidden" name="_method" value="put">
 						<div class="form-group">
-							<label>meeting name</label>
-							<input name="name" type="text" class="form-control" placeholder="会议名称" th:value="${meeting.name}">
+							<label>username</label>
+							<input name="username" type="text" class="form-control" placeholder="用户名" th:value="${user.username}">
 						</div>
 						<div class="form-group">
-							<label>meeting location</label>
-							<input name="location" type="text" class="form-control" placeholder="会议地址"th:value="${meeting.location}">
+							<label>password</label>
+							<input name="password" type="text" class="form-control" placeholder="密码" th:value="${user.password}">
 						</div>
 						<div class="form-group">
-							<label>meeting date</label>
-							<input name="date" type="date" class="form-control" placeholder="会议日期"th:value="${meeting.date}">
+							<label>is_manager</label><br>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" name="is_manager" type="radio" value="true" th:field="*{user.is_manager}">
+								<label class="form-check-label">管理员</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input name="is_manager" type="radio" value="false"class="form-check-input" th:field="*{user.is_manager}">
+								<label class="form-check-label">非管理员</label>
+							</div>
 						</div>
 						<div class="form-group">
-							<label>meeting url</label>
-							<input name="content" type="text" class="form-control" placeholder="会议详情链接"th:value="${meeting.url}">
+							<label>name</label>
+							<input name="name" type="text" class="form-control" placeholder="姓名" th:value="${user.name}">
 						</div>
-
+						<div class="form-group">
+							<label>age</label>
+							<input name="age" type="number" class="form-control" placeholder="年龄" min="0" max="200" value=0 th:value="${user.age}">
+						</div>
+						<div class="form-group">
+							<label>sex</label>
+							<input name="sex" type="text" class="form-control" placeholder="性别" th:value="${user.sex}">
+						</div>
+						<div class="form-group">
+							<label>telephone</label>
+							<input name="telephone" type="text" class="form-control" placeholder="电话" th:value="${user.telephone}">
+						</div>
+						<div class="form-group">
+							<label>个人简介</label>
+							<input name="introduce" type="text" class="form-control" placeholder="个人简介" th:value="${user.introduce}">
+						</div>
 						<button type="submit" class="btn btn-primary" >添加</button>
 					</form>
 				</main>

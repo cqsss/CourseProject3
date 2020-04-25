@@ -29,7 +29,7 @@ public class meetingController {
         //添加页面显示所有会议
         List<Meeting>meetings=meetingService.getAll();
         //查询所有会议返回列表页面
-         System.out.println("查询所有会议");
+//         System.out.println("查询所有会议");
         model.addAttribute("meetings",meetings);
         return  "meeting/add";
     }
@@ -41,7 +41,7 @@ public class meetingController {
     }
     @GetMapping("/meeting/{name}/{location}/{date}")
     public  String alter(@PathVariable("name")String name,@PathVariable("location")String location,@PathVariable("date")String date,Model model){
-         System.out.println("修改返回原值");
+//         System.out.println("修改返回原值");
 //        System.out.println(name);
 //        System.out.println(location);
 //        System.out.println(date);
@@ -57,7 +57,7 @@ public class meetingController {
     }
     @PutMapping("/meeting")
     public String update(Meeting meeting){
-        System.out.println("更新");
+//        System.out.println("更新");
         if(will_alter!=null){
             //meeting.show();
             meetingService.updateMeeting(meeting,will_alter);
@@ -66,7 +66,7 @@ public class meetingController {
     }
     @DeleteMapping("/meeting/{name}/{location}/{date}")
 public  String alter(@PathVariable("name")String name,@PathVariable("location")String location,@PathVariable("date")String date) {
-        System.out.println("删除");
+//        System.out.println("删除");
         meetingService.deleteMeeting(name,location,date);
         return "redirect:/meetings";
     }

@@ -22,13 +22,19 @@ public class MyConfig extends WebMvcConfigurationSupport {
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/index.html").setViewName("index");
         registry.addViewController("/dashboard.html").setViewName("dashboard");
-
+        registry.addViewController("/about.html").setViewName("about");
 
     }
 //注册拦截器
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/new/**");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/meetings");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/meeting");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/users");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/user");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/dashboard");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/about");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/table");
     }
 
     @Override

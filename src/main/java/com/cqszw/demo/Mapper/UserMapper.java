@@ -14,13 +14,17 @@ public interface UserMapper {
     User getbyusername(@Param("username") String username);
     @Select("select * from user")
     List<User> getAll();
-//    @Insert("insert into meeting(name,location,date,url) values(#{name},#{location},#{date},#{url})")
-//    public  int insertMeeting(Meeting meeting);
-//    @Update("update meeting set name=#{name},location=#{location},date=#{date},url=#{url} where name=#{old_name} and location=#{old_location} and date=#{old_date}")
-//    public int updateMeeting(@Param("name") String name,@Param("location") String location,
-//                             @Param("date") String date,@Param("url") String url,
-//                             @Param("old_name") String old_name,@Param("old_location") String old_location,
-//                             @Param("old_date") String old_date);
-//    @Delete("delete from meeting where name=#{name} and location=#{location} and date=#{date}")
-//    public  int deleteMeeting(@Param("name") String name,@Param("location") String location,@Param("date") String date);
+    @Insert("insert into user(username,password,is_manager,name,age,sex,telephone,introduce) " +
+            "values(#{username},#{password},#{is_manager},#{name},#{age},#{sex},#{telephone},#{introduce})")
+    public  int insertUser(User user);
+    @Update("update user set username=#{username},password=#{password},is_manager=#{is_manager}," +
+            "name=#{name},age=#{age},sex=#{sex},telephone=#{telephone},introduce=#{introduce}" +
+            " where username=#{old_username}")
+    public int updateUser(@Param("username") String username,@Param("password") String password,
+                             @Param("is_manager") boolean is_manager,@Param("name") String name,
+                             @Param("age") int age,@Param("sex") String sex,
+                             @Param("telephone") String telephone,@Param("introduce") String introduce,
+                             @Param("old_username") String old_name);
+    @Delete("delete from user where username=#{username}")
+    public  int deleteUser(@Param("username") String username);
 }

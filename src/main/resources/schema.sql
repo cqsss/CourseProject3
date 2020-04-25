@@ -62,3 +62,6 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('admin', '123456', '1', '', null, null, null, null, '1');
+INSERT INTO `user` VALUES ('hitwh', '123456', '0', '', null, null, null, null, '2');
+INSERT INTO `user` VALUES ('root', '123456', '1', '', null, null, null, null, '3');
+

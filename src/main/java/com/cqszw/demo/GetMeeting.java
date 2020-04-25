@@ -22,7 +22,7 @@ import java.util.List;
 public class GetMeeting {
     @Autowired
     private  MeetingService meetingService;
-    @Scheduled(cron = "0/5 * * * * ? ")
+    @Scheduled(cron = "0/20 * * * * ? ")
     public void getMeetings() throws IOException {
 
         Integer pagenum=1;
