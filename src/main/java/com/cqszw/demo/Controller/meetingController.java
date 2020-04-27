@@ -14,10 +14,10 @@ import java.util.List;
 public class meetingController {
     @Autowired
     private MeetingService meetingService;
-    private  Meeting will_alter;
+    private Meeting will_alter;
 
     @GetMapping("/meetings")
-    public  String list(Model model){
+    public String list(Model model){
 
         List<Meeting>meetings=meetingService.getAll();
         //查询所有会议返回列表页面
@@ -34,13 +34,13 @@ public class meetingController {
         return  "meeting/add";
     }
     @PostMapping("/meeting")
-    public  String addMeeting(Meeting meeting){
+    public String addMeeting(Meeting meeting){
         meetingService.insertMeeting(meeting);
         //最后回到员工列表页面
         return  "redirect:/meetings";
     }
     @GetMapping("/meeting/{name}/{location}/{date}")
-    public  String alter(@PathVariable("name")String name,@PathVariable("location")String location,@PathVariable("date")String date,Model model){
+    public String alter(@PathVariable("name")String name,@PathVariable("location")String location,@PathVariable("date")String date,Model model){
 //         System.out.println("修改返回原值");
 //        System.out.println(name);
 //        System.out.println(location);
@@ -65,7 +65,7 @@ public class meetingController {
         return "redirect:/meetings";
     }
     @DeleteMapping("/meeting/{name}/{location}/{date}")
-public  String alter(@PathVariable("name")String name,@PathVariable("location")String location,@PathVariable("date")String date) {
+    public String alter(@PathVariable("name")String name,@PathVariable("location")String location,@PathVariable("date")String date) {
 //        System.out.println("删除");
         meetingService.deleteMeeting(name,location,date);
         return "redirect:/meetings";
