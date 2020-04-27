@@ -25,7 +25,7 @@ public class GetMeeting {
     @Scheduled(cron = "0/20 * * * * ? ")
     public void getMeetings() throws IOException {
 
-        Integer pagenum=1;
+        Integer pagenum=10;
         String page;
         String url;
         List<String> lName=new LinkedList<String>();//用于存储名称
