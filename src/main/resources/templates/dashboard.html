@@ -139,6 +139,10 @@
         '#c4332b', '#16B644', '#6862FD', '#FDC763'
     ];
 
+	var date = new Date();
+	var year = date.getFullYear();
+	var day = date.getDay();
+
     function getVirtulData(year) {
         year = year || '2017';
         var date = +echarts.number.parseDate(year + '-01-01');
@@ -239,15 +243,6 @@
         //console.log(params);
         var date=params.data[0];
         window.location.assign("/table/"+date);
-        // $.ajax({
-        //     type:"post",
-        //     data:{date},
-        //     url:"/table/"+data,
-        //     dataType: 'json'
-        //     // success: function(data) {
-        //     //     return data;
-        //     // }
-        // });
     });
 </script>
 
