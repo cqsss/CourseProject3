@@ -23,6 +23,7 @@ public class MyConfig extends WebMvcConfigurationSupport {
         registry.addViewController("/index.html").setViewName("index");
         registry.addViewController("/dashboard.html").setViewName("dashboard");
         registry.addViewController("/about.html").setViewName("about");
+        registry.addViewController("/visitor/about.html").setViewName("visitor/about");
     }
 //注册拦截器
     @Override
