@@ -62,6 +62,11 @@ public class GetMeeting {
             Meeting meeting=new Meeting(lName.get(i),lLocation.get(i),lDate.get(i),lURL.get(i));
             //meeting.show();
             if(!meeting.is_null()) {
+                if(!lURL.get(i).startsWith("http://")){
+                    StringBuilder stringBuilder=new StringBuilder(meeting.getUrl());
+                    stringBuilder.insert(0,"http://meeting.sciencenet.cn/");
+                    meeting.setUrl(stringBuilder.toString());
+                }
                 if(!meetingService.searchMeeting(meeting.getName(),meeting.getLocation(),meeting.getDate())){
                     meetingService.insertMeeting(meeting);
                 }

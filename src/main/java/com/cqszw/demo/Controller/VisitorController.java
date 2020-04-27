@@ -3,6 +3,7 @@ package com.cqszw.demo.Controller;
 import com.cqszw.demo.Bean.Meeting;
 import com.cqszw.demo.Bean.User;
 import com.cqszw.demo.Bean.User_Meetings;
+import com.cqszw.demo.Service.MeetingService;
 import com.cqszw.demo.Service.UMService;
 import com.cqszw.demo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,11 @@ import java.util.List;
 @Controller
 public class VisitorController {
     @Autowired
-    private UserService userService;
+    private  UserService userService;
     @Autowired
     private  UMService umService;
+    @Autowired
+    private MeetingService meetingService;
     User will_alter;
     @RequestMapping("/visitor")
     public  String visitor(){
@@ -70,4 +73,16 @@ public class VisitorController {
             return "/visitor/dashboard";
         }
     }
+    @GetMapping("/visitor/table/{name}/{location}/{date}")
+    public  String alter(@PathVariable("name")String name, @PathVariable("location")String location,
+                         @PathVariable("date")String date,Model model) {
+        Meeting meeting = meetingService.getMeeting(name, location, date);
+        model.addAttribute("location",meeting.getLocation());
+        model.addAttribute("meeting",meeting);
+        return "visitor/map";
+    }
+//    @GetMapping("/visitor/meetings")
+//    public String meetings(){
+//        Meeting meeting
+//    }
 }

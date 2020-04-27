@@ -71,6 +71,7 @@
 						<th>location</th>
 						<th>date</th>
 						<th>url</th>
+						<th>操作</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -80,7 +81,8 @@
 						<td th:text="${meeting.date}"> </td>
 						<td th:text="${meeting.url}"> </td>
 						<td>
-							<a class="btn btn-sm btn-primary" th:href="@{'/table/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}">查看会议</a>
+							<a class="btn btn-sm btn-primary" th:href="@{'/visitor/table/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}">查看会议地址</a>
+							<a class="btn btn-sm btn-primary" th:href="${meeting.url}" target="_blank">去会议详情页</a>
 						</td>
 					</tr>
 					</tbody>

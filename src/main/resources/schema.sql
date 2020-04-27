@@ -32,10 +32,10 @@ CREATE TABLE `meeting` (
 -- ----------------------------
 -- Records of meeting
 -- ----------------------------
-INSERT INTO `meeting` VALUES ('hitwh', '南康', '2020-04-22', '', '0');
-INSERT INTO `meeting` VALUES ('操作系统', '威海', '2020-04-15', '', '1');
-INSERT INTO `meeting` VALUES ('软件工程', '日本东京', '2020-04-15', '', '2');
-INSERT INTO `meeting` VALUES ('软件工程', '日本名古屋市立大学', '2020-04-15', '', '3');
+INSERT INTO `meeting` VALUES ('hitwh', '南康', '2020-04-22', 'http://www.hitwh.edu.cn/', '0');
+INSERT INTO `meeting` VALUES ('操作系统', '威海', '2020-04-15', 'http://www.hitwh.edu.cn/', '1');
+INSERT INTO `meeting` VALUES ('软件工程', '日本东京', '2020-04-15', 'http://www.hitwh.edu.cn/', '2');
+INSERT INTO `meeting` VALUES ('软件工程', '日本名古屋市立大学', '2020-04-15', 'http://www.hitwh.edu.cn/', '3');
 
 
 SET FOREIGN_KEY_CHECKS=0;
