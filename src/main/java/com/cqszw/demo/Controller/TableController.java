@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -28,20 +31,25 @@ public class TableController {
         return "dashboard";
     }
     @GetMapping("/table/{date}")
-    public String getDate(@PathVariable("date") String date,Model model) {
+    public String getDate(@PathVariable("date") String date,Model model) throws ParseException {
         System.out.println(date);
-        String ym=date.substring(0,7);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date wholedate=sdf.parse(date);
+        SimpleDateFormat ymformat = new SimpleDateFormat("yyyy-MM");
+        String ym = ymformat.format(wholedate);
         model.addAttribute("ym",ym);
-        String y=date.substring(0,5);
-        String m = date.substring(5, 7);
-        String d=date.substring(7);
-
-        int month=Integer.parseInt(m);
-        month=month+1;
-        String next=y+month+d;
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(wholedate);
+        calendar.add(Calendar.MONTH,1);
+        Date nextdate = calendar.getTime();
+        String next = sdf.format(nextdate);
+        System.out.println(next);
         model.addAttribute("nexttime",next);
-        System.out.println("ym:"+ym);
-        System.out.println("next"+next);
+        calendar.setTime(wholedate);
+        calendar.add(Calendar.MONTH,-1);
+        Date lastdate = calendar.getTime();
+        String last = sdf.format(lastdate);
+        model.addAttribute("lasttime",last);
         List<Meeting> meetings=meetingService.getMeetingByDate(date);
         if(!meetings.isEmpty()){
             System.out.println(meetings.get(0).getName());
