@@ -35,8 +35,9 @@ public class LoginController {
                     return "redirect:/dashboard.html";
                 }
                 else{
-                    map.put("msg","权限不足");
-                    return "index";//为了防止表单重复提交，可以重定向
+                    //map.put("msg","权限不足");
+                    httpSession.setAttribute("visitorUser",username);
+                    return "redirect:/visitor";//为了防止表单重复提交，可以重定向
                 }
             }
             else{

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>C&Z学术日历和地图</title>
+		<!-- Bootstrap core CSS -->
+		<link href="/asserts/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="/asserts/css/dashboard.css" rel="stylesheet">
+		<style type="text/css">
+			/* Chart.js */
+			
+			@-webkit-keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			@keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			.chartjs-render-monitor {
+				-webkit-animation: chartjs-render-animation 0.001s;
+				animation: chartjs-render-animation 0.001s;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">-->
+			<!--<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Company name</a>-->
+			<!--<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">-->
+			<!--<ul class="navbar-nav px-3">-->
+				<!--<li class="nav-item text-nowrap">-->
+					<!--<a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Sign out</a>-->
+				<!--</li>-->
+			<!--</ul>-->
+		<!--</nav>-->
+<!--改用我抽取出来的顶部栏-->
+		<div th:replace="visitor_commens/bar::topbar"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
+				<div th:replace="visitor_commens/bar::sidebar(activeUri='users')"></div>
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+					<form th:action="@{/visitor/alter}" method="post">
+						<!--发送put请求修改员工数据-->
+						<!--
+						1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
+						2、页面创建一个post表单
+						3、创建一个input项，name="_method";值就是我们指定的请求方式
+						-->
+						<input type="hidden" name="_method" value="put">
+						<div class="form-group">
+							<label>username</label>
+							<input name="username" type="text" readonly class="form-control" placeholder="用户名" th:value="${user.username}">
+						</div>
+						<div class="form-group">
+							<label>password</label>
+							<input name="password" type="password" class="form-control" placeholder="密码" th:value="${user.password}">
+						</div>
+						<div class="form-group" type="hidden">
+							<label>is_manager</label><br>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" name="is_manager" type="radio" value="true" disabled th:field="*{user.is_manager}">
+								<label class="form-check-label">管理员</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input name="is_manager" type="radio" value="false"class="form-check-input" disabled th:field="*{user.is_manager}">
+								<label class="form-check-label">非管理员</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>name</label>
+							<input name="name" type="text" class="form-control" placeholder="姓名" th:value="${user.name}">
+						</div>
+						<div class="form-group">
+							<label>age</label>
+							<input name="age" type="number" class="form-control" placeholder="年龄" min="0" max="200" value=0 th:value="${user.age}">
+						</div>
+						<div class="form-group">
+							<label>sex</label>
+							<input name="sex" type="text" class="form-control" placeholder="性别" th:value="${user.sex}">
+						</div>
+						<div class="form-group">
+							<label>telephone</label>
+							<input name="telephone" type="text" class="form-control" placeholder="电话" th:value="${user.telephone}">
+						</div>
+						<div class="form-group">
+							<label>个人简介</label>
+							<input name="introduce" type="text" class="form-control" placeholder="个人简介" th:value="${user.introduce}">
+						</div>
+						<button type="submit" class="btn btn-primary">修改信息</button>
+					</form>
+				</main>
+			</div>
+		</div>
+
+		<!-- Bootstrap core JavaScript
+    ================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script type="text/javascript" src="/asserts/js/jquery-3.2.1.slim.min.js"></script>
+		<script type="text/javascript" src="/asserts/js/popper.min.js"></script>
+		<script type="text/javascript" src="/asserts/js/bootstrap.min.js"></script>
+
+		<!-- Icons -->
+		<script type="text/javascript" src="asserts/js/feather.min.js"></script>
+		<script>
+			feather.replace()
+		</script>
+
+		<!-- Graphs -->
+		<script type="text/javascript" src="/asserts/js/Chart.min.js"></script>
+		<script>
+			var ctx = document.getElementById("myChart");
+			var myChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+					datasets: [{
+						data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+						lineTension: 0,
+						backgroundColor: 'transparent',
+						borderColor: '#007bff',
+						borderWidth: 4,
+						pointBackgroundColor: '#007bff'
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: false
+							}
+						}]
+					},
+					legend: {
+						display: false,
+					}
+				}
+			});
+		</script>
+
+	</body>
+
+</html>

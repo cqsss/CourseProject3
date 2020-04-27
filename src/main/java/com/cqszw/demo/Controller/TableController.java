@@ -23,7 +23,7 @@ public class TableController {
 //        //查询所有会议返回列表页面
 //        System.out.println(meetings);
 //        model.addAttribute("meetings",meetings);
-        return "tabletest";
+        return "dashboard";
     }
     @GetMapping("/table/{date}")
     public String getDate(@PathVariable("date") String date,Model model) {
@@ -33,7 +33,7 @@ public class TableController {
             System.out.println(meetings.get(0).getName());
             model.addAttribute("meetings",meetings);
         }
-        return "tabletest";
+        return "dashboard";
     }
     @GetMapping("/table/{name}/{location}/{date}")
     public  String alter(@PathVariable("name")String name, @PathVariable("location")String location,
