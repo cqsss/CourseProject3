@@ -108,7 +108,7 @@
 </script>
 
 <!-- Graphs -->
-<script type="text/javascript" src="https://cdn.bootcss.com/echarts/4.7.0/echarts.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/echarts/4.7.0/echarts.min.js" th:inline="javascript"></script>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 <script>
     var myChart = echarts.init(document.getElementById('myChart'));
@@ -137,12 +137,9 @@
         '#c4332b', '#16B644', '#6862FD', '#FDC763'
     ];
 
-	var date = new Date();
-	var year = date.getFullYear();
-	var day = date.getDay();
 
     function getVirtulData(year) {
-        year = year || '2017';
+        year = year || '2020';
         var date = +echarts.number.parseDate(year + '-01-01');
         var end = +echarts.number.parseDate((+year + 1) + '-01-01');
         var dayTime = 3600 * 24 * 1000;
@@ -155,7 +152,7 @@
             }
             data.push([
                 echarts.format.formatTime('yyyy-MM-dd', time),
-                items.join('|')
+                '|'
             ]);
         }
         return data;
@@ -211,6 +208,7 @@
     }
 
     option = {
+
         tooltip: {
         },
         calendar: [{
@@ -224,7 +222,8 @@
                 nameMap: 'cn'
             },
             monthLabel: {
-                show: false
+                show: true,
+				nameMap: 'cn'
             },
             range: '2020-04'
         }],
