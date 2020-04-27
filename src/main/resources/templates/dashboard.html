@@ -50,6 +50,7 @@
 		<div th:replace="commens/bar::sidebar(activeUri='dashboard.html')"></div>
 
 		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+			<a class="btn btn-sm btn-primary" th:href="@{'/table/'+${nexttime}}">编辑</a>
 			<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
 				<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
 					<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
@@ -113,7 +114,7 @@
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 <script>
     var myChart = echarts.init(document.getElementById('myChart'));
-
+	alert([[${ym}]]);
     var layouts = [
         [
             [0, 0]
@@ -207,7 +208,6 @@
 
         return group;
     }
-
     option = {
 
         tooltip: {
@@ -226,7 +226,7 @@
                 show: true,
 				nameMap: 'cn'
             },
-            range: '2020-04'
+            range: '2020-05'
         }],
         series: [{
             type: 'custom',
