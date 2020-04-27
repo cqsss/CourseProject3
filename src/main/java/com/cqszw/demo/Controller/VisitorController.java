@@ -6,6 +6,7 @@ import com.cqszw.demo.Bean.User_Meetings;
 import com.cqszw.demo.Service.MeetingService;
 import com.cqszw.demo.Service.UMService;
 import com.cqszw.demo.Service.UserService;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,8 +82,58 @@ public class VisitorController {
         model.addAttribute("meeting",meeting);
         return "visitor/map";
     }
-//    @GetMapping("/visitor/meetings")
-//    public String meetings(){
-//        Meeting meeting
-//    }
+    @GetMapping("/visitor/meetings")
+    public String meetings(Model model, HttpServletRequest request){
+        Object visitorUser = request.getSession().getAttribute("visitorUser");
+        if(visitorUser==null){
+            model.addAttribute("msg","未登入，没有个人数据");
+            return "/visitor/list";
+        }
+        else{
+            String s = visitorUser.toString();
+            int userid = userService.getuserid(s);
+//            System.out.println("userid:"+userid);
+            List<Meeting> meetings=umService.getbyuser(userid);
+            model.addAttribute("meetings",meetings);
+//            //System.out.println(s);
+            return "/visitor/list";
+        }
+    }
+    @DeleteMapping("/visitor/meeting/delete/{meeting_id}")
+    public  String alter(@PathVariable("meeting_id")int meeting_id,Model model,HttpServletRequest request) {
+        Object visitorUser = request.getSession().getAttribute("visitorUser");
+        if(visitorUser==null){
+            return "redirect:/visitor/meetings";
+        }
+        else{
+            String s = visitorUser.toString();
+            int userid = userService.getuserid(s);
+            umService.deleteUserMeeting(meeting_id,userid);
+//            //System.out.println(s);
+            return "redirect:/visitor/meetings";
+        }
+    }
+    @GetMapping("/visitor/meeting/add")
+    public  String add(Model model){
+            List<Meeting> meetings = meetingService.getAll();
+            model.addAttribute("meetings",meetings);
+            return "/visitor/add";
+    }
+    @GetMapping("/visitor/meeting/add/{meeting_id}")
+    public  String add(Model model,HttpServletRequest request,@PathVariable("meeting_id") int meeting_id){
+        Object visitorUser = request.getSession().getAttribute("visitorUser");
+        if(visitorUser==null){
+            model.addAttribute("msg","未登录，请先登录");
+            return "/index";
+        }
+        else{
+            String s = visitorUser.toString();
+            int userid = userService.getuserid(s);
+            if(!umService.searchMeeting(userid,meeting_id)){
+                umService.insertUS(userid,meeting_id);
+            }
+            return "redirect:/visitor/meetings";
+        }
+    }
+
 }
