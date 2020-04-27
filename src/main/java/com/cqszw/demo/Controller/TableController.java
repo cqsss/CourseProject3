@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +30,18 @@ public class TableController {
     @GetMapping("/table/{date}")
     public String getDate(@PathVariable("date") String date,Model model) {
         System.out.println(date);
+        String ym=date.substring(0,7);
+        model.addAttribute("ym",ym);
+        String y=date.substring(0,5);
+        String m = date.substring(5, 7);
+        String d=date.substring(7);
+
+        int month=Integer.parseInt(m);
+        month=month+1;
+        String next=y+month+d;
+        model.addAttribute("nexttime",next);
+        System.out.println("ym:"+ym);
+        System.out.println("next"+next);
         List<Meeting> meetings=meetingService.getMeetingByDate(date);
         if(!meetings.isEmpty()){
             System.out.println(meetings.get(0).getName());
