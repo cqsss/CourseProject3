@@ -36,8 +36,11 @@ public class TableController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date wholedate=sdf.parse(date);
         SimpleDateFormat ymformat = new SimpleDateFormat("yyyy-MM");
+        SimpleDateFormat yformat = new SimpleDateFormat("yyyy");
         String ym = ymformat.format(wholedate);
+        String y = yformat.format(wholedate);
         model.addAttribute("ym",ym);
+        model.addAttribute("y",y);
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(wholedate);
         calendar.add(Calendar.MONTH,1);
