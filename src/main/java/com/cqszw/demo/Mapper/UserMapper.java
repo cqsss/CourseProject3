@@ -27,4 +27,6 @@ public interface UserMapper {
                              @Param("old_username") String old_name);
     @Delete("delete from user where username=#{username}")
     public  int deleteUser(@Param("username") String username);
+    @Select("select id from user where username=#{username}")
+    public int getuserid(@Param("username")String username);
 }

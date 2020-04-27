@@ -43,11 +43,11 @@
 
 <body>
 <!--引入topbar-->
-<div th:replace="commens/bar::topbar"></div>
+<div th:replace="visitor_commens/bar::topbar"></div>
 <div class="container-fluid">
 	<div class="row">
 		<!--引入sidebar-->
-		<div th:replace="commens/bar::sidebar(activeUri='dashboard.html')"></div>
+		<div th:replace="visitor_commens/bar::sidebar(activeUri='dashboard.html')"></div>
 
 		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 			<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
@@ -61,7 +61,7 @@
 			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 				<h1 class="h2">日历</h1>
 			</div>
-
+			<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
 			<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>
 			<div class="table-responsive">
 				<table class="table table-striped table-sm">
@@ -234,7 +234,7 @@
     myChart.on('click', function (params) {
         //console.log(params);
         var date=params.data[0];
-        window.location.assign("/table/"+date);
+        window.location.assign("/visitor/table/"+date);
         // $.ajax({
         //     type:"post",
         //     data:{date},

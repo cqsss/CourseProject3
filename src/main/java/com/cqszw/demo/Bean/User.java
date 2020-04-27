@@ -4,6 +4,16 @@ public class User {
     private String username;
     private String password;
     boolean is_manager;
+
+    public User() {
+    }
+
+    public User(String username, String password) {
+
+        this.username = username;
+        this.password = password;
+    }
+
     private String name;
     private int age;
     private String sex;

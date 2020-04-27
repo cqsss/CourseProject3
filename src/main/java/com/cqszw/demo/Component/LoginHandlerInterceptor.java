@@ -1,5 +1,7 @@
 package com.cqszw.demo.Component;
 
+import com.cqszw.demo.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 

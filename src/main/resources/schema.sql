@@ -63,5 +63,37 @@ CREATE TABLE `user` (
 -- ----------------------------
 INSERT INTO `user` VALUES ('admin', '123456', '1', '', null, null, null, null, '1');
 INSERT INTO `user` VALUES ('hitwh', '123456', '0', '', null, null, null, null, '2');
-INSERT INTO `user` VALUES ('root', '123456', '1', '', null, null, null, null, '3');
 
+
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : localhost
+Source Server Version : 80015
+Source Host           : localhost:3306
+Source Database       : academicconference
+
+Target Server Type    : MYSQL
+Target Server Version : 80015
+File Encoding         : 65001
+
+Date: 2020-04-26 11:35:48
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for user_meetings
+-- ----------------------------
+DROP TABLE IF EXISTS `user_meetings`;
+CREATE TABLE `user_meetings` (
+  `user_id` int(11) NOT NULL,
+  `meeting_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`meeting_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_meetings
+-- ----------------------------
+INSERT INTO `user_meetings` VALUES ('2', '1');
+INSERT INTO `user_meetings` VALUES ('2', '2');
