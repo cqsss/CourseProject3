@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Controller
@@ -25,10 +30,6 @@ public class VisitorController {
     @Autowired
     private MeetingService meetingService;
     User will_alter;
-    @RequestMapping("/visitor")
-    public  String visitor(){
-        return "/visitor/dashboard";
-    }
     @GetMapping("/visitor/login/{username}")
     public  String alter(@PathVariable("username")String username, Model model, HttpServletRequest request){
         Object loginUser = request.getSession().getAttribute("visitorUser");
@@ -58,7 +59,28 @@ public class VisitorController {
         return "redirect:/visitor/";
     }
     @RequestMapping("/visitor/table/{date}")
-    public String myMeetingbyDate(@PathVariable("date")String date, Model model, HttpServletRequest request){
+    public String myMeetingbyDate(@PathVariable("date")String date, Model model, HttpServletRequest request) throws ParseException {
+        System.out.println(date);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date wholedate=sdf.parse(date);
+        SimpleDateFormat ymformat = new SimpleDateFormat("yyyy-MM");
+        SimpleDateFormat yformat = new SimpleDateFormat("yyyy");
+        String ym = ymformat.format(wholedate);
+        String y = yformat.format(wholedate);
+        model.addAttribute("ym",ym);
+        model.addAttribute("y",y);
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(wholedate);
+        calendar.add(Calendar.MONTH,1);
+        Date nextdate = calendar.getTime();
+        String next = sdf.format(nextdate);
+        System.out.println(next);
+        model.addAttribute("nexttime",next);
+        calendar.setTime(wholedate);
+        calendar.add(Calendar.MONTH,-1);
+        Date lastdate = calendar.getTime();
+        String last = sdf.format(lastdate);
+        model.addAttribute("lasttime",last);
         Object visitorUser = request.getSession().getAttribute("visitorUser");
         if(visitorUser==null){
             model.addAttribute("msg","未登入，没有个人数据");

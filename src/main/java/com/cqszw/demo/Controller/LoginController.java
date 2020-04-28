@@ -41,9 +41,13 @@ public class LoginController {
                     return "redirect:/table/"+date;
                 }
                 else{
+                    httpSession.setAttribute("loginUser",username);
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+                    System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
+                    String date=df.format(new Date());
                     //map.put("msg","权限不足");
                     httpSession.setAttribute("visitorUser",username);
-                    return "redirect:/visitor";//为了防止表单重复提交，可以重定向
+                    return "redirect:/visitor/table/"+date;//为了防止表单重复提交，可以重定向
                 }
             }
             else{
