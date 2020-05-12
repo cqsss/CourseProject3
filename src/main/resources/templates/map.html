@@ -84,9 +84,23 @@
     var meeting=[[${meeting}]];
     map.centerAndZoom([[${location}]],15);
     var local = new BMap.LocalSearch(map, {
-        renderOptions:{map: map}
+        renderOptions:{map: map},onSearchComplete: function(results){
+            if(results.getNumPages()==0){
+                alert("搜索不到");
+            }
+            else{
+                alert("会议名称："+meeting.name
+                    +"\n会议地点："+meeting.location
+                    +"\n会议日期:"+meeting.date
+                    +"\n详情请见:"+meeting.url);
+                map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+                map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+            }
+        }
+
     });
     local.search([[${location}]]);
+<<<<<<< HEAD
     if
     alert("会议名称："+meeting.name
     +"\n会议地点："+meeting.location
@@ -94,6 +108,9 @@
     +"\n详情请见:"+meeting.url);
     map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
     map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+=======
+
+>>>>>>> 0b926dcfb04767a59b858237b3ad2cc7eaebe11a
 
 </script>
 </html>
