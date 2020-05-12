@@ -37,10 +37,13 @@ public class TableController {
         Date wholedate=sdf.parse(date);
         SimpleDateFormat ymformat = new SimpleDateFormat("yyyy-MM");
         SimpleDateFormat yformat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat ymdformat = new SimpleDateFormat("yyyy-MM-dd");
         String ym = ymformat.format(wholedate);
         String y = yformat.format(wholedate);
+        String ymd = ymdformat.format(wholedate);
         model.addAttribute("ym",ym);
         model.addAttribute("y",y);
+        model.addAttribute("ymd",ymd);
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(wholedate);
         calendar.add(Calendar.MONTH,1);

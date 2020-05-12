@@ -55,8 +55,6 @@ public class GetMeeting {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println("更新查询结果完毕！！");
         for(int i=0;i<lName.size();i++) {
             //System.out.println("名称:"+lName.get(i)+",日期:"+lDate.get(i)+",地点:"+lLocation.get(i)+",URL:"+lURL.get(i));
             Meeting meeting=new Meeting(lName.get(i),lLocation.get(i),lDate.get(i),lURL.get(i));
