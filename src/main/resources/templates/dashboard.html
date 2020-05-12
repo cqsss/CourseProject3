@@ -220,7 +220,18 @@
         window.location.assign("/table/"+date);
     });
 </script>
+<script>
+    function entersearch(){
+        var event = window.event || arguments.callee.caller.arguments[0];
+        if (event.keyCode == 13)
+        {
+            var $Search = $("#Search").val();
+            //alert($Search);
+            window.location.assign("/meeting/search/"+$Search);
+        }
+    }
 
+</script>
 </body>
 
 </html>

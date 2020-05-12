@@ -76,7 +76,18 @@
 <!-- Graphs -->
 <script type="text/javascript" src="https://cdn.bootcss.com/echarts/4.7.0/echarts.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script>
+    function entersearch(){
+        var event = window.event || arguments.callee.caller.arguments[0];
+        if (event.keyCode == 13)
+        {
+            var $Search = $("#Search").val();
+            //alert($Search);
+            window.location.assign("/meeting/search/"+$Search);
+        }
+    }
 
+</script>
 
 </body>
 

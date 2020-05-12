@@ -144,6 +144,12 @@ public class VisitorController {
             model.addAttribute("meetings",meetings);
             return "/visitor/add";
     }
+    @GetMapping("/visitor/meeting/search/{keyword}")
+    public  String search(@PathVariable("keyword")String keyword, Model model){
+        List<Meeting> meetings = meetingService.search(keyword);
+        model.addAttribute("meetings",meetings);
+        return "/visitor/add";
+    }
     @GetMapping("/visitor/meeting/add/{meeting_id}")
     public  String add(Model model,HttpServletRequest request,@PathVariable("meeting_id") int meeting_id){
         Object visitorUser = request.getSession().getAttribute("visitorUser");

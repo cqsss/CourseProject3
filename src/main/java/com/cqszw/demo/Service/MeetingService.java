@@ -37,4 +37,5 @@ public class MeetingService {
             return  false;
         }
     }
+    public  List<Meeting> search(String keyword){return  meetingMapper.search(keyword);}
 }

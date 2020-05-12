@@ -33,6 +33,13 @@ public class meetingController {
         model.addAttribute("meetings",meetings);
         return  "meeting/add";
     }
+    @RequestMapping("/meeting/search/{keyword}")
+    public  String toSearchMeeting(@PathVariable("keyword")String keyword, Model model){
+        List<Meeting>meetings=meetingService.search(keyword);
+        //搜索会议返回结果页面
+        model.addAttribute("meetings",meetings);
+        return  "meeting/list";
+    }
     @PostMapping("/meeting")
     public String addMeeting(Meeting meeting){
         meetingService.insertMeeting(meeting);
