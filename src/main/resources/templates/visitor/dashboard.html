@@ -63,9 +63,9 @@
 			</div>
 			<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
 			<div align="center">
-				<a class="btn btn-sm btn-primary" th:href="@{'/table/'+${lasttime}}"> < </a>
+				<a class="btn btn-sm btn-primary" th:href="@{'/visitor/table/'+${lasttime}}"> < </a>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a class="btn btn-sm btn-primary" th:href="@{'/table/'+${nexttime}}"> > </a>
+				<a class="btn btn-sm btn-primary" th:href="@{'/visitor/table/'+${nexttime}}"> > </a>
 			</div>
 			<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>
 			<div class="table-responsive">

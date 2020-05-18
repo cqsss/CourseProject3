@@ -86,9 +86,8 @@
     var local = new BMap.LocalSearch(map, {
         renderOptions:{map: map},onSearchComplete: function(results){
             if(results.getNumPages()==0){
-                alert("搜索不到");
-            }
-            else{
+                alert("该地点在地图上搜索不到");
+            } else{
                 alert("会议名称："+meeting.name
                     +"\n会议地点："+meeting.location
                     +"\n会议日期:"+meeting.date
@@ -97,7 +96,6 @@
                 map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
             }
         }
-
     });
     local.search([[${location}]]);
 

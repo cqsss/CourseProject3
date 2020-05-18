@@ -87,7 +87,7 @@ public class VisitorController {
         Object visitorUser = request.getSession().getAttribute("visitorUser");
         if(visitorUser==null){
             model.addAttribute("msg","未登入，没有个人数据");
-            return "/visitor/dashboard";
+            return "visitor/dashboard";
         }
         else{
             String s = visitorUser.toString();
@@ -96,7 +96,7 @@ public class VisitorController {
             List<Meeting> meetings=umService.getbyuseranddate(userid,date);
             model.addAttribute("meetings",meetings);
 //            //System.out.println(s);
-            return "/visitor/dashboard";
+            return "visitor/dashboard";
         }
     }
     @GetMapping("/visitor/table/{name}/{location}/{date}")
@@ -112,7 +112,7 @@ public class VisitorController {
         Object visitorUser = request.getSession().getAttribute("visitorUser");
         if(visitorUser==null){
             model.addAttribute("msg","未登入，没有个人数据");
-            return "/visitor/list";
+            return "visitor/list";
         }
         else{
             String s = visitorUser.toString();
@@ -121,7 +121,7 @@ public class VisitorController {
             List<Meeting> meetings=umService.getbyuser(userid);
             model.addAttribute("meetings",meetings);
 //            //System.out.println(s);
-            return "/visitor/list";
+            return "visitor/list";
         }
     }
     @DeleteMapping("/visitor/meeting/delete/{meeting_id}")
@@ -142,20 +142,20 @@ public class VisitorController {
     public  String add(Model model){
             List<Meeting> meetings = meetingService.getAll();
             model.addAttribute("meetings",meetings);
-            return "/visitor/add";
+            return "visitor/add";
     }
     @GetMapping("/visitor/meeting/search/{keyword}")
     public  String search(@PathVariable("keyword")String keyword, Model model){
         List<Meeting> meetings = meetingService.search(keyword);
         model.addAttribute("meetings",meetings);
-        return "/visitor/add";
+        return "visitor/add";
     }
     @GetMapping("/visitor/meeting/add/{meeting_id}")
     public  String add(Model model,HttpServletRequest request,@PathVariable("meeting_id") int meeting_id){
         Object visitorUser = request.getSession().getAttribute("visitorUser");
         if(visitorUser==null){
             model.addAttribute("msg","未登录，请先登录");
-            return "/index";
+            return "index";
         }
         else{
             String s = visitorUser.toString();
