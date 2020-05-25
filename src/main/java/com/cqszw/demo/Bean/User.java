@@ -19,7 +19,6 @@ public class User {
     private String sex;
     private String telephone;
     private String introduce;
-    private int id;
 
     public String getUsername() {
         return username;
@@ -83,13 +82,5 @@ public class User {
 
     public void setIntroduce(String introduce) {
         this.introduce = introduce;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

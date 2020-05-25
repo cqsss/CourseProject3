@@ -8,8 +8,6 @@ import java.util.List;
 
 @Repository
 public interface UserMapper {
-    @Select("select * from user where id=#{id}")
-    User getbyid(@Param("id") int id);
     @Select("select * from user where username=#{username}")
     User getbyusername(@Param("username") String username);
     @Select("select * from user")

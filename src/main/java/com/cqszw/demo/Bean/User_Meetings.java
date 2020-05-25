@@ -3,15 +3,15 @@ package com.cqszw.demo.Bean;
 import java.util.List;
 
 public class User_Meetings {
-    private int user_id;
+    private String username;
     private int meeting_id;
     private List<Meeting>meetings;
-    public int getUser_id() {
-        return user_id;
+    public String getUser_id() {
+        return username;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser_id(String username) {
+        this.username = username;
     }
 
     public int getMeeting_id() {

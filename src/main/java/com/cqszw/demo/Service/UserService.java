@@ -12,7 +12,6 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
     public User getUserbyUsername(String username){return userMapper.getbyusername(username);}
-    public User getUserbyId(int id){return  userMapper.getbyid(id);}
     public List<User> getAll(){return  userMapper.getAll();}
     public int insertUser(User user){return  userMapper.insertUser(user);}
     public int updateUser(User user,User old_user){

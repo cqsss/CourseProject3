@@ -90,10 +90,8 @@ public class VisitorController {
             return "visitor/dashboard";
         }
         else{
-            String s = visitorUser.toString();
-            int userid = userService.getuserid(s);
-            System.out.println("userid:"+userid);
-            List<Meeting> meetings=umService.getbyuseranddate(userid,date);
+            String username = visitorUser.toString();
+            List<Meeting> meetings=umService.getbyuseranddate(username,date);
             model.addAttribute("meetings",meetings);
 //            //System.out.println(s);
             return "visitor/dashboard";
@@ -115,10 +113,8 @@ public class VisitorController {
             return "visitor/list";
         }
         else{
-            String s = visitorUser.toString();
-            int userid = userService.getuserid(s);
-//            System.out.println("userid:"+userid);
-            List<Meeting> meetings=umService.getbyuser(userid);
+            String username = visitorUser.toString();
+            List<Meeting> meetings=umService.getbyuser(username);
             model.addAttribute("meetings",meetings);
 //            //System.out.println(s);
             return "visitor/list";
@@ -131,9 +127,8 @@ public class VisitorController {
             return "redirect:/visitor/meetings";
         }
         else{
-            String s = visitorUser.toString();
-            int userid = userService.getuserid(s);
-            umService.deleteUserMeeting(meeting_id,userid);
+            String username = visitorUser.toString();
+            umService.deleteUserMeeting(meeting_id,username);
 //            //System.out.println(s);
             return "redirect:/visitor/meetings";
         }
@@ -158,10 +153,9 @@ public class VisitorController {
             return "index";
         }
         else{
-            String s = visitorUser.toString();
-            int userid = userService.getuserid(s);
-            if(!umService.searchMeeting(userid,meeting_id)){
-                umService.insertUS(userid,meeting_id);
+            String username = visitorUser.toString();
+            if(!umService.searchMeeting(username,meeting_id)){
+                umService.insertUS(username,meeting_id);
             }
             return "redirect:/visitor/meetings";
         }
