@@ -8,7 +8,7 @@ Source Database       : academicconference
 
 Target Server Type    : MYSQL
 Target Server Version : 80015
-File Encoding         : 65001
+FileController Encoding         : 65001
 
 Date: 2020-05-25 20:29:55
 */
@@ -69,7 +69,7 @@ CREATE TABLE `paper` (
 -- ----------------------------
 -- Records of paper
 -- ----------------------------
-
+INSERT INTO `paper` VALUES ('1', '计算机', '算法', '陈乔晟', '最短路算法');
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
@@ -99,9 +99,8 @@ DROP TABLE IF EXISTS `user_dl`;
 CREATE TABLE `user_dl` (
   `username` varchar(255) NOT NULL,
   `paper_id` int(11) NOT NULL,
-  `downloadtime` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`username`,`paper_id`),
-  KEY `username` (`username`)
+  `downloadtime` varchar(255) NOT NULL,
+  PRIMARY KEY (`username`,`paper_id`,`downloadtime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -130,8 +129,8 @@ DROP TABLE IF EXISTS `user_ul`;
 CREATE TABLE `user_ul` (
   `username` varchar(255) NOT NULL,
   `paper_id` int(11) NOT NULL,
-  `uploadtime` varchar(0) DEFAULT NULL,
-  PRIMARY KEY (`username`,`paper_id`)
+  `uploadtime` varchar(255) NOT NULL,
+  PRIMARY KEY (`username`,`paper_id`,`uploadtime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

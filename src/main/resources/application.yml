@@ -1,7 +1,7 @@
 spring:
   datasource:
     username: root
-    password: Zw123456#
+    password: 123456
     url: jdbc:mysql://localhost:3306/academicconference?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     initialization-mode: always
@@ -11,5 +11,14 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+  servlet:
+    multipart:
+      enabled: true
+      #      最大支持文件大小
+      max-file-size: 100MB
+      #      最大支持请求大小
+      max-request-size: 100MB
+  #文件存储路径
+  filepath: D:/file/
 server:
   port: 8080
