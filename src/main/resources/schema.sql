@@ -41,16 +41,18 @@ CREATE TABLE `meeting` (
 -- ----------------------------
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL AUTO_INCREMENT,
+   `type` varchar(255) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
-  `content` varchar(255) DEFAULT NULL,
-  `publishdate` varchar(255) DEFAULT NULL,
-  `viewcount` int(11) NOT NULL,
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `publishdate` varchar(255) NOT NULL,
+  `viewcount` int(11) NOT NULL default 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of news
+
 -- ----------------------------
 
 -- ----------------------------

@@ -30,7 +30,4 @@ public class UserService {
             return  false;
         }
     }
-    public  int getuserid(String username){
-        return userMapper.getuserid(username);
-    }
 }
