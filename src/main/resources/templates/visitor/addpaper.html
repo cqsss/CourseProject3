@@ -48,7 +48,7 @@
 <div class="container-fluid">
     <div class="row">
         <!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
-        <div th:replace="visitor_commens/bar::sidebar(activeUri='meetings')"></div>
+        <div th:replace="visitor_commens/bar::sidebar(activeUri='papers')"></div>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <h2><a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/paper/upload}">上传论文</a></h2>
             <div class="table-responsive">
@@ -69,18 +69,15 @@
                         <td th:text="${paper.type}"> </td>
                         <td th:text="${paper.keyword}"> </td>
                         <td>
-                            <form th:action="@{'/visitor/paper/download/'+${paper.id}}" method="post" enctype="multipart/form-data">
-                                <a class="btn btn-sm btn-success" th:href="@{'/visitor/downloads'}"><input type="submit" value="下载"/></a>
-                            </form>
+                            <button class="btn btn-sm btn-danger deleteBtn" th:attr="del_uri=@{'/visitor/paper/download/'+${paper.id}}">下载</button>
                         </td>
-
                     </tr>
                     </tbody>
 
                 </table>
             </div>
         </main>
-        <form id="deleteMeeting" method="post">
+        <form id="download" method="post">
             <input type="hidden" name="_method" value="delete">
 
         </form>
@@ -101,8 +98,7 @@
 </script>
 <script>
     $(".deleteBtn").click(function(){
-        //删除当前员工的
-        $("#deleteMeeting").attr("action",$(this).attr("del_uri")).submit();
+        $("#download").attr("action",$(this).attr("del_uri")).submit();
         return false;
     });
 </script>

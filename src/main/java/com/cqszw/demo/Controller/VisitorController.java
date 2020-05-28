@@ -204,7 +204,7 @@ public class VisitorController {
             return "visitor/uploadlist";
         }
     }
-    @RequestMapping("/visitor/paper/download/{paper_id}")
+    @DeleteMapping("/visitor/paper/download/{paper_id}")
     public String downloadPaper(Model model,HttpServletRequest request,HttpServletResponse response,@PathVariable("paper_id") int paper_id) throws UnsupportedEncodingException{
         Object visitorUser = request.getSession().getAttribute("visitorUser");
         if(visitorUser==null){
@@ -237,7 +237,7 @@ public class VisitorController {
                         os.write(buffer,0,i);
                         i = bis.read(buffer);
                     }
-                    return "redirect:/visitor/downloads";
+                    return "visitor/uploadlist";
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -249,15 +249,14 @@ public class VisitorController {
                     e.printStackTrace();
                 }
             }
-            return "redirect:/visitor/downloads";
+            return "visitor/uploadlist";
         }
     }
     @GetMapping("visitor/paper/upload")
     public String toUploadPaper(Model model) {
         return "visitor/upload";
     }
-    @RequestMapping("/visitor/upload")
-    @ResponseBody
+    @PutMapping("/visitor/upload")
     public String uploadPaper(Model model,HttpServletRequest request,@RequestParam("fileName") MultipartFile file,Paper paper) throws UnsupportedEncodingException {
         Object visitorUser = request.getSession().getAttribute("visitorUser");
         if(visitorUser==null){
@@ -286,7 +285,7 @@ public class VisitorController {
             }
             try {
                 file.transferTo(dest); //保存文件
-                return "redirect:/visitor/uploads";
+                return "redirect:/visitor/paper/add";
             } catch (IllegalStateException e) {
                 e.printStackTrace();
                 return "false";
