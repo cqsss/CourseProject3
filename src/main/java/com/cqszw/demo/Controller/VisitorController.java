@@ -205,6 +205,7 @@ public class VisitorController {
         }
     }
     @DeleteMapping("/visitor/paper/download/{paper_id}")
+    @ResponseBody
     public String downloadPaper(Model model,HttpServletRequest request,HttpServletResponse response,@PathVariable("paper_id") int paper_id) throws UnsupportedEncodingException{
         Object visitorUser = request.getSession().getAttribute("visitorUser");
         if(visitorUser==null){
@@ -237,12 +238,12 @@ public class VisitorController {
                         os.write(buffer,0,i);
                         i = bis.read(buffer);
                     }
-                    return "visitor/uploadlist";
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 System.out.println("----------file download---" + filename);
                 try {
+                    os.close();
                     bis.close();
                     fis.close();
                 } catch (IOException e) {
