@@ -18,5 +18,5 @@ public class PaperService {
     public List<Paper> getAll(){return  paperMapper.getAll();}
     public String gettopicbyid(int paper_id){return paperMapper.gettopicbyid(paper_id);};
     public int gernum(){return paperMapper.getnum();}
-
+    public int insertPaper(Paper paper){return paperMapper.insertPaper(paper);};
 }

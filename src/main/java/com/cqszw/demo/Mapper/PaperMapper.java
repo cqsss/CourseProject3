@@ -1,6 +1,7 @@
 package com.cqszw.demo.Mapper;
 
 import com.cqszw.demo.Bean.Paper;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,8 @@ public interface PaperMapper {
     List<Paper> getAll();
     @Select("select topic from paper where id=#{paper_id}")
     public String gettopicbyid(@Param("paper_id") int paper_id);
-    @Select("select num(*) from paper")
+    @Select("select count(*) from paper")
     public int getnum();
+    @Insert("insert into paper(id,topic,type,author,keyword) values(#{id},#{topic},#{type},#{author},#{keyword})")
+    public int insertPaper(Paper paper);
 }

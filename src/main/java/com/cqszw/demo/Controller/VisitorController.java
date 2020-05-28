@@ -36,7 +36,7 @@ public class VisitorController {
     @Autowired
     private UPDService updService;
     @Autowired
-    private UPDService upuService;
+    private UPUService upuService;
     User will_alter;
     @GetMapping("/visitor/login/{username}")
     public  String alter(@PathVariable("username")String username, Model model, HttpServletRequest request){
@@ -252,9 +252,13 @@ public class VisitorController {
             return "redirect:/visitor/downloads";
         }
     }
-    @RequestMapping("/visitor/paper/upload")
+    @GetMapping("visitor/paper/upload")
+    public String toUploadPaper(Model model) {
+        return "visitor/upload";
+    }
+    @RequestMapping("/visitor/upload")
     @ResponseBody
-    public String uploadPaper(Model model,HttpServletRequest request,@RequestParam("fileName") MultipartFile file){
+    public String uploadPaper(Model model,HttpServletRequest request,@RequestParam("fileName") MultipartFile file,Paper paper) throws UnsupportedEncodingException {
         Object visitorUser = request.getSession().getAttribute("visitorUser");
         if(visitorUser==null){
             model.addAttribute("msg","未登录，请先登录");
@@ -262,14 +266,16 @@ public class VisitorController {
         }
         else {
             if (file.isEmpty()) {
-                return "false";
+                return "visitor/uploadlist";
             }
             String username = visitorUser.toString();
             SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String datetime = tempDate.format(new java.util.Date());
             int nextid = paperService.gernum()+1;
-            updService.insertUPD(username,nextid,datetime);
-            String fileName = file.getOriginalFilename();
+            paper.setId(nextid);
+            upuService.insertUPU(username,nextid,datetime);
+            paperService.insertPaper(paper);
+            String fileName = paper.getTopic()+".pdf";
             int size = (int) file.getSize();
             System.out.println(fileName + "-->" + size);
 
@@ -280,7 +286,7 @@ public class VisitorController {
             }
             try {
                 file.transferTo(dest); //保存文件
-                return "true";
+                return "redirect:/visitor/uploads";
             } catch (IllegalStateException e) {
                 e.printStackTrace();
                 return "false";
