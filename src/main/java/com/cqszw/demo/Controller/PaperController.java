@@ -55,13 +55,13 @@ public class PaperController {
     }
     @GetMapping("/uploads")
     public String uploads(Model model, HttpServletRequest request){
-        Object visitorUser = request.getSession().getAttribute("visitorUser");
-        if(visitorUser==null){
+        Object User = request.getSession().getAttribute("loginUser");
+        if(User==null){
             model.addAttribute("msg","未登入，没有个人数据");
             return "paper/uploadlist";
         }
         else{
-            String username = visitorUser.toString();
+            String username = User.toString();
             List<Paper> papers=upuService.getpaperbyuser(username);
             model.addAttribute("papers",papers);
 //            //System.out.println(s);
@@ -69,15 +69,14 @@ public class PaperController {
         }
     }
     @GetMapping("/paper/download/{paper_id}")
-    @ResponseBody
     public String downloadPaper(Model model, HttpServletRequest request, HttpServletResponse response, @PathVariable("paper_id") int paper_id) throws UnsupportedEncodingException{
-        Object visitorUser = request.getSession().getAttribute("visitorUser");
-        if(visitorUser==null){
+        Object user = request.getSession().getAttribute("loginUser");
+        if(user==null){
             model.addAttribute("msg","未登录，请先登录");
-            return "index";
+            return "redirect:/index";
         }
         else{
-            String username = visitorUser.toString();
+            String username = user.toString();
             SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String datetime = tempDate.format(new java.util.Date());
             updService.insertUPD(username,paper_id,datetime);
@@ -133,12 +132,12 @@ public class PaperController {
     }
     @GetMapping("/paper/upload")
     public String toUploadPaper(Model model) {
-        return "/upload";
+        return "paper/upload";
     }
     @PutMapping("/upload")
     public String uploadPaper(Model model, HttpServletRequest request, @RequestParam("fileName") MultipartFile file, Paper paper) throws UnsupportedEncodingException {
-        Object visitorUser = request.getSession().getAttribute("visitorUser");
-        if(visitorUser==null){
+        Object user = request.getSession().getAttribute("loginUser");
+        if(user==null){
             model.addAttribute("msg","未登录，请先登录");
             return "index";
         }
@@ -146,7 +145,7 @@ public class PaperController {
             if (file.isEmpty()) {
                 return "redirect:/papers";
             }
-            String username = visitorUser.toString();
+            String username = user.toString();
             SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String datetime = tempDate.format(new java.util.Date());
             int nextid = paperService.gernum()+1;
@@ -164,7 +163,7 @@ public class PaperController {
             }
             try {
                 file.transferTo(dest); //保存文件
-                return "/paper/uploadlist";
+                return "redirect:/papers";
             } catch (IllegalStateException e) {
                 e.printStackTrace();
                 return "false";

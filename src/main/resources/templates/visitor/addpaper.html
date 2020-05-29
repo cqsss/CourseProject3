@@ -50,7 +50,10 @@
         <!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
         <div th:replace="visitor_commens/bar::sidebar(activeUri='papers')"></div>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <h2><a class="btn btn-sm btn-success" th:href="@{/visitor/paper/upload}">上传论文</a></h2>
+            <h2><a class="btn btn-sm btn-success" th:href="@{/visitor/paper/upload}">上传论文</a>
+                <a class="btn btn-sm btn-success" th:href="@{/visitor/uploads}">我的上传记录</a>
+                <a class="btn btn-sm btn-success" th:href="@{/visitor/downloads}">我的下载记录</a>
+            </h2>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
