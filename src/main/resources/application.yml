@@ -19,6 +19,6 @@ spring:
       #      最大支持请求大小
       max-request-size: 100MB
   #文件存储路径
-  filepath: D:/file/
+  filepath: D:/file
 server:
   port: 8080

@@ -43,25 +43,39 @@
 	</head>
 
 	<body>
+		<div th:replace="commens/bar::topbar"></div>
 		<div class="container-fluid">
 			<div class="row">
+				<!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
+				<div th:replace="commens/bar::sidebar(activeUri='papers')"></div>
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<form th:action="@{/newuser}" method="post">
+					<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+						<!--发送put请求修改员工数据-->
+						<!--
+                        1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
+                        2、页面创建一个post表单
+                        3、创建一个input项，name="_method";值就是我们指定的请求方式
+                        -->
+						<input type="hidden" name="_method" value="put">
 						<div class="form-group">
-							<label>username</label>
-							<input name="username" type="text" class="form-control" placeholder="用户名" >
+							<label>topic</label>
+							<input name="topic" type="text" class="form-control" placeholder="标题">
 						</div>
 						<div class="form-group">
-							<label>password</label>
-							<input name="password" type="text" class="form-control" placeholder="密码" >
+							<label>type</label>
+							<input name="type" type="text" class="form-control" placeholder="类型">
 						</div>
 						<div class="form-group">
-							<label>confirm password</label>
-							<input name="confirm_password" type="text" class="form-control" placeholder="确认密码" >
+							<label>author</label>
+							<input name="author" type="text" class="form-control" placeholder="作者">
 						</div>
-						<button type="submit" class="btn btn-primary" >添加</button>
+						<div class="form-group">
+							<label>keyword</label>
+							<input name="keyword" type="text" class="form-control" placeholder="关键词">
+						</div>
+						<p>选择文件: <input type="file" name="fileName"/></p>
+						<p><input class="btn btn-sm btn-primary" type="submit" value="上传论文"/></p>
 					</form>
-					<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
 				</main>
 			</div>
 		</div>
@@ -112,5 +126,16 @@
 		</script>
 
 	</body>
+	<script>
+        function entersearch(){
+            var event = window.event || arguments.callee.caller.arguments[0];
+            if (event.keyCode == 13)
+            {
+                var $Search = $("#Search").val();
+                //alert($Search);
+                window.location.assign("/meeting/search/"+$Search);
+            }
+        }
 
+	</script>
 </html>

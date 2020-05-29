@@ -40,7 +40,7 @@ public class PaperController {
     }
     @GetMapping("/downloads")
     public String downloads(Model model, HttpServletRequest request){
-        Object visitorUser = request.getSession().getAttribute("visitorUser");
+        Object visitorUser = request.getSession().getAttribute("loginUser");
         if(visitorUser==null){
             model.addAttribute("msg","未登入，没有个人数据");
             return "paper/downloadlist";
@@ -107,7 +107,7 @@ public class PaperController {
                 }
                 System.out.println("----------file download---" + filename);
                 try {
-                    os.flush();
+
                     os.close();
                     bis.close();
                     fis.close();

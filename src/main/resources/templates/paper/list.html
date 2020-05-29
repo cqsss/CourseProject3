@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>C&Z学术日历和地图</title>
+		<title>C&Z学术社区</title>
 		<!-- Bootstrap core CSS -->
 		<link href="/asserts/css/bootstrap.min.css" rel="stylesheet">
 
@@ -59,7 +59,10 @@
 				<!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
 				<div th:replace="commens/bar::sidebar(activeUri='papers')"></div>
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h2><a class="btn btn-sm btn-success" href="user" th:href="@{/paper/upload}">上传论文</a></h2>
+					<h2><a class="btn btn-sm btn-success" th:href="@{/paper/upload}">上传论文</a>
+                        <a class="btn btn-sm btn-success" th:href="@{/uploads}">我的上传记录</a>
+                        <a class="btn btn-sm btn-success" th:href="@{/downloads}">我的下载记录</a>
+                    </h2>
 					<div class="table-responsive">
 						<table class="table table-striped table-sm">
 							<thead>
