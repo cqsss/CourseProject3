@@ -196,19 +196,8 @@ public class VisitorController {
         }
         else{
             String username = visitorUser.toString();
-            List<User_Download> user_downloads= updService.getdlbyuser(username);
-            List<Download_Record> download_records = null;
-            for(User_Download user_download:user_downloads) {
-                Paper paper = paperService.getpaperbyid(user_download.getPaper_id());
-                Download_Record download_record = null;
-                download_record.setAuthor(paper.getAuthor());
-                download_record.setKeyword(paper.getKeyword());
-                download_record.setTopic(paper.getTopic());
-                download_record.setType(paper.getType());
-                download_record.setDownloadtime(user_download.getDownloadtime());
-                download_records.add(download_record);
-            }
-            model.addAttribute("download_records",download_records);
+            List<Paper> papers=updService.getpaperbyuser(username);
+            model.addAttribute("papers",papers);
 //            //System.out.println(s);
             return "visitor/downloadlist";
         }
@@ -222,24 +211,13 @@ public class VisitorController {
         }
         else{
             String username = visitorUser.toString();
-            List<User_Upload> user_uploads= upuService.getulbyuser(username);
-            List<Upload_Record> upload_records = null;
-            for(User_Upload user_upload:user_uploads) {
-                Paper paper = paperService.getpaperbyid(user_upload.getPaper_id());
-                Upload_Record upload_record = null;
-                upload_record.setAuthor(paper.getAuthor());
-                upload_record.setKeyword(paper.getKeyword());
-                upload_record.setTopic(paper.getTopic());
-                upload_record.setType(paper.getType());
-                upload_record.setUploadtime(user_upload.getUploadtime());
-                upload_records.add(upload_record);
-            }
-            model.addAttribute("upload_records",upload_records);
+            List<Paper> papers=upuService.getpaperbyuser(username);
+            model.addAttribute("papers",papers);
 //            //System.out.println(s);
             return "visitor/uploadlist";
         }
     }
-    @RequestMapping("/visitor/paper/download/{paper_id}")
+    @GetMapping("/visitor/paper/download/{paper_id}")
     @ResponseBody
     public String downloadPaper(Model model,HttpServletRequest request,HttpServletResponse response,@PathVariable("paper_id") int paper_id) throws UnsupportedEncodingException{
         Object visitorUser = request.getSession().getAttribute("visitorUser");
@@ -278,6 +256,7 @@ public class VisitorController {
                 }
                 System.out.println("----------file download---" + filename);
                 try {
+                    os.flush();
                     os.close();
                     bis.close();
                     fis.close();

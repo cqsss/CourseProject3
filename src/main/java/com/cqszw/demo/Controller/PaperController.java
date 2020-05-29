@@ -1,6 +1,6 @@
 package com.cqszw.demo.Controller;
 
-import com.cqszw.demo.Bean.*;
+import com.cqszw.demo.Bean.Paper;
 import com.cqszw.demo.Mapper.PaperMapper;
 import com.cqszw.demo.Service.PaperService;
 import com.cqszw.demo.Service.UPDService;
@@ -47,59 +47,37 @@ public class PaperController {
         }
         else{
             String username = visitorUser.toString();
-            List<User_Download> user_downloads= updService.getdlbyuser(username);
-            List<Download_Record> download_records = null;
-            for(User_Download user_download:user_downloads) {
-                Paper paper = paperService.getpaperbyid(user_download.getPaper_id());
-                Download_Record download_record = null;
-                download_record.setAuthor(paper.getAuthor());
-                download_record.setKeyword(paper.getKeyword());
-                download_record.setTopic(paper.getTopic());
-                download_record.setType(paper.getType());
-                download_record.setDownloadtime(user_download.getDownloadtime());
-                download_records.add(download_record);
-            }
-            model.addAttribute("download_records",download_records);
+            List<Paper> papers=updService.getpaperbyuser(username);
+            model.addAttribute("papers",papers);
 //            //System.out.println(s);
             return "paper/downloadlist";
         }
     }
     @GetMapping("/uploads")
     public String uploads(Model model, HttpServletRequest request){
-        Object visitorUser = request.getSession().getAttribute("visitorUser");
-        if(visitorUser==null){
+        Object User = request.getSession().getAttribute("loginUser");
+        if(User==null){
             model.addAttribute("msg","未登入，没有个人数据");
             return "paper/uploadlist";
         }
         else{
-            String username = visitorUser.toString();
-            List<User_Upload> user_uploads= upuService.getulbyuser(username);
-            List<Upload_Record> upload_records = null;
-            for(User_Upload user_upload:user_uploads) {
-                Paper paper = paperService.getpaperbyid(user_upload.getPaper_id());
-                Upload_Record upload_record = null;
-                upload_record.setAuthor(paper.getAuthor());
-                upload_record.setKeyword(paper.getKeyword());
-                upload_record.setTopic(paper.getTopic());
-                upload_record.setType(paper.getType());
-                upload_record.setUploadtime(user_upload.getUploadtime());
-                upload_records.add(upload_record);
-            }
-            model.addAttribute("upload_records",upload_records);
+            String username = User.toString();
+            List<Paper> papers=upuService.getpaperbyuser(username);
+            model.addAttribute("papers",papers);
 //            //System.out.println(s);
             return "paper/uploadlist";
         }
     }
-    @RequestMapping("/paper/download/{paper_id}")
+    @GetMapping("/paper/download/{paper_id}")
     @ResponseBody
     public String downloadPaper(Model model, HttpServletRequest request, HttpServletResponse response, @PathVariable("paper_id") int paper_id) throws UnsupportedEncodingException{
-        Object visitorUser = request.getSession().getAttribute("visitorUser");
-        if(visitorUser==null){
+        Object user = request.getSession().getAttribute("loginUser");
+        if(user==null){
             model.addAttribute("msg","未登录，请先登录");
-            return "index";
+            return "redirect:/index";
         }
         else{
-            String username = visitorUser.toString();
+            String username = user.toString();
             SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String datetime = tempDate.format(new java.util.Date());
             updService.insertUPD(username,paper_id,datetime);
@@ -129,6 +107,7 @@ public class PaperController {
                 }
                 System.out.println("----------file download---" + filename);
                 try {
+                    os.flush();
                     os.close();
                     bis.close();
                     fis.close();
@@ -155,12 +134,12 @@ public class PaperController {
     }
     @GetMapping("/paper/upload")
     public String toUploadPaper(Model model) {
-        return "/upload";
+        return "paper/upload";
     }
     @PutMapping("/upload")
     public String uploadPaper(Model model, HttpServletRequest request, @RequestParam("fileName") MultipartFile file, Paper paper) throws UnsupportedEncodingException {
-        Object visitorUser = request.getSession().getAttribute("visitorUser");
-        if(visitorUser==null){
+        Object user = request.getSession().getAttribute("loginUser");
+        if(user==null){
             model.addAttribute("msg","未登录，请先登录");
             return "index";
         }
@@ -168,7 +147,7 @@ public class PaperController {
             if (file.isEmpty()) {
                 return "redirect:/papers";
             }
-            String username = visitorUser.toString();
+            String username = user.toString();
             SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String datetime = tempDate.format(new java.util.Date());
             int nextid = paperService.gernum()+1;
@@ -186,7 +165,7 @@ public class PaperController {
             }
             try {
                 file.transferTo(dest); //保存文件
-                return "/paper/uploadlist";
+                return "redirect:/papers";
             } catch (IllegalStateException e) {
                 e.printStackTrace();
                 return "false";

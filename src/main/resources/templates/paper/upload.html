@@ -53,13 +53,13 @@
 <!--</ul>-->
 <!--</nav>-->
 <!--改用我抽取出来的顶部栏-->
-<div th:replace="visitor_commens/bar::topbar"></div>
+<div th:replace="commens/bar::topbar"></div>
 <div class="container-fluid">
     <div class="row">
         <!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
-        <div th:replace="visitor_commens/bar::sidebar(activeUri='papers')"></div>
+        <div th:replace="commens/bar::sidebar(activeUri='papers')"></div>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <form th:action="@{/visitor/upload}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/upload}" method="post" enctype="multipart/form-data">
                 <!--发送put请求修改员工数据-->
                 <!--
                 1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
