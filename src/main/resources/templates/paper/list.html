@@ -202,8 +202,8 @@
 								<td th:text="${paper.type}"> </td>
 								<td th:text="${paper.keyword}"> </td>
 								<td>
-									<button class="btn btn-sm btn-primary" th:attr="del_uri=@{'/paper/download/'+${paper.id}}">下载</button>
-									<button class="btn btn-sm btn-danger deleteBtn" th:herf="@{'/paper/delete/'+${paper.id}}">删除</button>
+                                    <a class="btn btn-sm btn-primary" th:href="@{'/visitor/paper/download/'+${paper.id}}">下载</a>
+									<a class="btn btn-sm btn-danger deleteBtn" th:href="@{'/paper/delete/'+${paper.id}}">删除</a>
 								</td>
 							</tr>
 							</tbody>
@@ -211,10 +211,6 @@
 						</table>
 					</div>
 				</main>
-				<form id="delete" method="post">
-					<input type="hidden" name="_method" value="delete">
-				</form>
-
 			</div>
 		</div>
 

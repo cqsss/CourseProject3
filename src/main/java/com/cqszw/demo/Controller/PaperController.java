@@ -68,7 +68,7 @@ public class PaperController {
             return "paper/uploadlist";
         }
     }
-    @DeleteMapping("/paper/download/{paper_id}")
+    @GetMapping("/paper/download/{paper_id}")
     @ResponseBody
     public String downloadPaper(Model model, HttpServletRequest request, HttpServletResponse response, @PathVariable("paper_id") int paper_id) throws UnsupportedEncodingException{
         Object visitorUser = request.getSession().getAttribute("visitorUser");
@@ -123,6 +123,7 @@ public class PaperController {
         String filename=paperService.gettopicbyid(paper_id)+".pdf";
         String filePath = "D:/file" ;
         File file = new File(filePath + "/" + filename);
+        paperService.deletePaper(paper_id);
         System.out.println(filePath + "/" + filename);
         // 路径为文件且不为空则进行删除
         if(file.exists()){ //判断文件父目录是否存在

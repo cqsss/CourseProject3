@@ -50,7 +50,7 @@
         <!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
         <div th:replace="visitor_commens/bar::sidebar(activeUri='papers')"></div>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <h2><a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/paper/upload}">上传论文</a></h2>
+            <h2><a class="btn btn-sm btn-success" th:href="@{/visitor/paper/upload}">上传论文</a></h2>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -69,7 +69,7 @@
                         <td th:text="${paper.type}"> </td>
                         <td th:text="${paper.keyword}"> </td>
                         <td>
-                            <a class="btn btn-sm btn-primary" th:herf="@{'/visitor/paper/download/'+${paper.id}}">下载</a>
+                            <a class="btn btn-sm btn-primary" th:href="@{'/visitor/paper/download/'+${paper.id}}">下载</a>
                         </td>
                     </tr>
                     </tbody>
