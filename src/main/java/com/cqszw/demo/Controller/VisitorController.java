@@ -1,9 +1,6 @@
 package com.cqszw.demo.Controller;
 
-import com.cqszw.demo.Bean.Meeting;
-import com.cqszw.demo.Bean.Paper;
-import com.cqszw.demo.Bean.User;
-import com.cqszw.demo.Bean.User_Meetings;
+import com.cqszw.demo.Bean.*;
 import com.cqszw.demo.Service.*;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +34,8 @@ public class VisitorController {
     private UPDService updService;
     @Autowired
     private UPUService upuService;
+    @Autowired
+    private NewsService newsService;
     User will_alter;
     @GetMapping("/visitor/login/{username}")
     public  String alter(@PathVariable("username")String username, Model model, HttpServletRequest request){
@@ -167,6 +166,20 @@ public class VisitorController {
             }
             return "redirect:/visitor/meetings";
         }
+    }
+    @GetMapping("/visitor/newslist")
+    public String news(Model model){
+        List<News> newsList = newsService.getAll();
+        model.addAttribute("newslist",newsList);
+        return "visitor/news";
+    }
+    @DeleteMapping("/visitor/news/{id}")
+    public  String viewnews(@PathVariable("id")int id,Model model){
+        News news = newsService.getById(id);
+        newsService.viewcount(news);
+        news=newsService.getById(id);
+        model.addAttribute("news",news);
+        return  "visitor/newsdetail";
     }
     @GetMapping("/visitor/paper/add")
     public  String addpaper(Model model){
