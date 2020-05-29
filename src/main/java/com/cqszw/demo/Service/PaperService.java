@@ -16,8 +16,9 @@ public class PaperService {
     @Autowired
     private PaperMapper paperMapper;
     public List<Paper> getAll(){return  paperMapper.getAll();}
-    public String gettopicbyid(int paper_id){return paperMapper.gettopicbyid(paper_id);};
+    public String gettopicbyid(int id){return paperMapper.gettopicbyid(id);};
     public int gernum(){return paperMapper.getnum();}
+    public Paper getpaperbyid(int id) {return paperMapper.getpaperbyid(id);};
     public int insertPaper(Paper paper){return paperMapper.insertPaper(paper);};
-    public int deletePaper(int paper_id){return paperMapper.deletePaper(paper_id);};
+    public int deletePaper(int id){return paperMapper.deletePaper(id);};
 }

@@ -70,14 +70,16 @@
                         <th>author</th>
                         <th>type</th>
                         <th>keyboard</th>
+                        <th>uploadtime</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="paper:${papers}">
-                        <td th:text="${paper.topic}"> </td>
-                        <td th:text="${paper.author}"> </td>
-                        <td th:text="${paper.type}"> </td>
-                        <td th:text="${paper.keyword}"> </td>
+                    <tr th:each="upload_record:${upload_records}">
+                        <td th:text="${upload_record.topic}"> </td>
+                        <td th:text="${upload_record.author}"> </td>
+                        <td th:text="${upload_record.type}"> </td>
+                        <td th:text="${upload_record.keyword}"> </td>
+                        <td th:text="${upload_record.uploadtime}"> </td>
                     </tr>
                     </tbody>
 

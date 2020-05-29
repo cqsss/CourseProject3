@@ -17,12 +17,14 @@ import java.util.List;
 public interface PaperMapper {
     @Select("select * from paper")
     List<Paper> getAll();
-    @Select("select topic from paper where id=#{paper_id}")
-    public String gettopicbyid(@Param("paper_id") int paper_id);
+    @Select("select topic from paper where id=#{id}")
+    public String gettopicbyid(@Param("id") int id);
     @Select("select count(*) from paper")
     public int getnum();
+    @Select("select * from paper where id=#{id}")
+    public Paper getpaperbyid(@Param("id") int id);
     @Insert("insert into paper(id,topic,type,author,keyword) values(#{id},#{topic},#{type},#{author},#{keyword})")
     public int insertPaper(Paper paper);
-    @Delete("delete from paper where id = #{paper_id}")
-    public int deletePaper(int paper_id);
+    @Delete("delete from paper where id = #{id}")
+    public int deletePaper(int id);
 }

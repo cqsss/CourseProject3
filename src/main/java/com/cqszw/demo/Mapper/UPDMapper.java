@@ -1,6 +1,7 @@
 package com.cqszw.demo.Mapper;
 
 import com.cqszw.demo.Bean.Paper;
+import com.cqszw.demo.Bean.User_Download;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -14,6 +15,8 @@ import java.util.List;
  */
 @Repository
 public interface UPDMapper {
+    @Select("select * from user_dl where username = #{username} order by downloadtime desc")
+    public List<User_Download> getdlbyuser(@Param("username") String username);
     @Select("select * from paper where id in(select paper_id from user_dl where username=#{username})")
     public List<Paper> getpaperbyuser(@Param("username") String username);
     @Insert("insert into user_dl(username,paper_id,downloadtime) values(#{username},#{paper_id},#{downloadtime})")
