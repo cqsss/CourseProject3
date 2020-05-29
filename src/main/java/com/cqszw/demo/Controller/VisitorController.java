@@ -204,7 +204,7 @@ public class VisitorController {
             return "visitor/uploadlist";
         }
     }
-    @DeleteMapping("/visitor/paper/download/{paper_id}")
+    @GetMapping("/visitor/paper/download/{paper_id}")
     @ResponseBody
     public String downloadPaper(Model model,HttpServletRequest request,HttpServletResponse response,@PathVariable("paper_id") int paper_id) throws UnsupportedEncodingException{
         Object visitorUser = request.getSession().getAttribute("visitorUser");
