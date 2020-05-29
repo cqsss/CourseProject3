@@ -202,8 +202,8 @@
 								<td th:text="${paper.type}"> </td>
 								<td th:text="${paper.keyword}"> </td>
 								<td>
-                                    <a class="btn btn-sm btn-primary" th:href="@{'/visitor/paper/download/'+${paper.id}}">下载</a>
-									<a class="btn btn-sm btn-danger deleteBtn" th:href="@{'/paper/delete/'+${paper.id}}">删除</a>
+                                    <a class="btn btn-sm btn-primary" th:href="@{'/paper/download/'+${paper.id}}">下载</a>
+									<a class="btn btn-sm btn-danger" th:href="@{'/paper/delete/'+${paper.id}}">删除</a>
 								</td>
 							</tr>
 							</tbody>
