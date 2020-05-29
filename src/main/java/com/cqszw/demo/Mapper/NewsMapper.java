@@ -18,6 +18,8 @@ public interface  NewsMapper {
     public int updateNews(@Param("title") String title,@Param("content") String content,
                              @Param("type") String type,
                              @Param("id") int id);
+    @Update("update news set viewcount=#{viewcount}+1 where id=#{id}")
+    public int viewcount(@Param("viewcount") int viewcount,@Param("id")int id);
     @Delete("delete from news where id=#{id}")
     int deleteNews(@Param("id") int id);
 }
