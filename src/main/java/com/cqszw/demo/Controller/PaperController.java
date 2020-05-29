@@ -69,6 +69,7 @@ public class PaperController {
         }
     }
     @GetMapping("/paper/download/{paper_id}")
+    @ResponseBody
     public String downloadPaper(Model model, HttpServletRequest request, HttpServletResponse response, @PathVariable("paper_id") int paper_id) throws UnsupportedEncodingException{
         Object user = request.getSession().getAttribute("loginUser");
         if(user==null){
@@ -106,6 +107,7 @@ public class PaperController {
                 }
                 System.out.println("----------file download---" + filename);
                 try {
+
                     os.close();
                     bis.close();
                     fis.close();
