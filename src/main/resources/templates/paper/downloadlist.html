@@ -43,14 +43,25 @@
 </head>
 
 <body>
+<!--<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">-->
+<!--<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Company name</a>-->
+<!--<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">-->
+<!--<ul class="navbar-nav px-3">-->
+<!--<li class="nav-item text-nowrap">-->
+<!--<a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Sign out</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</nav>-->
 <!--改用我抽取出来的顶部栏-->
 <div th:replace="visitor_commens/bar::topbar"></div>
 <div class="container-fluid">
     <div class="row">
         <!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
         <div th:replace="visitor_commens/bar::sidebar(activeUri='papers')"></div>
+
+
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <h2><a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/paper/upload}">上传论文</a></h2>
+            <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -58,8 +69,7 @@
                         <th>topic</th>
                         <th>author</th>
                         <th>type</th>
-                        <th>keyword</th>
-                        <th>操作</th>
+                        <th>keyboard</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -68,19 +78,12 @@
                         <td th:text="${paper.author}"> </td>
                         <td th:text="${paper.type}"> </td>
                         <td th:text="${paper.keyword}"> </td>
-                        <td>
-                            <button class="btn btn-sm btn-primary" th:attr="del_uri=@{'/visitor/paper/download/'+${paper.id}}">下载</button>
-                        </td>
                     </tr>
                     </tbody>
 
                 </table>
             </div>
         </main>
-        <form id="download" method="post">
-            <input type="hidden" name="_method" value="download">
-
-        </form>
     </div>
 </div>
 
@@ -98,41 +101,15 @@
 </script>
 <script>
     $(".deleteBtn").click(function(){
-        $("#download").attr("action",$(this).attr("del_uri")).submit();
+        //删除当前员工的
+        $("#deleteMeeting").attr("action",$(this).attr("del_uri")).submit();
         return false;
     });
 </script>
 <!-- Graphs -->
 <script type="text/javascript" src="/asserts/js/Chart.min.js"></script>
-<script>
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            datasets: [{
-                data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-                lineTension: 0,
-                backgroundColor: 'transparent',
-                borderColor: '#007bff',
-                borderWidth: 4,
-                pointBackgroundColor: '#007bff'
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: false
-                    }
-                }]
-            },
-            legend: {
-                display: false,
-            }
-        }
-    });
-</script>
+
+</body>
 <script>
     function entersearch(){
         var event = window.event || arguments.callee.caller.arguments[0];
@@ -145,6 +122,4 @@
     }
 
 </script>
-</body>
-
 </html>

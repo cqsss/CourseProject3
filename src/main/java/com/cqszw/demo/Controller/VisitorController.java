@@ -250,7 +250,7 @@ public class VisitorController {
                     e.printStackTrace();
                 }
             }
-            return "visitor/uploadlist";
+            return "visitor/downloadlist";
         }
     }
     @GetMapping("visitor/paper/upload")

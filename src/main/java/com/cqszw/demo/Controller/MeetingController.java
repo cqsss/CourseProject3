@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Controller
-public class meetingController {
+public class MeetingController {
     @Autowired
     private MeetingService meetingService;
     private Meeting will_alter;
