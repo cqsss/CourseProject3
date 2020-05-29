@@ -203,7 +203,7 @@
 								<td th:text="${paper.keyword}"> </td>
 								<td>
 									<button class="btn btn-sm btn-primary" th:attr="del_uri=@{'/paper/download/'+${paper.id}}">下载</button>
-									<button class="btn btn-sm btn-danger deleteBtn" th:attr="del_uri=@{'/paper/delete/'+${paper.id}}">删除</button>
+									<button class="btn btn-sm btn-danger deleteBtn" th:herf="@{'/paper/delete/'+${paper.id}}">删除</button>
 								</td>
 							</tr>
 							</tbody>
@@ -211,9 +211,6 @@
 						</table>
 					</div>
 				</main>
-				<form id="download" method="post">
-					<input type="hidden" name="_method" value="download">
-				</form>
 				<form id="delete" method="post">
 					<input type="hidden" name="_method" value="delete">
 				</form>

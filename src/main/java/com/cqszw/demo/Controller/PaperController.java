@@ -117,8 +117,7 @@ public class PaperController {
             return "paper/downloadlist";
         }
     }
-    @DeleteMapping("/paper/delete/{paper_id}")
-    @ResponseBody
+    @GetMapping("/paper/delete/{paper_id}")
     public String deletePaper(@PathVariable("paper_id") int paper_id) throws UnsupportedEncodingException{
         paperService.deletePaper(paper_id);
         String filename=paperService.gettopicbyid(paper_id)+".pdf";
