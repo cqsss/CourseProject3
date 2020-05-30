@@ -1,6 +1,8 @@
 package com.cqszw.demo.Controller;
 
+import com.cqszw.demo.Bean.Download_Record;
 import com.cqszw.demo.Bean.Paper;
+import com.cqszw.demo.Bean.Upload_Record;
 import com.cqszw.demo.Mapper.PaperMapper;
 import com.cqszw.demo.Service.PaperService;
 import com.cqszw.demo.Service.UPDService;
@@ -43,29 +45,29 @@ public class PaperController {
         Object visitorUser = request.getSession().getAttribute("loginUser");
         if(visitorUser==null){
             model.addAttribute("msg","未登入，没有个人数据");
-            return "paper/downloadlist";
+            return "downloadlist";
         }
         else{
             String username = visitorUser.toString();
-            List<Paper> papers=updService.getpaperbyuser(username);
+            List<Download_Record> papers = updService.download_records(username);
             model.addAttribute("papers",papers);
 //            //System.out.println(s);
-            return "paper/downloadlist";
+            return "downloadlist";
         }
     }
     @GetMapping("/uploads")
     public String uploads(Model model, HttpServletRequest request){
-        Object User = request.getSession().getAttribute("loginUser");
-        if(User==null){
+        Object visitorUser = request.getSession().getAttribute("loginUser");
+        if(visitorUser==null){
             model.addAttribute("msg","未登入，没有个人数据");
-            return "paper/uploadlist";
+            return "uploadlist";
         }
         else{
-            String username = User.toString();
-            List<Paper> papers=upuService.getpaperbyuser(username);
+            String username = visitorUser.toString();
+            List<Upload_Record> papers=upuService.upload_records(username);
             model.addAttribute("papers",papers);
 //            //System.out.println(s);
-            return "paper/uploadlist";
+            return "uploadlist";
         }
     }
     @GetMapping("/paper/download/{paper_id}")

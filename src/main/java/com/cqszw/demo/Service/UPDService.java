@@ -21,5 +21,5 @@ public class UPDService {
     public List<User_Download> getdlbyuser(String username){return updMapper.getdlbyuser(username);}
     public List<Paper> getpaperbyuser(String username){return updMapper.getpaperbyuser(username);}
     public int insertUPD(String username,int paper_id,String downloadtime){return updMapper.insertUPD(username,paper_id,downloadtime);}
-    public List<Download_Record>download_records(String username){return  updMapper.getDownloadRecords(username);}
+    public List<Download_Record> download_records(String username){return  updMapper.getDownloadRecords(username);}
 }

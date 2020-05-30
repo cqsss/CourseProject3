@@ -23,7 +23,7 @@ public interface UPDMapper {
     @Select("SELECT type,topic,author,keyword,downloadtime\n" +
             "FROM paper,user_dl\n" +
             "where paper.id=user_dl.paper_id and username=#{username}")
-    public List<Download_Record>getDownloadRecords(@Param("username")String username);
+    public List<Download_Record> getDownloadRecords(@Param("username")String username);
     @Insert("insert into user_dl(username,paper_id,downloadtime) values(#{username},#{paper_id},#{downloadtime})")
     public int insertUPD(@Param("username")String username,@Param("paper_id")int paper_id,@Param("downloadtime")String downloadtime);
 }
