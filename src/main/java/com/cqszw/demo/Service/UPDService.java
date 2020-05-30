@@ -1,5 +1,6 @@
 package com.cqszw.demo.Service;
 
+import com.cqszw.demo.Bean.Download_Record;
 import com.cqszw.demo.Bean.Paper;
 import com.cqszw.demo.Bean.User_Download;
 import com.cqszw.demo.Mapper.UPDMapper;
@@ -20,5 +21,5 @@ public class UPDService {
     public List<User_Download> getdlbyuser(String username){return updMapper.getdlbyuser(username);}
     public List<Paper> getpaperbyuser(String username){return updMapper.getpaperbyuser(username);}
     public int insertUPD(String username,int paper_id,String downloadtime){return updMapper.insertUPD(username,paper_id,downloadtime);}
-
+    public List<Download_Record>download_records(String username){return  updMapper.getDownloadRecords(username);}
 }

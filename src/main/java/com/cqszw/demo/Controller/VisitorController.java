@@ -196,7 +196,8 @@ public class VisitorController {
         }
         else{
             String username = visitorUser.toString();
-            List<Paper> papers=updService.getpaperbyuser(username);
+//            List<Paper> papers=updService.getpaperbyuser(username);
+            List<Download_Record>papers=updService.download_records(username);
             model.addAttribute("papers",papers);
 //            //System.out.println(s);
             return "visitor/downloadlist";
