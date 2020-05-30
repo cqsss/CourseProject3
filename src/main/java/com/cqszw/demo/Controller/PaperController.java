@@ -45,14 +45,14 @@ public class PaperController {
         Object visitorUser = request.getSession().getAttribute("loginUser");
         if(visitorUser==null){
             model.addAttribute("msg","未登入，没有个人数据");
-            return "downloadlist";
+            return "paper/downloadlist";
         }
         else{
             String username = visitorUser.toString();
             List<Download_Record> papers = updService.download_records(username);
             model.addAttribute("papers",papers);
 //            //System.out.println(s);
-            return "downloadlist";
+            return "paper/downloadlist";
         }
     }
     @GetMapping("/uploads")
@@ -60,14 +60,14 @@ public class PaperController {
         Object visitorUser = request.getSession().getAttribute("loginUser");
         if(visitorUser==null){
             model.addAttribute("msg","未登入，没有个人数据");
-            return "uploadlist";
+            return "paper/uploadlist";
         }
         else{
             String username = visitorUser.toString();
             List<Upload_Record> papers=upuService.upload_records(username);
             model.addAttribute("papers",papers);
 //            //System.out.println(s);
-            return "uploadlist";
+            return "paper/uploadlist";
         }
     }
     @GetMapping("/paper/download/{paper_id}")
