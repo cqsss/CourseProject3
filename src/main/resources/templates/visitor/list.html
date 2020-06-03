@@ -67,9 +67,10 @@
 						<table class="table table-striped table-sm">
 							<thead>
 								<tr>
-									<th>name</th>
-									<th>location</th>
-									<th>date</th>
+									<th>会议名称</th>
+									<th>分类</th>
+									<th>地点</th>
+									<th>日期</th>
 									<th>url</th>
 									<th>操作</th>
 								</tr>
@@ -77,6 +78,7 @@
 							<tbody>
 								<tr th:each="meeting:${meetings}">
 										<td th:text="${meeting.name}"> </td>
+										<td th:text="${meeting.type}"> </td>
 										<td th:text="${meeting.location}"> </td>
 										<td th:text="${meeting.date}"> </td>
 									    <td th:text="${meeting.url}"> </td>

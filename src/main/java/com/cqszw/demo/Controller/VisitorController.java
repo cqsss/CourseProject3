@@ -37,6 +37,7 @@ public class VisitorController {
     @Autowired
     private NewsService newsService;
     User will_alter;
+    int nowid = 0;
     @GetMapping("/visitor/login/{username}")
     public  String alter(@PathVariable("username")String username, Model model, HttpServletRequest request){
         Object loginUser = request.getSession().getAttribute("visitorUser");
@@ -285,9 +286,9 @@ public class VisitorController {
             String username = visitorUser.toString();
             SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String datetime = tempDate.format(new java.util.Date());
-            int nextid = paperService.gernum()+1;
-            paper.setId(nextid);
-            upuService.insertUPU(username,nextid,datetime);
+            nowid++;
+            paper.setId(nowid);
+            upuService.insertUPU(username,nowid,datetime);
             paperService.insertPaper(paper);
             String fileName = paper.getTopic()+".pdf";
             int size = (int) file.getSize();

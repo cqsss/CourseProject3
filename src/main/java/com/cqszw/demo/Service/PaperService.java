@@ -17,8 +17,11 @@ public class PaperService {
     private PaperMapper paperMapper;
     public List<Paper> getAll(){return  paperMapper.getAll();}
     public String gettopicbyid(int id){return paperMapper.gettopicbyid(id);};
-    public int gernum(){return paperMapper.getnum();}
+    public int getnum(){return paperMapper.getnum();}
+    public int getmaxid(){return paperMapper.getmaxid();};
     public Paper getpaperbyid(int id) {return paperMapper.getpaperbyid(id);};
+    public Paper getPaperByType(String type){return paperMapper.getPaperByType(type);};
+    public List<String> getType(){return paperMapper.getType();}
     public int insertPaper(Paper paper){return paperMapper.insertPaper(paper);};
     public int deletePaper(int id){return paperMapper.deletePaper(id);};
 }

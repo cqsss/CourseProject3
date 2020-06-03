@@ -21,8 +21,14 @@ public interface PaperMapper {
     public String gettopicbyid(@Param("id") int id);
     @Select("select count(*) from paper")
     public int getnum();
+    @Select("select max(id) from paper")
+    public int getmaxid();
     @Select("select * from paper where id=#{id}")
     public Paper getpaperbyid(@Param("id") int id);
+    @Select("select * from paper where type=#{type}")
+    public Paper getPaperByType(@Param("type") String type);
+    @Select("select type from paper")
+    public List<String> getType();
     @Insert("insert into paper(id,topic,type,author,keyword) values(#{id},#{topic},#{type},#{author},#{keyword})")
     public int insertPaper(Paper paper);
     @Delete("delete from paper where id = #{id}")

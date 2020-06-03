@@ -32,6 +32,7 @@ public class PaperController {
     private UPDService updService;
     @Autowired
     private UPUService upuService;
+    int nowid = 0;
     @GetMapping("/papers")
     public String list(Model model){
 
@@ -123,7 +124,7 @@ public class PaperController {
     @GetMapping("/paper/delete/{paper_id}")
     public String deletePaper(@PathVariable("paper_id") int paper_id) {
         String filename=paperService.gettopicbyid(paper_id)+".pdf";
-        String filePath = "D:/file" ;
+        String filePath = "/SpringBoot/file" ;
         File file = new File(filePath + "/" + filename);
         paperService.deletePaper(paper_id);
         System.out.println(filePath + "/" + filename);
@@ -152,9 +153,9 @@ public class PaperController {
             String username = user.toString();
             SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String datetime = tempDate.format(new java.util.Date());
-            int nextid = paperService.gernum()+1;
-            paper.setId(nextid);
-            upuService.insertUPU(username,nextid,datetime);
+            nowid++;
+            paper.setId(nowid);
+            upuService.insertUPU(username,nowid,datetime);
             paperService.insertPaper(paper);
             String fileName = paper.getTopic()+".pdf";
             int size = (int) file.getSize();

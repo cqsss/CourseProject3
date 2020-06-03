@@ -13,8 +13,9 @@ public class Meeting {
 
     private  int id;
 
-    public Meeting(String name, String location, String date, String url) {
+    public Meeting(String name, String type, String location, String date, String url) {
         this.id = id;
+        this.type = type;
         this.name = name;
         this.location = location;
         this.date = date;
