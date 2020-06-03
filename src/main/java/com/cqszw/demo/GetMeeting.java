@@ -25,7 +25,7 @@ public class GetMeeting {
     @Scheduled(cron = "0/20 * * * * ? ")
     public void getMeetings() throws IOException {
 
-        Integer pagenum=10;
+        Integer pagenum=5;
         String page;
         String category;
         String url;

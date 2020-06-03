@@ -74,6 +74,7 @@ public class Meeting {
 
     public void  show(){
         System.out.println("name: "+name);
+        System.out.println("type: "+type);
         System.out.println("location: "+location);
         System.out.println("date: "+date);
         System.out.println("url: "+url);
