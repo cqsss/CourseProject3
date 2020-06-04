@@ -12,6 +12,8 @@ public interface  NewsMapper {
      News getbyid(@Param("id") int id);
     @Select("select * from news")
      List<News> getAll();
+    @Select("select * from news where type=#{type}")
+    List<News> getNewsByType(@Param("type") String type);
     @Insert("insert into news(title,content,publishdate,type) values(#{title},#{content},#{publishdate},#{type})")
     int insertNews(News news);
     @Update("update news set title=#{title},content=#{content},type=#{type} where id=#{id}")

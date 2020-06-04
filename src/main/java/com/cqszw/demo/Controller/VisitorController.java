@@ -180,6 +180,12 @@ public class VisitorController {
         model.addAttribute("newslist",newsList);
         return "visitor/news";
     }
+    @GetMapping("/visitor/newslist/category/{type}")
+    public String newsType(@PathVariable("type")String type, Model model) {
+        List<News> newslist = newsService.getNewsByType(type);
+        model.addAttribute("newslist",newslist);
+        return "visitor/news";
+    }
     @DeleteMapping("/visitor/news/{id}")
     public  String viewnews(@PathVariable("id")int id,Model model){
         News news = newsService.getById(id);

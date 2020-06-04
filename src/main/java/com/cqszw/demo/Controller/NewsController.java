@@ -24,6 +24,12 @@ public class NewsController {
         model.addAttribute("newslist",newsList);
         return  "news/management";
     }
+    @GetMapping("/newslist/category/{type}")
+    public String newsType(@PathVariable("type")String type, Model model) {
+        List<News> newslist = newsService.getNewsByType(type);
+        model.addAttribute("newslist",newslist);
+        return "news/management";
+    }
     @GetMapping("/news")
     public  String toAddNews(Model model){
         return  "news/add";

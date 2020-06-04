@@ -13,7 +13,8 @@ public class NewsService {
     @Autowired
     private NewsMapper newsMapper;
     public List<News> getAll(){return newsMapper.getAll();}
-    public  News getById(int id){return  newsMapper.getbyid(id);}
+    public List<News> getNewsByType(String type) {return newsMapper.getNewsByType(type);};
+    public News getById(int id){return  newsMapper.getbyid(id);}
     public int insertNews(News news) {
         return  newsMapper.insertNews(news);
     }
@@ -25,5 +26,5 @@ public class NewsService {
     public int deleteNews(int id) {
         return  newsMapper.deleteNews(id);
     }
-    public  int viewcount(News news){return  newsMapper.viewcount(news.getViewcount(),news.getId());}
+    public int viewcount(News news){return  newsMapper.viewcount(news.getViewcount(),news.getId());}
 }
