@@ -35,7 +35,6 @@ public class PaperController {
     int nowid = 0;
     @GetMapping("/papers")
     public String list(Model model){
-
         List<Paper> papers=paperService.getAll();
         //查询所有会议返回列表页面
         model.addAttribute("papers",papers);
@@ -45,7 +44,7 @@ public class PaperController {
     public String paperType(@PathVariable("type")String type, Model model) {
         List<Paper> papers = paperService.getPaperByType(type);
         model.addAttribute("papers",papers);
-        return "visitor/addpaper";
+        return "paper/list";
     }
     @GetMapping("/downloads")
     public String downloads(Model model, HttpServletRequest request){

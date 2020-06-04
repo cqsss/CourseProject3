@@ -14,7 +14,7 @@ public interface MeetingMapper {
     List<Meeting> getbydate(@Param("date") String date);
     @Select("select * from meeting where type=#{type}")
     List<Meeting> getbytype(@Param("type") String type);
-    @Select("select * from meeting")
+    @Select("select * from meeting order by date desc")
     List<Meeting> getAll();
     @Select("select * from meeting where name like CONCAT(CONCAT('%', #{keyword}), '%') " +
             "or location like CONCAT(CONCAT('%', #{keyword}), '%') or date like CONCAT(CONCAT('%', #{keyword}), '%')")

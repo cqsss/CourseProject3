@@ -10,7 +10,7 @@ import java.util.List;
 public interface  NewsMapper {
     @Select("select * from news where id=#{id}")
      News getbyid(@Param("id") int id);
-    @Select("select * from news")
+    @Select("select * from news order by publishdate desc")
      List<News> getAll();
     @Select("select * from news where type=#{type}")
     List<News> getNewsByType(@Param("type") String type);
