@@ -33,6 +33,12 @@ public class MeetingController {
         model.addAttribute("meetings",meetings);
         return  "meeting/add";
     }
+    @GetMapping("/meetings/category/{type}")
+    public String meetingType(@PathVariable("type")String type, Model model) {
+        List<Meeting> meetings = meetingService.getMeetingByType(type);
+        model.addAttribute("meetings",meetings);
+        return "meeting/list";
+    }
     @RequestMapping("/meeting/search/{keyword}")
     public  String toSearchMeeting(@PathVariable("keyword")String keyword, Model model){
         List<Meeting>meetings=meetingService.search(keyword);

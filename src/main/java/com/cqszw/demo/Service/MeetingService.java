@@ -2,6 +2,7 @@ package com.cqszw.demo.Service;
 
 import com.cqszw.demo.Bean.Meeting;
 import com.cqszw.demo.Mapper.MeetingMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class MeetingService {
     public List<Meeting> getMeetingByDate(String date) {
         return meetingMapper.getbydate(date);
     }
+    public List<Meeting> getMeetingByType(String type) {return meetingMapper.getbytype(type);};
     public int insertMeeting(Meeting meeting){ return meetingMapper.insertMeeting(meeting);}
     public List<Meeting> getAll(){return  meetingMapper.getAll();}
     public Meeting getMeeting(String name,String location,String date){return meetingMapper.getMeeting(name, location, date);}

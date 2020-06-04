@@ -26,7 +26,7 @@ public interface PaperMapper {
     @Select("select * from paper where id=#{id}")
     public Paper getpaperbyid(@Param("id") int id);
     @Select("select * from paper where type=#{type}")
-    public Paper getPaperByType(@Param("type") String type);
+    public List<Paper> getPaperByType(@Param("type") String type);
     @Select("select type from paper")
     public List<String> getType();
     @Insert("insert into paper(id,topic,type,author,keyword) values(#{id},#{topic},#{type},#{author},#{keyword})")

@@ -153,6 +153,12 @@ public class VisitorController {
         model.addAttribute("meetings",meetings);
         return "visitor/add";
     }
+    @GetMapping("/visitor/meetings/category/{type}")
+    public String meetingType(@PathVariable("type")String type, Model model) {
+        List<Meeting> meetings = meetingService.getMeetingByType(type);
+        model.addAttribute("meetings",meetings);
+        return "visitor/add";
+    }
     @GetMapping("/visitor/meeting/add/{meeting_id}")
     public  String add(Model model,HttpServletRequest request,@PathVariable("meeting_id") int meeting_id){
         Object visitorUser = request.getSession().getAttribute("visitorUser");
@@ -185,6 +191,12 @@ public class VisitorController {
     @GetMapping("/visitor/paper/add")
     public  String addpaper(Model model){
         List<Paper> papers = paperService.getAll();
+        model.addAttribute("papers",papers);
+        return "visitor/addpaper";
+    }
+    @GetMapping("/visitor/papers/category/{type}")
+    public String paperType(@PathVariable("type")String type, Model model) {
+        List<Paper> papers = paperService.getPaperByType(type);
         model.addAttribute("papers",papers);
         return "visitor/addpaper";
     }

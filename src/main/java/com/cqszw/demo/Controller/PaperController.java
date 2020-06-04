@@ -41,6 +41,12 @@ public class PaperController {
         model.addAttribute("papers",papers);
         return  "paper/list";
     }
+    @GetMapping("/papers/category/{type}")
+    public String paperType(@PathVariable("type")String type, Model model) {
+        List<Paper> papers = paperService.getPaperByType(type);
+        model.addAttribute("papers",papers);
+        return "visitor/addpaper";
+    }
     @GetMapping("/downloads")
     public String downloads(Model model, HttpServletRequest request){
         Object visitorUser = request.getSession().getAttribute("loginUser");
