@@ -27,4 +27,5 @@ public class NewsService {
         return  newsMapper.deleteNews(id);
     }
     public int viewcount(News news){return  newsMapper.viewcount(news.getViewcount(),news.getId());}
+    public List<News> search(String keyword){return newsMapper.search(keyword);}
 }

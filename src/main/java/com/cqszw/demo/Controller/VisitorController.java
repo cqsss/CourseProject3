@@ -147,11 +147,16 @@ public class VisitorController {
             model.addAttribute("meetings",meetings);
             return "visitor/add";
     }
-    @GetMapping("/visitor/meeting/search/{keyword}")
-    public  String search(@PathVariable("keyword")String keyword, Model model){
-        List<Meeting> meetings = meetingService.search(keyword);
-        model.addAttribute("meetings",meetings);
-        return "visitor/add";
+    @GetMapping("/visitor/meeting/new")
+    public  String toNewMeeting(){
+
+        return "visitor/new";
+    }
+    @PostMapping("/visitor/meeting")
+    public String addMeeting(Meeting meeting){
+        meetingService.insertMeeting(meeting);
+        //最后回到员工列表页面
+        return  "redirect:/meetings";
     }
     @GetMapping("/visitor/meetings/category/{type}")
     public String meetingType(@PathVariable("type")String type, Model model) {

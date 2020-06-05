@@ -29,6 +29,11 @@ public interface PaperMapper {
     public List<Paper> getPaperByType(@Param("type") String type);
     @Select("select type from paper")
     public List<String> getType();
+    @Select("select * from paper where topic like CONCAT(CONCAT('%', #{keyword}), '%') " +
+            "or author like CONCAT(CONCAT('%', #{keyword}), '%') " +
+            "or type like CONCAT(CONCAT('%', #{keyword}), '%')" +
+            "or keyword like CONCAT(CONCAT('%', #{keyword}), '%')")
+    List<Paper> search(@Param("keyword") String keyword);
     @Insert("insert into paper(id,topic,type,author,keyword) values(#{id},#{topic},#{type},#{author},#{keyword})")
     public int insertPaper(Paper paper);
     @Delete("delete from paper where id = #{id}")

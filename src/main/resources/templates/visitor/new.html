@@ -43,21 +43,11 @@
 	</head>
 
 	<body>
-		<!--<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">-->
-			<!--<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Company name</a>-->
-			<!--<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">-->
-			<!--<ul class="navbar-nav px-3">-->
-				<!--<li class="nav-item text-nowrap">-->
-					<!--<a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Sign out</a>-->
-				<!--</li>-->
-			<!--</ul>-->
-		<!--</nav>-->
-<!--改用我抽取出来的顶部栏-->
-		<div th:replace="commens/bar::topbar"></div>
+		<div th:replace="visitor_commens/bar::topbar"></div>
 		<div class="container-fluid">
 			<div class="row">
 				<!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
-				<div th:replace="commens/bar::sidebar(activeUri='meetings')"></div>
+				<div th:replace="visitor_commens/bar::sidebar(activeUri='meetings')"></div>
 				<!--<nav class="col-md-2 d-none d-md-block bg-light sidebar">-->
 				<!---->
 					<!--<div class="sidebar-sticky">-->
@@ -183,7 +173,7 @@
 				<!--</nav>-->
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<form th:action="@{/meeting}" method="post">
+					<form th:action="@{/visitor/meeting}" method="post">
 						<!--发送put请求修改员工数据-->
 						<!--
 						1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
@@ -207,7 +197,7 @@
 							<input name="url" type="text" class="form-control" placeholder="会议详情链接" >
 						</div>
 
-						<button type="submit" class="btn btn-primary" >添加</button>
+						<button type="submit" class="btn btn-primary" >发布</button>
 					</form>
 				</main>
 			</div>
@@ -266,7 +256,7 @@
             {
                 var $Search = $("#Search").val();
                 //alert($Search);
-                window.location.assign("/search/meeting/"+$Search);
+                window.location.assign("/visitor/search/meeting/"+$Search);
             }
         }
 

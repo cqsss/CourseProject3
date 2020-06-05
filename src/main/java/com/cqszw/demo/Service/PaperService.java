@@ -24,4 +24,5 @@ public class PaperService {
     public List<String> getType(){return paperMapper.getType();}
     public int insertPaper(Paper paper){return paperMapper.insertPaper(paper);};
     public int deletePaper(int id){return paperMapper.deletePaper(id);};
+    public List<Paper> search(String keyword){return paperMapper.search(keyword);}
 }
