@@ -19,6 +19,9 @@ public interface  NewsMapper {
     @Select("select * from news where title like CONCAT(CONCAT('%', #{keyword}), '%') " +
             "or publishdate like CONCAT(CONCAT('%', #{keyword}), '%') or type like CONCAT(CONCAT('%', #{keyword}), '%')")
     List<News> search(@Param("keyword") String keyword);
+    @Select("select * from news where type=#{type} and (title like CONCAT(CONCAT('%', #{keyword}), '%') " +
+            "or publishdate like CONCAT(CONCAT('%', #{keyword}), '%') or type like CONCAT(CONCAT('%', #{keyword}), '%'))")
+    List<News> searchadntype(@Param("type") String type,@Param("keyword") String keyword);
     @Update("update news set title=#{title},content=#{content},type=#{type} where id=#{id}")
     public int updateNews(@Param("title") String title,@Param("content") String content,
                              @Param("type") String type,

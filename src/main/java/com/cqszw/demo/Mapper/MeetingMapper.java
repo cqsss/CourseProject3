@@ -19,6 +19,9 @@ public interface MeetingMapper {
     @Select("select * from meeting where name like CONCAT(CONCAT('%', #{keyword}), '%') " +
             "or location like CONCAT(CONCAT('%', #{keyword}), '%') or date like CONCAT(CONCAT('%', #{keyword}), '%')")
     List<Meeting> search(@Param("keyword") String keyword);
+    @Select("select * from meeting where type=#{type} and (name like CONCAT(CONCAT('%', #{keyword}), '%') " +
+            "or location like CONCAT(CONCAT('%', #{keyword}), '%') or date like CONCAT(CONCAT('%', #{keyword}), '%'))")
+    List<Meeting> searchandtype(@Param("type") String type, @Param("keyword") String keyword);
     @Insert("insert into meeting(name,type,location,date,url) values(#{name},#{type},#{location},#{date},#{url})")
     public  int insertMeeting(Meeting meeting);
     @Select("select * from meeting where name=#{name} and location=#{location} and date=#{date}")

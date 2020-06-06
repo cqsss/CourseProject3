@@ -196,6 +196,19 @@
 							<input name="name" type="text" class="form-control" placeholder="会议名称" th:value="${meeting.name}">
 						</div>
 						<div class="form-group">
+							<label>type</label>
+							<select  name="type" class="form-control" >
+								<option th:selected="${meeting.type=='生命科学'}" value="生命科学">生命科学</option>
+								<option th:selected="${meeting.type=='地球科学'}" value="地球科学">地球科学</option>
+								<option th:selected="${meeting.type=='化学科学'}" value="化学科学">化学科学</option>
+								<option th:selected="${meeting.type=='信息科学'}" value="信息科学">信息科学</option>
+								<option th:selected="${meeting.type=='数理科学'}" value="数理科学">数理科学</option>
+								<option th:selected="${meeting.type=='医学科学'}" value="医学科学">医学科学</option>
+								<option th:selected="${meeting.type=='工程材料'}" value="工程材料">工程材料</option>
+								<option th:selected="${meeting.type=='管理综合'}" value="管理综合">管理综合</option>
+							</select>
+						</div>
+						<div class="form-group">
 							<label>meeting location</label>
 							<input name="location" type="text" class="form-control" placeholder="会议地址"th:value="${meeting.location}">
 						</div>

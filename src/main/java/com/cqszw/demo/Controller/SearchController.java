@@ -9,6 +9,7 @@ import com.cqszw.demo.Service.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -69,5 +70,40 @@ public class SearchController {
         model.addAttribute("papers",papers);
         model.addAttribute("keyword",keyword);
         return  "search/visitor/paper";
+    }
+    @GetMapping("/meetings/category/{type}/{keyword}")
+    public String meetingType(@PathVariable("type")String type,@PathVariable("keyword") String keyword, Model model) {
+        List<Meeting> meetings = meetingService.searchandtype(type,keyword);
+        model.addAttribute("meetings",meetings);
+        return "search/meeting";
+    }
+    @GetMapping("/newslist/category/{type}/{keyword}")
+    public String newsType(@PathVariable("type")String type,@PathVariable("keyword") String keyword, Model model) {
+        List<News> newslist = newsService.searchandtype(type,keyword);
+        model.addAttribute("newslist",newslist);
+        return "search/news";
+    }
+    @GetMapping("/papers/category/{type}/{keyword}")
+    public String paperType(@PathVariable("type")String type,@PathVariable("keyword") String keyword, Model model) {
+        List<Paper> papers = paperService.searchandtype(type,keyword);
+        model.addAttribute("papers",papers);
+        return "search/paper";
+    } @GetMapping("/visitor/meetings/category/{type}/{keyword}")
+    public String VmeetingType(@PathVariable("type")String type,@PathVariable("keyword") String keyword, Model model) {
+        List<Meeting> meetings = meetingService.searchandtype(type,keyword);
+        model.addAttribute("meetings",meetings);
+        return "search/visitor/meeting";
+    }
+    @GetMapping("/visitor/newslist/category/{type}/{keyword}")
+    public String VnewsType(@PathVariable("type")String type,@PathVariable("keyword") String keyword, Model model) {
+        List<News> newslist = newsService.searchandtype(type,keyword);
+        model.addAttribute("newslist",newslist);
+        return "search/visitor/news";
+    }
+    @GetMapping("/visitor/papers/category/{type}/{keyword}")
+    public String VpaperType(@PathVariable("type")String type,@PathVariable("keyword") String keyword, Model model) {
+        List<Paper> papers = paperService.searchandtype(type,keyword);
+        model.addAttribute("papers",papers);
+        return "search/visitor/paper";
     }
 }

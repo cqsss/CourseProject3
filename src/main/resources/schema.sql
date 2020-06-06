@@ -80,8 +80,8 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `is_manager` tinyint(1) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
-  `sex` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NUll,
+  `sex` varchar(255) DEFAULT '保密' not null ,
   `telephone` varchar(255) DEFAULT NULL,
   `introduce` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`username`)
@@ -90,8 +90,8 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('admin', '123456', '1', '', null, null, null, null);
-INSERT INTO `user` VALUES ('hitwh', '123456', '0', '', null, null, null, null);
+INSERT INTO `user` VALUES ('admin', '123456', '1', '', null, '保密', null,  null);
+INSERT INTO `user` VALUES ('hitwh', '123456', '0', '', null, '保密', null, null);
 
 -- ----------------------------
 -- Table structure for user_dl

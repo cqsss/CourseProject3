@@ -40,4 +40,5 @@ public class MeetingService {
         }
     }
     public  List<Meeting> search(String keyword){return  meetingMapper.search(keyword);}
+    public  List<Meeting>searchandtype(String type,String keyword){return  meetingMapper.searchandtype(type,keyword);}
 }

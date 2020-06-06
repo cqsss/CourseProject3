@@ -28,4 +28,5 @@ public class NewsService {
     }
     public int viewcount(News news){return  newsMapper.viewcount(news.getViewcount(),news.getId());}
     public List<News> search(String keyword){return newsMapper.search(keyword);}
+    public List<News> searchandtype(String type,String keyword){return newsMapper.searchadntype(type,keyword);}
 }
