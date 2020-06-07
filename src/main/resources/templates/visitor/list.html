@@ -62,8 +62,9 @@
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 					<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
-					<h2><a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/meeting/add}">添加会议</a></h2>
-                    <h2><a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/meeting/new}">我要发布</a></h2>
+					<h2><a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/meeting/add}">添加会议</a>
+                    <a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/meeting/new}">我要发布</a>
+					</h2>
                     <div class="table-responsive">
 						<table class="table table-striped table-sm">
 							<thead>

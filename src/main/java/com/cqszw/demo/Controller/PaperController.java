@@ -50,7 +50,7 @@ public class PaperController {
     public String downloads(Model model, HttpServletRequest request){
         Object visitorUser = request.getSession().getAttribute("loginUser");
         if(visitorUser==null){
-            model.addAttribute("msg","未登入，没有个人数据");
+            model.addAttribute("msg","未登陆，没有个人数据");
             return "paper/downloadlist";
         }
         else{
@@ -65,7 +65,7 @@ public class PaperController {
     public String uploads(Model model, HttpServletRequest request){
         Object visitorUser = request.getSession().getAttribute("loginUser");
         if(visitorUser==null){
-            model.addAttribute("msg","未登入，没有个人数据");
+            model.addAttribute("msg","未登陆，没有个人数据");
             return "paper/uploadlist";
         }
         else{

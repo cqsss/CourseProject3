@@ -64,7 +64,7 @@ public class VisitorController {
             //meeting.show();
             userService.updateUser(user,will_alter);
         }
-        return "redirect:/visitor/";
+        return "redirect:/visitor/meetings";
     }
     @RequestMapping("/visitor/table/{date}")
     public String myMeetingbyDate(@PathVariable("date")String date, Model model, HttpServletRequest request) throws ParseException {
@@ -94,7 +94,7 @@ public class VisitorController {
         model.addAttribute("lasttime",last);
         Object visitorUser = request.getSession().getAttribute("visitorUser");
         if(visitorUser==null){
-            model.addAttribute("msg","未登入，没有个人数据");
+            model.addAttribute("msg","未登陆，没有个人数据");
             return "visitor/dashboard";
         }
         else{
@@ -117,7 +117,7 @@ public class VisitorController {
     public String meetings(Model model, HttpServletRequest request){
         Object visitorUser = request.getSession().getAttribute("visitorUser");
         if(visitorUser==null){
-            model.addAttribute("msg","未登入，没有个人数据");
+            model.addAttribute("msg","未登陆，没有个人数据");
             return "visitor/list";
         }
         else{
@@ -148,9 +148,14 @@ public class VisitorController {
             return "visitor/add";
     }
     @GetMapping("/visitor/meeting/new")
-    public  String toNewMeeting(){
-
-        return "visitor/new";
+    public  String toNewMeeting(HttpServletRequest request,Model model) {
+        Object visitorUser = request.getSession().getAttribute("visitorUser");
+        if (visitorUser == null) {
+            model.addAttribute("msg", "未登陆，请先登录");
+            return "index";
+        } else {
+            return "visitor/new";
+        }
     }
     @PostMapping("/visitor/meeting")
     public String addMeeting(Meeting meeting){
@@ -215,7 +220,7 @@ public class VisitorController {
     public String downloads(Model model, HttpServletRequest request){
         Object visitorUser = request.getSession().getAttribute("visitorUser");
         if(visitorUser==null){
-            model.addAttribute("msg","未登入，没有个人数据");
+            model.addAttribute("msg","未登陆，没有个人数据");
             return "visitor/downloadlist";
         }
         else{
@@ -230,7 +235,7 @@ public class VisitorController {
     public String uploads(Model model, HttpServletRequest request){
         Object visitorUser = request.getSession().getAttribute("visitorUser");
         if(visitorUser==null){
-            model.addAttribute("msg","未登入，没有个人数据");
+            model.addAttribute("msg","未登陆，没有个人数据");
             return "visitor/uploadlist";
         }
         else{

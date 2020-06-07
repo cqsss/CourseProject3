@@ -35,6 +35,13 @@ public class MyConfig extends WebMvcConfigurationSupport {
         registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/dashboard/**");
         registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/about/**");
         registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/table/**");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/newslist/**");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/news/**");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/papers/**");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/paper/**");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/downloads/**");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/uploads/**");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/search/**");
     }
 
     @Override
