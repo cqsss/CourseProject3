@@ -35,11 +35,23 @@ public class NewsController {
         return  "news/add";
     }
     @PostMapping("/news")
-    public String addNews(News news){
+    public String addNews(News news,Model model){
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
         System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
         String date=df.format(new Date());
         news.setPublishdate(date);
+        if(news.getTitle().isEmpty()){
+            model.addAttribute("msg","标题不能为空");
+            return  "news/add";
+        }
+        if(news.getTitle().length()>100){
+            model.addAttribute("msg","标题不能超过100个字符");
+            return  "news/add";
+        }
+        if(news.getContent().length()>4000){
+            model.addAttribute("msg","内容不能超过4000个字符");
+            return  "news/add";
+        }
         newsService.insertNews(news);
         //最后回到员工列表页面
         return  "redirect:/newslist";
@@ -54,8 +66,20 @@ public class NewsController {
         return  "news/alter";
     }
     @PutMapping("/news")
-    public String update(News news){
+    public String update(News news,Model model){
         if(will_alter!=null){
+            if(news.getTitle().isEmpty()){
+                model.addAttribute("msg","标题不能为空");
+                return  "news/alter";
+            }
+            if(news.getTitle().length()>100){
+                model.addAttribute("msg","标题不能超过100个字符");
+                return  "news/alter";
+            }
+            if(news.getContent().length()>4000){
+                model.addAttribute("msg","内容不能超过4000个字符");
+                return  "news/alter";
+            }
             newsService.updateNews(news,will_alter);
         }
         return "redirect:/newslist";

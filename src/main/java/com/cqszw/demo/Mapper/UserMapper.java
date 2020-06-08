@@ -15,10 +15,10 @@ public interface UserMapper {
     @Insert("insert into user(username,password,is_manager,name,age,sex,telephone,introduce) " +
             "values(#{username},#{password},#{is_manager},#{name},#{age},#{sex},#{telephone},#{introduce})")
     public  int insertUser(User user);
-    @Update("update user set username=#{username},password=#{password},is_manager=#{is_manager}," +
+    @Update("update user set password=#{password},is_manager=#{is_manager}," +
             "name=#{name},age=#{age},sex=#{sex},telephone=#{telephone},introduce=#{introduce}" +
             " where username=#{old_username}")
-    public int updateUser(@Param("username") String username,@Param("password") String password,
+    public int updateUser(   @Param("password") String password,
                              @Param("is_manager") boolean is_manager,@Param("name") String name,
                              @Param("age") int age,@Param("sex") String sex,
                              @Param("telephone") String telephone,@Param("introduce") String introduce,

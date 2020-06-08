@@ -1,5 +1,6 @@
 package com.cqszw.demo.Controller;
 
+import ch.qos.logback.core.util.FileUtil;
 import com.cqszw.demo.Bean.Download_Record;
 import com.cqszw.demo.Bean.Paper;
 import com.cqszw.demo.Bean.Upload_Record;
@@ -152,8 +153,38 @@ public class PaperController {
             return "index";
         }
         else {
+
             if (file.isEmpty()) {
-                return "redirect:/papers";
+                model.addAttribute("msg","未选择文件");
+                return "paper/upload";
+            }
+            if(paper.getTopic().length()>100){
+                model.addAttribute("msg","论文标题小于100个字符");
+                return "paper/upload";
+            }
+            if(paper.getTopic().isEmpty()){
+                model.addAttribute("msg","论文标题不能为空");
+                return "paper/upload";
+            }
+            if(paper.getAuthor().isEmpty()){
+                model.addAttribute("msg","作者不能为空");
+                return "paper/upload";
+            }
+            if(paper.getAuthor().length()>100){
+                model.addAttribute("msg","作者小于100个字符");
+                return "paper/upload";
+            }
+            int begin = file.getOriginalFilename().indexOf(".");
+            int last = file.getOriginalFilename().length();//获得文件后缀名
+            String a = file.getOriginalFilename().substring(begin, last);
+            if (!a.endsWith(".pdf")) {
+                model.addAttribute("msg","当前只支持上传pdf文件类型");
+                return "paper/upload";
+            }
+            Float MB = Float.parseFloat(String.valueOf(file.getSize()))/1024/1024;//1kb=1024b,1mb=1024kb
+            if(MB>200){
+                model.addAttribute("msg","单个文件不可以超过200Mb");
+                return "paper/upload";
             }
             String username = user.toString();
             SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

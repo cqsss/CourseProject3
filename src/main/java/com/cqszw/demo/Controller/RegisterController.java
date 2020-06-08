@@ -32,8 +32,8 @@ public class RegisterController {
             map.put("msg","两次密码输入不一致");
             return  "register";
         }
-        else if (password.length()<6){
-            map.put("msg","密码长度至少6位");
+        else if (password.length()<6||password.length()>50){
+            map.put("msg","密码长度至少6位,至多50位");
             return  "register";
         }
         else {

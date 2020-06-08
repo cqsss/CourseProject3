@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Controller
 public class VisitorController {
@@ -59,10 +60,33 @@ public class VisitorController {
         }
     }
     @PutMapping("/visitor/alter")
-    public  String alterinformation(User user){
+    public  String alterinformation(User user,Model model){
+        Pattern p = Pattern.compile("[\u4E00-\u9FA5|\\！|\\，|\\。|\\（|\\）|\\《|\\》|\\“|\\”|\\？|\\：|\\；|\\【|\\】]");
         if(will_alter!=null){
             //meeting.show();
-            userService.updateUser(user,will_alter);
+            if(user.getPassword().length()<6||user.getPassword().length()>50){
+                model.addAttribute("msg","密码至少大于6位小于50位");
+                model.addAttribute("user",will_alter);
+                return "visitor/alter";
+            }
+            else if(user.getName().length()>100){
+                model.addAttribute("msg","姓名不超过100个字符");
+                model.addAttribute("user",will_alter);
+                return "visitorr/alter";
+            }
+            else if(p.matcher(user.getTelephone()).find()||user.getTelephone().length()>100){
+                model.addAttribute("msg","电话不能含有中文及中文字符，长度小于100");
+                model.addAttribute("user",will_alter);
+                return "visitor/alter";
+            }
+            else if(user.getIntroduce().length()>100){
+                model.addAttribute("msg","个人简介不超过100个字符");
+                model.addAttribute("user",will_alter);
+                return "visitor/alter";
+            }
+            else{
+                userService.updateUser(user,will_alter);
+            }
         }
         return "redirect:/visitor/meetings";
     }
@@ -158,9 +182,38 @@ public class VisitorController {
         }
     }
     @PostMapping("/visitor/meeting")
-    public String addMeeting(Meeting meeting){
-        meetingService.insertMeeting(meeting);
-        //最后回到员工列表页面
+    public String addMeeting(Meeting meeting,Model model){
+        if(meeting.getName().isEmpty()){
+            model.addAttribute("msg","会议名不能为空");
+            return "visitor/new";
+        }
+        else if(meeting.getName().length()>100){
+            model.addAttribute("msg","会议名不超过100个字符");
+            return "visitor/new";
+        }
+        else if(meeting.getLocation().isEmpty()){
+            model.addAttribute("msg","地址不能为空");
+            model.addAttribute("user",will_alter);
+            return "visitor/new";
+        }
+        else if(meeting.getDate().isEmpty()){
+            model.addAttribute("msg","日期不能为空");
+            model.addAttribute("user",will_alter);
+            return "visitor/new";
+        }
+        else if(meeting.getLocation().length()>100){
+            model.addAttribute("msg","地址不超过100个字符");
+            model.addAttribute("user",will_alter);
+            return "visitor/new";
+        }
+        else if(meeting.getUrl().length()>200){
+            model.addAttribute("msg","地址不超过200个字符");
+            model.addAttribute("user",will_alter);
+            return "visitor/new";
+        }
+        else{
+            meetingService.insertMeeting(meeting);
+        }
         return  "redirect:/meetings";
     }
     @GetMapping("/visitor/meetings/category/{type}")

@@ -25,6 +25,10 @@ public class SearchController {
     private PaperService paperService;
     @RequestMapping("/search/meeting/{keyword}")
     public  String toSearchMeeting(@PathVariable("keyword")String keyword, Model model){
+        if(keyword.length()>100){
+            model.addAttribute("msg","搜索内容不可以超过100个字符");
+            return "search/meeting";
+        }
         List<Meeting> meetings=meetingService.search(keyword);
         //搜索会议返回结果页面
         model.addAttribute("meetings",meetings);
@@ -33,6 +37,10 @@ public class SearchController {
     }
     @RequestMapping("/search/news/{keyword}")
     public  String toSearchNews(@PathVariable("keyword")String keyword, Model model){
+        if(keyword.length()>100){
+            model.addAttribute("msg","搜索内容不可以超过100个字符");
+            return "search/meeting";
+        }
         List<News>newslist =newsService.search(keyword);
         //搜索会议返回结果页面
         model.addAttribute("newslist",newslist);
@@ -41,6 +49,10 @@ public class SearchController {
     }
     @RequestMapping("/search/paper/{keyword}")
     public  String toSearchPaper(@PathVariable("keyword")String keyword, Model model){
+        if(keyword.length()>100){
+            model.addAttribute("msg","搜索内容不可以超过100个字符");
+            return "search/meeting";
+        }
         List<Paper> papers =paperService.search(keyword);
         //搜索会议返回结果页面
         model.addAttribute("papers",papers);
@@ -49,6 +61,10 @@ public class SearchController {
     }
     @RequestMapping("/visitor/search/meeting/{keyword}")
     public  String toVisitorSearchMeeting(@PathVariable("keyword")String keyword, Model model){
+        if(keyword.length()>100){
+            model.addAttribute("msg","搜索内容不可以超过100个字符");
+            return  "search/visitor/meeting";
+        }
         List<Meeting> meetings=meetingService.search(keyword);
         //搜索会议返回结果页面
         model.addAttribute("meetings",meetings);
@@ -57,6 +73,10 @@ public class SearchController {
     }
     @RequestMapping("/visitor/search/news/{keyword}")
     public  String toVistorSearchNews(@PathVariable("keyword")String keyword, Model model){
+        if(keyword.length()>100){
+            model.addAttribute("msg","搜索内容不可以超过100个字符");
+            return  "search/visitor/meeting";
+        }
         List<News>newslist =newsService.search(keyword);
         //搜索会议返回结果页面
         model.addAttribute("newslist",newslist);
@@ -65,6 +85,10 @@ public class SearchController {
     }
     @RequestMapping("/visitor/search/paper/{keyword}")
     public  String toVisitorSearchPaper(@PathVariable("keyword")String keyword, Model model){
+        if(keyword.length()>100){
+            model.addAttribute("msg","搜索内容不可以超过100个字符");
+            return  "search/visitor/meeting";
+        }
         List<Paper> papers =paperService.search(keyword);
         //搜索会议返回结果页面
         model.addAttribute("papers",papers);
@@ -73,35 +97,59 @@ public class SearchController {
     }
     @GetMapping("/meetings/category/{type}/{keyword}")
     public String meetingType(@PathVariable("type")String type,@PathVariable("keyword") String keyword, Model model) {
+        if(keyword.length()>100){
+            model.addAttribute("msg","搜索内容不可以超过100个字符");
+            return "search/meeting";
+        }
         List<Meeting> meetings = meetingService.searchandtype(type,keyword);
         model.addAttribute("meetings",meetings);
         return "search/meeting";
     }
     @GetMapping("/newslist/category/{type}/{keyword}")
     public String newsType(@PathVariable("type")String type,@PathVariable("keyword") String keyword, Model model) {
+        if(keyword.length()>100){
+            model.addAttribute("msg","搜索内容不可以超过100个字符");
+            return "search/meeting";
+        }
         List<News> newslist = newsService.searchandtype(type,keyword);
         model.addAttribute("newslist",newslist);
         return "search/news";
     }
     @GetMapping("/papers/category/{type}/{keyword}")
     public String paperType(@PathVariable("type")String type,@PathVariable("keyword") String keyword, Model model) {
+        if(keyword.length()>100){
+            model.addAttribute("msg","搜索内容不可以超过100个字符");
+            return "search/meeting";
+        }
         List<Paper> papers = paperService.searchandtype(type,keyword);
         model.addAttribute("papers",papers);
         return "search/paper";
     } @GetMapping("/visitor/meetings/category/{type}/{keyword}")
     public String VmeetingType(@PathVariable("type")String type,@PathVariable("keyword") String keyword, Model model) {
+        if(keyword.length()>100){
+            model.addAttribute("msg","搜索内容不可以超过100个字符");
+            return  "search/visitor/meeting";
+        }
         List<Meeting> meetings = meetingService.searchandtype(type,keyword);
         model.addAttribute("meetings",meetings);
         return "search/visitor/meeting";
     }
     @GetMapping("/visitor/newslist/category/{type}/{keyword}")
     public String VnewsType(@PathVariable("type")String type,@PathVariable("keyword") String keyword, Model model) {
+        if(keyword.length()>100){
+            model.addAttribute("msg","搜索内容不可以超过100个字符");
+            return  "search/visitor/meeting";
+        }
         List<News> newslist = newsService.searchandtype(type,keyword);
         model.addAttribute("newslist",newslist);
         return "search/visitor/news";
     }
     @GetMapping("/visitor/papers/category/{type}/{keyword}")
     public String VpaperType(@PathVariable("type")String type,@PathVariable("keyword") String keyword, Model model) {
+        if(keyword.length()>100){
+            model.addAttribute("msg","搜索内容不可以超过100个字符");
+            return  "search/visitor/meeting";
+        }
         List<Paper> papers = paperService.searchandtype(type,keyword);
         model.addAttribute("papers",papers);
         return "search/visitor/paper";

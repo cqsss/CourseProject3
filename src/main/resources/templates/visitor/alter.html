@@ -59,6 +59,7 @@
 				<!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
 				<div th:replace="visitor_commens/bar::sidebar(activeUri='users')"></div>
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+					<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
 					<form th:action="@{/visitor/alter}" method="post">
 						<!--发送put请求修改员工数据-->
 						<!--

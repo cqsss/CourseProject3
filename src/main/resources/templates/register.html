@@ -59,7 +59,8 @@
 							<label>confirm password</label>
 							<input name="confirm_password" type="text" class="form-control" placeholder="确认密码" >
 						</div>
-						<button type="submit" class="btn btn-primary" >添加</button>
+						<button type="submit" class="btn btn-primary" >注册</button>
+						<a class="btn btn-primary" th:href="@{/index}">返回登陆页面</a>
 					</form>
 					<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
 				</main>

@@ -15,7 +15,7 @@ public class UserService {
     public List<User> getAll(){return  userMapper.getAll();}
     public int insertUser(User user){return  userMapper.insertUser(user);}
     public int updateUser(User user,User old_user){
-        return  userMapper.updateUser(user.getUsername(),user.getPassword(),user.isIs_manager(),
+        return  userMapper.updateUser(user.getPassword(),user.isIs_manager(),
                 user.getName(),user.getAge(),user.getSex(),user.getTelephone(),
                 user.getIntroduce(),old_user.getUsername());
     }

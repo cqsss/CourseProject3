@@ -50,6 +50,7 @@
         <!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
         <div th:replace="visitor_commens/bar::sidebar(activeUri='papers')"></div>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
             <h2><a class="btn btn-sm btn-success" href="meeting" th:href="@{'/visitor/search/meeting/'+${keyword}}">学术会议</a>
                 <a class="btn btn-sm btn-success" href="news" th:href="@{'/visitor/search/news/'+${keyword}}">学术新闻</a>
                 <a class="btn btn-sm btn-success" href="paper" th:href="@{'/visitor/search/paper/'+${keyword}}">学术论文</a>
