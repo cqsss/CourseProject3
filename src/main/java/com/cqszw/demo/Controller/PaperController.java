@@ -153,7 +153,6 @@ public class PaperController {
             return "index";
         }
         else {
-
             if (file.isEmpty()) {
                 model.addAttribute("msg","未选择文件");
                 return "paper/upload";
@@ -182,8 +181,8 @@ public class PaperController {
                 return "paper/upload";
             }
             Float MB = Float.parseFloat(String.valueOf(file.getSize()))/1024/1024;//1kb=1024b,1mb=1024kb
-            if(MB>200){
-                model.addAttribute("msg","单个文件不可以超过200Mb");
+            if(MB>100){
+                model.addAttribute("msg","单个文件不可以超过100MB");
                 return "paper/upload";
             }
             String username = user.toString();
