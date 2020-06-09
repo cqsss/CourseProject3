@@ -41,7 +41,7 @@ CREATE TABLE `meeting` (
 -- ----------------------------
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
-`id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
    `type` varchar(255) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci,
@@ -60,7 +60,7 @@ CREATE TABLE `news` (
 -- ----------------------------
 DROP TABLE IF EXISTS `paper`;
 CREATE TABLE `paper` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `type` varchar(255) NOT NULL,
   `topic` varchar(255) NOT NULL,
   `author` varchar(255) DEFAULT NULL,

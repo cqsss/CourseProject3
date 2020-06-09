@@ -33,7 +33,6 @@ public class PaperController {
     private UPDService updService;
     @Autowired
     private UPUService upuService;
-    int nowid = 0;
     @GetMapping("/papers")
     public String list(Model model){
         List<Paper> papers=paperService.getAll();
@@ -188,10 +187,9 @@ public class PaperController {
             String username = user.toString();
             SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String datetime = tempDate.format(new java.util.Date());
-            nowid++;
-            paper.setId(nowid);
-            upuService.insertUPU(username,nowid,datetime);
             paperService.insertPaper(paper);
+            int nowid = paperService.getidByPaper(paper);
+            upuService.insertUPU(username,nowid,datetime);
             String fileName = paper.getTopic()+".pdf";
             int size = (int) file.getSize();
             System.out.println(fileName + "-->" + size);

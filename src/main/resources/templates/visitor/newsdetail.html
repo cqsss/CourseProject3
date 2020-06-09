@@ -39,6 +39,15 @@
 				-webkit-animation: chartjs-render-animation 0.001s;
 				animation: chartjs-render-animation 0.001s;
 			}
+			h3{
+				text-align: center;
+			}
+			p{
+				text-align: center;
+			}
+			h5{
+				margin: 10px 200px;
+			}
 		</style>
 	</head>
 
@@ -49,8 +58,9 @@
 				<div th:replace="visitor_commens/bar::sidebar(activeUri='news')"></div>
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 					<h3 th:text="${news.title}"></h3>
-					<p th:text="${news.type}"></p><p th:text="'浏览量'+${news.viewcount}"></p>
-					<p th:text="'发布日期'+${news.publishdate}"></p>
+					<p th:text="'类型：'+${news.type}"></p>
+					<p th:text="'浏览量：'+${news.viewcount}"></p>
+					<p th:text="'发布日期：'+${news.publishdate}"></p>
 					<h5 th:text="${news.content}"></h5>
 				</main>
 			</div>
