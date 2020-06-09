@@ -39,19 +39,19 @@ public class UserController {
     public  String addMeeting(User user,Model model){
         Pattern p = Pattern.compile("[\u4E00-\u9FA5|\\！|\\，|\\。|\\（|\\）|\\《|\\》|\\“|\\”|\\？|\\：|\\；|\\【|\\】]");
         if(user.getPassword().length()<6||user.getPassword().length()>50){
-            model.addAttribute("msg","密码至少大于6位小于50位");
+            model.addAttribute("msg","密码长度需大于6位小于50位");
             return "user/add";
         }
         else if(user.getName().length()>100){
-            model.addAttribute("msg","姓名不超过100个字符");
+            model.addAttribute("msg","姓名不能超过100个字符");
             return "user/add";
         }
         else if(p.matcher(user.getTelephone()).find()||user.getTelephone().length()>100){
-            model.addAttribute("msg","电话不能含有中文及中文字符，长度小于100");
+            model.addAttribute("msg","电话不能含有中文及中文字符，且长度需小于100个字符");
             return "user/add";
         }
-        else if(user.getIntroduce().length()>100){
-            model.addAttribute("msg","个人简介不超过100个字符");
+        else if(user.getIntroduce().length()>200){
+            model.addAttribute("msg","个人简介不能超过200个字符");
             return "user/add";
         }
         else{

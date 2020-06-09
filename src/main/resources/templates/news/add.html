@@ -51,11 +51,11 @@
             <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
             <form th:action="@{/news}" method="post">
                 <div class="form-group">
-                    <label>news title</label>
+                    <label>新闻标题</label>
                     <input name="title" type="text" class="form-control" placeholder="新闻标题" >
                 </div>
                 <div class="form-group">
-                    <label>type</label>
+                    <label>新闻类型</label>
                     <select  name="type" class="form-control" >
                         <option value="生命科学" selected="selected">生命科学</option>
                         <option value="地球科学">地球科学</option>

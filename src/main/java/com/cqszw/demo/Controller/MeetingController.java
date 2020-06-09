@@ -41,26 +41,26 @@ public class MeetingController {
             return "meeting/add";
         }
         else if(meeting.getName().length()>100){
-            model.addAttribute("msg","会议名不超过100个字符");
+            model.addAttribute("msg","会议名称不能超过100个字符");
             return "meeting/add";
         }
         else if(meeting.getLocation().isEmpty()){
-            model.addAttribute("msg","地址不能为空");
+            model.addAttribute("msg","会议地点不能为空");
             model.addAttribute("user",will_alter);
             return "meeting/add";
         }
         else if(meeting.getDate().isEmpty()){
-            model.addAttribute("msg","日期不能为空");
+            model.addAttribute("msg","会议日期不能为空");
             model.addAttribute("user",will_alter);
             return "meeting/add";
         }
         else if(meeting.getLocation().length()>100){
-            model.addAttribute("msg","地址不超过100个字符");
+            model.addAttribute("msg","会议地点不能超过100个字符");
             model.addAttribute("user",will_alter);
             return "meeting/add";
         }
         else if(meeting.getUrl().length()>200){
-            model.addAttribute("msg","地址不超过200个字符");
+            model.addAttribute("msg","会议链接不能超过200个字符");
             model.addAttribute("user",will_alter);
             return "meeting/add";
         }

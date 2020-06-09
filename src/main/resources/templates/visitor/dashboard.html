@@ -73,7 +73,7 @@
 					<thead>
 					<tr>
 						<th>会议名称</th>
-						<th>分类</th>
+						<th>类型</th>
 						<th>地点</th>
 						<th>日期</th>
 						<th>操作</th>
@@ -86,7 +86,7 @@
 						<td th:text="${meeting.location}"> </td>
 						<td th:text="${meeting.date}"> </td>
 						<td>
-							<a class="btn btn-sm btn-primary" th:href="@{'/visitor/table/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}">查看会议</a>
+							<a class="btn btn-sm btn-primary" th:href="@{'/visitor/table/'+${meeting.name}+'/'+${meeting.location}+'/'+${meeting.date}}">查看会议地点</a>
 							<a class="btn btn-sm btn-primary" th:href="${meeting.url}" target="_blank">去会议详情页</a>
 						</td>
 					</tr>

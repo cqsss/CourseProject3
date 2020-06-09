@@ -193,11 +193,11 @@
 						-->
 						<input type="hidden" name="_method" value="put">
 						<div class="form-group">
-							<label>meeting name</label>
+							<label>会议名称</label>
 							<input name="name" type="text" class="form-control" placeholder="会议名称" th:value="${meeting.name}">
 						</div>
 						<div class="form-group">
-							<label>type</label>
+							<label>会议类型</label>
 							<select  name="type" class="form-control" >
 								<option th:selected="${meeting.type=='生命科学'}" value="生命科学">生命科学</option>
 								<option th:selected="${meeting.type=='地球科学'}" value="地球科学">地球科学</option>
@@ -210,18 +210,17 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label>meeting location</label>
-							<input name="location" type="text" class="form-control" placeholder="会议地址"th:value="${meeting.location}">
+							<label>会议地点</label>
+							<input name="location" type="text" class="form-control" placeholder="会议地点"th:value="${meeting.location}">
 						</div>
 						<div class="form-group">
-							<label>meeting date</label>
+							<label>会议日期</label>
 							<input name="date" type="date" class="form-control" placeholder="会议日期"th:value="${meeting.date}">
 						</div>
 						<div class="form-group">
-							<label>meeting url</label>
+							<label>会议详情链接</label>
 							<input name="content" type="text" class="form-control" placeholder="会议详情链接"th:value="${meeting.url}">
 						</div>
-
 						<button type="submit" class="btn btn-primary" >修改</button>
 					</form>
 				</main>
