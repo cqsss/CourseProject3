@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>我关注的会议</title>
+		<title>我发布的会议</title>
 		<!-- Bootstrap core CSS -->
 		<link href="/asserts/css/bootstrap.min.css" rel="stylesheet">
 
@@ -62,11 +62,6 @@
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 					<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
-					<h2>
-						<a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/meeting/add}">添加会议</a>
-                    	<a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/meeting/new}">我要发布</a>
-						<a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/meeting/publish}">我发布的</a>
-					</h2>
                     <div class="table-responsive">
 						<table class="table table-striped table-sm">
 							<thead>
@@ -75,17 +70,25 @@
 									<th>类型</th>
 									<th>地点</th>
 									<th>日期</th>
+									<th>审核进度</th>
 									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="meeting:${meetings}">
-										<td><a th:href="${meeting.url}" th:text="${meeting.name}" target="_blank"> </a></td>
-										<td th:text="${meeting.type}"> </td>
-										<td th:text="${meeting.location}"> </td>
-										<td th:text="${meeting.date}"> </td>
-										<td>
-											<button class="btn btn-sm btn-danger deleteBtn" th:attr="del_uri=@{'/visitor/meeting/delete/'+${meeting.id}}">删除</button>
+								<tr th:each="up:${ups}">
+										<td><a th:href="${up.url}" th:text="${up.name}" target="_blank"> </a></td>
+										<td th:text="${up.type}"> </td>
+										<td th:text="${up.location}"> </td>
+										<td th:text="${up.date}"> </td>
+										<td th:switch="${up.getIs_checked()}">
+											<p th:case="0">待审核</p>
+											<p th:case="1">已通过审核</p>
+											<p th:case="2">审核未通过</p>
+										</td>
+										<td th:switch="${up.getIs_checked()}">
+											<button th:case="0" class="btn btn-sm btn-danger deleteBtn" th:attr="del_uri=@{'/visitor/meeting/publish/'+${up.id}}">撤回发布</button>
+											<button th:case="1" class="btn btn-sm btn-danger deleteBtn" th:attr="del_uri=@{'/visitor/meeting/publish/'+${up.id}}">添加到我的会议</button>
+											<button th:case="2" class="btn btn-sm btn-danger deleteBtn" th:attr="del_uri=@{'/visitor/meeting/publish/'+${up.id}}">重新编辑发布</button>
 										</td>
 
 								</tr>

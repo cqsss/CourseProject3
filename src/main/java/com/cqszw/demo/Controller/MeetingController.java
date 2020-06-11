@@ -2,6 +2,7 @@ package com.cqszw.demo.Controller;
 
 import com.cqszw.demo.Bean.Meeting;
 import com.cqszw.demo.Service.MeetingService;
+import com.cqszw.demo.Service.UPService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,8 @@ import java.util.List;
 public class MeetingController {
     @Autowired
     private MeetingService meetingService;
+    @Autowired
+    private UPService upService;
     private Meeting will_alter;
 
     @GetMapping("/meetings")
@@ -65,6 +68,11 @@ public class MeetingController {
             return "meeting/add";
         }
         else{
+            if(!meeting.getUrl().startsWith("http")){
+                StringBuilder stringBuilder=new StringBuilder(meeting.getUrl());
+                stringBuilder.insert(0,"http://");
+                meeting.setUrl(stringBuilder.toString());
+            }
             meetingService.insertMeeting(meeting);
         }
 
@@ -133,4 +141,23 @@ public class MeetingController {
         meetingService.deleteMeeting(name,location,date);
         return "redirect:/meetings";
     }
+    @GetMapping("/meeting/check")
+    public  String toCheckMeeting(Model model){
+        List<Meeting> meetings = meetingService.unchecked();
+        model.addAttribute("meetings",meetings);
+        return  "meeting/check";
+    }
+    @GetMapping("/meeting/checked/{id}")
+    public  String toCheckMeeting(@PathVariable int id){
+        meetingService.passcheck(id);
+        upService.pass(id);
+        return  "redirect:/meeting/check";
+    }
+    @DeleteMapping("/meeting/checked/{id}")
+    public  String confuseMeeting(@PathVariable int id){
+        meetingService.confuse(id);
+        upService.confuse(id);
+        return  "redirect:/meeting/check";
+    }
+
 }

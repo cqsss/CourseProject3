@@ -2,6 +2,7 @@ package com.cqszw.demo.Controller;
 
 import com.cqszw.demo.Bean.*;
 import com.cqszw.demo.Service.*;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,10 @@ public class VisitorController {
     private UPUService upuService;
     @Autowired
     private NewsService newsService;
+    @Autowired
+    private UPService upService;
     User will_alter;
+    User_Publish will_republish;
     @GetMapping("/visitor/login/{username}")
     public  String alter(@PathVariable("username")String username, Model model, HttpServletRequest request){
         Object loginUser = request.getSession().getAttribute("visitorUser");
@@ -181,7 +185,7 @@ public class VisitorController {
         }
     }
     @PostMapping("/visitor/meeting")
-    public String addMeeting(Meeting meeting,Model model){
+    public String addMeeting(HttpServletRequest request,Meeting meeting,Model model){
         if(meeting.getName().isEmpty()){
             model.addAttribute("msg","会议名不能为空");
             return "visitor/new";
@@ -192,28 +196,37 @@ public class VisitorController {
         }
         else if(meeting.getLocation().isEmpty()){
             model.addAttribute("msg","地址不能为空");
-            model.addAttribute("user",will_alter);
             return "visitor/new";
         }
         else if(meeting.getDate().isEmpty()){
             model.addAttribute("msg","日期不能为空");
-            model.addAttribute("user",will_alter);
             return "visitor/new";
         }
         else if(meeting.getLocation().length()>100){
             model.addAttribute("msg","地址不超过100个字符");
-            model.addAttribute("user",will_alter);
             return "visitor/new";
         }
         else if(meeting.getUrl().length()>200){
             model.addAttribute("msg","地址不超过200个字符");
-            model.addAttribute("user",will_alter);
             return "visitor/new";
         }
         else{
-            meetingService.insertMeeting(meeting);
+            if(!meeting.getUrl().startsWith("http")){
+                StringBuilder stringBuilder=new StringBuilder(meeting.getUrl());
+                stringBuilder.insert(0,"http://");
+                meeting.setUrl(stringBuilder.toString());
+            }
+            meeting.setChecked(0);
+//            System.out.println("审核通过了吗？"+meeting.isChecked());
+            meetingService.visitorMeeting(meeting);
+            User_Publish user_publish=new User_Publish();
+            int id=meetingService.getMeetingAll(meeting.getName(),meeting.getLocation(),meeting.getDate()).getId();
+            user_publish.setMeeting_id(id);
+            Object visitorUser = request.getSession().getAttribute("visitorUser");
+            user_publish.setUsername(visitorUser.toString());
+            upService.insert(user_publish);
         }
-        return  "redirect:/meetings";
+        return  "redirect:/visitor/meetings";
     }
     @GetMapping("/visitor/meetings/category/{type}")
     public String meetingType(@PathVariable("type")String type, Model model) {
@@ -298,6 +311,52 @@ public class VisitorController {
             return "visitor/uploadlist";
         }
     }
+    @GetMapping("visitor/meeting/publish")
+    public String tomypublish(Model model,HttpServletRequest request){
+        Object visitorUser = request.getSession().getAttribute("visitorUser");
+        if(visitorUser==null){
+            model.addAttribute("msg","未登陆，没有个人数据");
+            return "visitor/publish";
+        }
+        List<User_Publish_Record> ups = upService.getAll(visitorUser.toString());
+        model.addAttribute("ups",ups);
+        return "visitor/publish";
+
+    }
+    @DeleteMapping("/visitor/meeting/publish/{id}")
+    public  String doMyMeeting(@PathVariable int id, HttpServletRequest request, Model model){
+        Object visitorUser = request.getSession().getAttribute("visitorUser");
+        User_Publish up = upService.getById(id);
+        if(up.getIs_checked()==0){
+            upService.deleteById(up.getMeeting_id());
+            meetingService.deleteById(up.getMeeting_id());
+            return "redirect:/visitor/meeting/publish";
+        }
+        else if(up.getIs_checked()==1){
+            String username = visitorUser.toString();
+            if(!umService.searchMeeting(username,up.getMeeting_id())){
+                umService.insertUS(username,up.getMeeting_id());
+            }
+            return "redirect:/visitor/meetings";
+
+
+        }
+        else {
+            will_republish=up;
+            Meeting meeting = meetingService.getById(up.getMeeting_id());
+            model.addAttribute("meeting",meeting);
+            return "visitor/alterpublish";
+        }
+    }
+    @PutMapping("/visitor/meeting/alterpublish")
+    String republish(Meeting meeting){
+        if(will_republish!=null){
+            upService.clear(will_republish.getMeeting_id());
+            meetingService.updateMeeting(meeting,meetingService.getById(will_republish.getMeeting_id()));
+            meetingService.clear(will_republish.getMeeting_id());
+        }
+        return "redirect:/visitor/meeting/publish";
+    }
     @GetMapping("/visitor/paper/download/{paper_id}")
     @ResponseBody
     public String downloadPaper(Model model,HttpServletRequest request,HttpServletResponse response,@PathVariable("paper_id") int paper_id) throws UnsupportedEncodingException{
@@ -362,35 +421,35 @@ public class VisitorController {
         else {
             if (file.isEmpty()) {
                 model.addAttribute("msg","未选择文件");
-                return "visitor/paper/upload";
+                return "visitor/upload";
             }
             if(paper.getTopic().length()>100){
                 model.addAttribute("msg","论文标题小于100个字符");
-                return "visitor/paper/upload";
+                return "visitor/upload";
             }
             if(paper.getTopic().isEmpty()){
                 model.addAttribute("msg","论文标题不能为空");
-                return "visitor/paper/upload";
+                return "visitor/upload";
             }
             if(paper.getAuthor().isEmpty()){
                 model.addAttribute("msg","作者不能为空");
-                return "visitor/paper/upload";
+                return "visitor/upload";
             }
             if(paper.getAuthor().length()>100){
                 model.addAttribute("msg","作者小于100个字符");
-                return "visitor/paper/upload";
+                return "visitor/upload";
             }
             int begin = file.getOriginalFilename().indexOf(".");
             int last = file.getOriginalFilename().length();//获得文件后缀名
             String a = file.getOriginalFilename().substring(begin, last);
             if (!a.endsWith(".pdf")) {
                 model.addAttribute("msg","当前只支持上传pdf文件类型");
-                return "visitor/paper/upload";
+                return "visitor/upload";
             }
             Float MB = Float.parseFloat(String.valueOf(file.getSize()))/1024/1024;//1kb=1024b,1mb=1024kb
             if(MB>100){
                 model.addAttribute("msg","单个文件不可以超过100MB");
-                return "visitor/paper/upload";
+                return "visitor/upload";
             }
             String username = visitorUser.toString();
             SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
