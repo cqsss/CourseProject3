@@ -248,7 +248,7 @@ public class VisitorController {
         model.addAttribute("newslist",newslist);
         return "visitor/news";
     }
-    @DeleteMapping("/visitor/news/{id}")
+    @GetMapping("/visitor/news/{id}")
     public  String viewnews(@PathVariable("id")int id,Model model){
         News news = newsService.getById(id);
         newsService.viewcount(news);
@@ -258,15 +258,23 @@ public class VisitorController {
     }
     @GetMapping("/visitor/paper/add")
     public  String addpaper(Model model){
-        List<Paper> papers = paperService.getAll();
+        List<Upload_Record> papers=paperService.getAllwithUsername();
         model.addAttribute("papers",papers);
         return "visitor/addpaper";
     }
     @GetMapping("/visitor/papers/category/{type}")
     public String paperType(@PathVariable("type")String type, Model model) {
-        List<Paper> papers = paperService.getPaperByType(type);
+        List<Upload_Record> papers = paperService.getPaperByTypewithUsername(type);
         model.addAttribute("papers",papers);
         return "visitor/addpaper";
+    }
+    @GetMapping("/visitor/userdetail/{username}")
+    public String userDetail(@PathVariable("username")String username, Model model){
+        List<Upload_Record> papers = paperService.getPaperByUsername(username);
+        model.addAttribute("papers",papers);
+        User user = userService.getUserbyUsername(username);
+        model.addAttribute("user",user);
+        return "visitor/userdetail";
     }
     @GetMapping("/visitor/downloads")
     public String downloads(Model model, HttpServletRequest request){

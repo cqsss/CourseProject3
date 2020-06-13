@@ -5,11 +5,29 @@ package com.cqszw.demo.Bean;
  * @date 2020/5/29
  */
 public class Upload_Record {
+    private int id;
     private String type;
     private String topic;
     private String author;
     private String keyword;
     private String uploadtime;
+    private String username;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getType() {
         return type;

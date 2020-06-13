@@ -81,6 +81,7 @@
 								<th>作者</th>
 								<th>类型</th>
 								<th>关键词</th>
+								<th>上传者</th>
 								<th>操作</th>
 							</tr>
 							</thead>
@@ -90,6 +91,7 @@
 								<td th:text="${paper.author}"> </td>
 								<td th:text="${paper.type}"> </td>
 								<td th:text="${paper.keyword}"> </td>
+								<td th:text="${paper.username}"> </td>
 								<td>
                                     <a class="btn btn-sm btn-primary" th:href="@{'/paper/download/'+${paper.id}}">下载</a>
 									<a class="btn btn-sm btn-danger" th:href="@{'/paper/delete/'+${paper.id}}">删除</a>

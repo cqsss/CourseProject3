@@ -1,7 +1,7 @@
 package com.cqszw.demo.Bean;
 
 /**
- * @author Lenovo
+ * @author cqs
  * @date 2020/5/27
  */
 public class Paper {

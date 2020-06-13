@@ -35,14 +35,14 @@ public class PaperController {
     private UPUService upuService;
     @GetMapping("/papers")
     public String list(Model model){
-        List<Paper> papers=paperService.getAll();
-        //查询所有会议返回列表页面
+        List<Upload_Record> papers=paperService.getAllwithUsername();
+        //查询所有论文返回列表页面
         model.addAttribute("papers",papers);
         return  "paper/list";
     }
     @GetMapping("/papers/category/{type}")
     public String paperType(@PathVariable("type")String type, Model model) {
-        List<Paper> papers = paperService.getPaperByType(type);
+        List<Upload_Record> papers = paperService.getPaperByTypewithUsername(type);
         model.addAttribute("papers",papers);
         return "paper/list";
     }
@@ -129,7 +129,7 @@ public class PaperController {
     @GetMapping("/paper/delete/{paper_id}")
     public String deletePaper(@PathVariable("paper_id") int paper_id) {
         String filename=paperService.gettopicbyid(paper_id)+".pdf";
-        String filePath = "/SpringBoot/file" ;
+        String filePath = "D:/file" ;
         File file = new File(filePath + "/" + filename);
         paperService.deletePaper(paper_id);
         System.out.println(filePath + "/" + filename);

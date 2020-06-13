@@ -1,6 +1,7 @@
 package com.cqszw.demo.Mapper;
 
 import com.cqszw.demo.Bean.Paper;
+import com.cqszw.demo.Bean.Upload_Record;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -17,12 +18,18 @@ import java.util.List;
 public interface PaperMapper {
     @Select("select * from paper")
     List<Paper> getAll();
+    @Select("select * from paper,user_ul where paper.id=user_ul.paper_id")
+    List<Upload_Record> getAllwithUsername();
     @Select("select topic from paper where id=#{id}")
     public String gettopicbyid(@Param("id") int id);
     @Select("select * from paper where id=#{id}")
     public Paper getpaperbyid(@Param("id") int id);
     @Select("select * from paper where type=#{type}")
     public List<Paper> getPaperByType(@Param("type") String type);
+    @Select("select * from paper,user_ul where paper.id=user_ul.paper_id and paper.type=#{type}")
+    public List<Upload_Record> getPaperByTypewithUsername(@Param("type") String type);
+    @Select("select * from paper,user_ul where paper.id=user_ul.paper_id and user_ul.username=#{username}")
+    public List<Upload_Record> getPaperByUsername(@Param("username") String username);
     @Select("select type from paper")
     public List<String> getType();
     @Select("select id from paper where topic=#{topic} and type=#{type} and author=#{author} and keyword=#{keyword}")
