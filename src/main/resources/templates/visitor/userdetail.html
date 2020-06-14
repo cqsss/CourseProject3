@@ -74,6 +74,7 @@
                         <th>类型</th>
                         <th>关键词</th>
                         <th>上传时间</th>
+                        <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -83,6 +84,10 @@
                         <td th:text="${paper.type}"> </td>
                         <td th:text="${paper.keyword}"> </td>
                         <td th:text="${paper.uploadtime}"> </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" th:href="@{'/visitor/paper/download/'+${paper.id}}">下载</a>
+                            <a class="btn btn-sm btn-success" style="color:white;" th:onclick="@{'onLineReadPDF('+${paper.id}+')'}">浏览</a>
+                        </td>
                     </tr>
                     </tbody>
 
@@ -130,5 +135,11 @@
         }
     }
 
+</script>
+<script>
+    function onLineReadPDF(id) {
+        console.log(id);
+        window.open("/pdfjs/web/viewer.html?file=/paper/view/"+id);
+    }
 </script>
 </html>

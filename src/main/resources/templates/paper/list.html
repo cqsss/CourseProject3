@@ -95,6 +95,7 @@
 								<td>
                                     <a class="btn btn-sm btn-primary" th:href="@{'/paper/download/'+${paper.id}}">下载</a>
 									<a class="btn btn-sm btn-danger" th:href="@{'/paper/delete/'+${paper.id}}">删除</a>
+									<a class="btn btn-sm btn-success" style="color:white;" th:onclick="@{'onLineReadPDF('+${paper.id}+')'}">浏览</a>
 								</td>
 							</tr>
 							</tbody>
@@ -167,6 +168,12 @@
             }
 
 		</script>
+        <script>
+            function onLineReadPDF(id) {
+            	console.log(id);
+                window.open("/pdfjs/web/viewer.html?file=/paper/view/"+id);
+            }
+        </script>
 	</body>
 
 </html>

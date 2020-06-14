@@ -211,4 +211,30 @@ public class PaperController {
             }
         }
     }
+    @GetMapping("/paper/view/{paper_id}")
+    public void viewPaper(HttpServletRequest request, HttpServletResponse response, @PathVariable("paper_id") int paper_id) {
+        String filename=paperService.gettopicbyid(paper_id)+".pdf";
+        String filePath = "D:/file" ;
+        File file = new File(filePath + "/" + filename);
+        if (file.exists()) {
+            byte[] data = null;
+            FileInputStream input=null;
+            try {
+                input= new FileInputStream(file);
+                data = new byte[input.available()];
+                input.read(data);
+                response.getOutputStream().write(data);
+            } catch (Exception e) {
+                System.out.println("pdf文件处理异常：" + e);
+            }finally{
+                try {
+                    if(input!=null){
+                        input.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
