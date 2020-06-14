@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>学术新闻</title>
+		<title>我发布的会议</title>
 		<!-- Bootstrap core CSS -->
 		<link href="/asserts/css/bootstrap.min.css" rel="stylesheet">
 
@@ -43,45 +43,63 @@
 	</head>
 
 	<body>
-
+		<!--<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">-->
+			<!--<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Company name</a>-->
+			<!--<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">-->
+			<!--<ul class="navbar-nav px-3">-->
+				<!--<li class="nav-item text-nowrap">-->
+					<!--<a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Sign out</a>-->
+				<!--</li>-->
+			<!--</ul>-->
+		<!--</nav>-->
+<!--改用我抽取出来的顶部栏-->
 		<div th:replace="visitor_commens/bar::topbar"></div>
 		<div class="container-fluid">
 			<div class="row">
 				<!--&lt;!&ndash;同理用抽取的边栏替代&ndash;&gt;-->
-				<div th:replace="visitor_commens/bar::sidebar(activeUri='news')"></div>
+				<div th:replace="visitor_commens/bar::sidebar(activeUri='users')"></div>
+
+
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h2>
-						<a class="btn btn-primary" th:href="@{/visitor/newslist/category/生命科学}">生命科学</a>
-						<a class="btn btn-primary" th:href="@{/visitor/newslist/category/地球科学}">地球科学</a>
-						<a class="btn btn-primary" th:href="@{/visitor/newslist/category/化学科学}">化学科学</a>
-						<a class="btn btn-primary" th:href="@{/visitor/newslist/category/信息科学}">信息科学</a>
-						<a class="btn btn-primary" th:href="@{/visitor/newslist/category/数理科学}">数理科学</a>
-						<a class="btn btn-primary" th:href="@{/visitor/newslist/category/医学科学}">医学科学</a>
-						<a class="btn btn-primary" th:href="@{/visitor/newslist/category/工程材料}">工程材料</a>
-						<a class="btn btn-primary" th:href="@{/visitor/newslist/category/管理综合}">管理综合</a>
-					</h2>
-					<div class="table-responsive">
+					<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+                    <div class="table-responsive">
 						<table class="table table-striped table-sm">
 							<thead>
 								<tr>
-									<th>标题</th>
-									<th>分类</th>
-									<th>发布日期</th>
-									<th>浏览量</th>
+									<th>会议名称</th>
+									<th>类型</th>
+									<th>地点</th>
+									<th>日期</th>
+									<th>审核进度</th>
+									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
-							<tr th:each="news:${newslist}">
-									<td><a th:href="@{'/visitor/news/'+${news.id}}" th:text="${news.title}"> </a></td>
-									<td th:text="${news.type}"> </td>
-									<td th:text="${news.publishdate}"> </td>
-									<td th:text="${news.viewcount}"> </td>
+								<tr th:each="up:${ups}">
+										<td><a th:href="${up.url}" th:text="${up.name}" target="_blank"> </a></td>
+										<td th:text="${up.type}"> </td>
+										<td th:text="${up.location}"> </td>
+										<td th:text="${up.date}"> </td>
+										<td th:switch="${up.getIs_checked()}">
+											<p th:case="0">待审核</p>
+											<p th:case="1">已通过审核</p>
+											<p th:case="2">审核未通过</p>
+										</td>
+										<td th:switch="${up.getIs_checked()}">
+											<button th:case="0" class="btn btn-sm btn-danger deleteBtn" th:attr="del_uri=@{'/visitor/meeting/publish/'+${up.id}}">撤回发布</button>
+											<button th:case="1" class="btn btn-sm btn-danger deleteBtn" th:attr="del_uri=@{'/visitor/meeting/publish/'+${up.id}}">添加到我的会议</button>
+											<button th:case="2" class="btn btn-sm btn-danger deleteBtn" th:attr="del_uri=@{'/visitor/meeting/publish/'+${up.id}}">重新编辑发布</button>
+										</td>
+
 								</tr>
 							</tbody>
 
 						</table>
 					</div>
 				</main>
+				<form id="deleteMeeting" method="post">
+					<input type="hidden" name="_method" value="delete">
+				</form>
 			</div>
 		</div>
 

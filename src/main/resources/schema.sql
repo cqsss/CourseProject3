@@ -26,9 +26,11 @@ CREATE TABLE `meeting` (
   `location` varchar(255) NOT NULL,
   `date` varchar(255) NOT NULL,
   `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `checked` int(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`,`location`,`date`),
-  KEY `id` (`id`)
+  KEY `id` (`id`),
+  check (checked in(0,1,2))
 ) ENGINE=InnoDB AUTO_INCREMENT=197 DEFAULT CHARSET=utf8;
 
 
@@ -137,3 +139,11 @@ CREATE TABLE `user_ul` (
 -- ----------------------------
 -- Records of user_ul
 -- ----------------------------
+DROP TABLE IF EXISTS `user_publish`;
+CREATE TABLE `user_publish` (
+  `meeting_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `is_checked` int(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`meeting_id`),
+  check (is_checked in (0,1,2))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

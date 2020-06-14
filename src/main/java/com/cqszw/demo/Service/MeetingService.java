@@ -21,8 +21,10 @@ public class MeetingService {
     }
     public List<Meeting> getMeetingByType(String type) {return meetingMapper.getbytype(type);};
     public int insertMeeting(Meeting meeting){ return meetingMapper.insertMeeting(meeting);}
+    public int visitorMeeting(Meeting meeting){ return meetingMapper.visitorMeeting(meeting);}
     public List<Meeting> getAll(){return  meetingMapper.getAll();}
     public Meeting getMeeting(String name,String location,String date){return meetingMapper.getMeeting(name, location, date);}
+    public Meeting getMeetingAll(String name,String location,String date){return meetingMapper.getMeetingAll(name, location, date);}
     public int updateMeeting(Meeting meeting,Meeting old_meeting){
         return  meetingMapper.updateMeeting(meeting.getName(),meeting.getLocation(),
                 meeting.getDate(),meeting.getUrl(),old_meeting.getName(),
@@ -40,5 +42,12 @@ public class MeetingService {
         }
     }
     public  List<Meeting> search(String keyword){return  meetingMapper.search(keyword);}
-    public  List<Meeting>searchandtype(String type,String keyword){return  meetingMapper.searchandtype(type,keyword);}
+    public  List<Meeting> searchandtype(String type,String keyword){return  meetingMapper.searchandtype(type,keyword);}
+    public  List<Meeting> unchecked(){return  meetingMapper.getUnchecked();}
+    public  int passcheck(int id){return  meetingMapper.passcheck(id);}
+    public  int confuse(int id){return  meetingMapper.confuseMeeting(id);}
+    public  int deleteById(int id){return  meetingMapper.deleteById(id);}
+    public  Meeting getById(int id){return meetingMapper.getById(id);}
+    public  int clear(int id){return  meetingMapper.clear(id);}
+
 }

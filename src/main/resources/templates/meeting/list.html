@@ -183,7 +183,10 @@
 				<!--</nav>-->
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h2><a class="btn btn-sm btn-success" href="meeting" th:href="@{/meeting}">添加会议</a></h2>
+					<h2>
+						<a class="btn btn-sm btn-success" href="meeting" th:href="@{/meeting}">添加会议</a>
+						<a class="btn btn-sm btn-success" href="meeting" th:href="@{/meeting/check}">审核会议</a>
+					</h2>
                     <h2>
                         <a class="btn btn-primary" th:href="@{/meetings/category/生命科学}">生命科学</a>
                         <a class="btn btn-primary" th:href="@{/meetings/category/地球科学}">地球科学</a>
@@ -207,7 +210,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="meeting:${meetings}">
-                                        <td><a th:href="${meeting.url}" th:text="${meeting.name}"> </a></td>
+                                        <td><a th:href="${meeting.url}" th:text="${meeting.name}" target="_blank"> </a></td>
 										<td th:text="${meeting.type}"> </td>
 										<td th:text="${meeting.location}"> </td>
 										<td th:text="${meeting.date}"> </td>

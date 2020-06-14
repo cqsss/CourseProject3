@@ -27,6 +27,15 @@ public class Meeting {
     private  String date;
     private  String url;
     private  String type;
+    private  int checked;
+
+    public int getChecked() {
+        return checked;
+    }
+
+    public void setChecked(int checked) {
+        this.checked = checked;
+    }
 
     public String getType() {
         return type;

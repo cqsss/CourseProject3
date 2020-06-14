@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>C&Z学术社区</title>
+		<title>我关注的会议</title>
 		<!-- Bootstrap core CSS -->
 		<link href="/asserts/css/bootstrap.min.css" rel="stylesheet">
 
@@ -62,8 +62,10 @@
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 					<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
-					<h2><a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/meeting/add}">添加会议</a>
-                    <a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/meeting/new}">我要发布</a>
+					<h2>
+						<a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/meeting/add}">添加会议</a>
+                    	<a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/meeting/new}">我要发布</a>
+						<a class="btn btn-sm btn-success" href="meeting" th:href="@{/visitor/meeting/publish}">我发布的</a>
 					</h2>
                     <div class="table-responsive">
 						<table class="table table-striped table-sm">
@@ -78,7 +80,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="meeting:${meetings}">
-										<td><a th:href="${meeting.url}" th:text="${meeting.name}"> </a></td>
+										<td><a th:href="${meeting.url}" th:text="${meeting.name}" target="_blank"> </a></td>
 										<td th:text="${meeting.type}"> </td>
 										<td th:text="${meeting.location}"> </td>
 										<td th:text="${meeting.date}"> </td>
