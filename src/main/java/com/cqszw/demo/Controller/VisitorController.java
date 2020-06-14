@@ -370,35 +370,35 @@ public class VisitorController {
         else {
             if (file.isEmpty()) {
                 model.addAttribute("msg","未选择文件");
-                return "/visitor/upload";
+                return "visitor/upload";
             }
             if(paper.getTopic().length()>100){
                 model.addAttribute("msg","论文标题小于100个字符");
-                return "/visitor/upload";
+                return "visitor/upload";
             }
             if(paper.getTopic().isEmpty()){
                 model.addAttribute("msg","论文标题不能为空");
-                return "/visitor/upload";
+                return "visitor/upload";
             }
             if(paper.getAuthor().isEmpty()){
                 model.addAttribute("msg","作者不能为空");
-                return "/visitor/upload";
+                return "visitor/upload";
             }
             if(paper.getAuthor().length()>100){
                 model.addAttribute("msg","作者小于100个字符");
-                return "/visitor/upload";
+                return "visitor/upload";
             }
             int begin = file.getOriginalFilename().indexOf(".");
             int last = file.getOriginalFilename().length();//获得文件后缀名
             String a = file.getOriginalFilename().substring(begin, last);
             if (!a.endsWith(".pdf")) {
                 model.addAttribute("msg","当前只支持上传pdf文件类型");
-                return "/visitor/upload";
+                return "visitor/upload";
             }
             Float MB = Float.parseFloat(String.valueOf(file.getSize()))/1024/1024;//1kb=1024b,1mb=1024kb
             if(MB>100){
                 model.addAttribute("msg","单个文件不可以超过100MB");
-                return "/visitor/upload";
+                return "visitor/upload";
             }
             String username = visitorUser.toString();
             SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
