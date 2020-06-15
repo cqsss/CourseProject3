@@ -37,11 +37,8 @@ public class RegisterController {
             return  "register";
         }
         else {
-            if(!userService.searchUser(username)){
-                map.put("msg","该用户名已被使用");
-                return  "register";
-            }
             User user = new User(username,password);
+            user.setSex("保密");
             userService.insertUser(user);
             map.put("msg","注册成功，可以进行登录了！");
             return  "index";
